@@ -15,6 +15,26 @@
     <link rel="stylesheet" href="CSS/skins/color-4.css" class="alternate-style" title="color-4" disabled>
     <link rel="stylesheet" href="CSS/skins/color-5.css" class="alternate-style" title="color-5" disabled>
     <link rel="stylesheet" href="CSS/style-switcher.css">
+    <style>
+        .skills .skill-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .skills .skill-icons .skill-icon {
+            text-align: center;
+            width: 80px;
+        }
+        .skills .skill-icons .skill-icon img {
+            width: 40px;
+            height: 40px;
+        }
+        .skills .skill-icons .skill-icon p {
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <!-- Main Container start -->
@@ -101,40 +121,68 @@
                                     </div>
                                 </div>
                                 <div class="skills padd-15">
+                                    <h3 class="title">Skills</h3>
                                     <div class="row">
-                                        <div class="skill-item padd-15">
-                                            <h5>Python</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 90%;"></div>
-                                                <div class="skill-percent">90%</div>
+                                        <div class="skill-icons padd-15">
+                                            <div class="skill-icon">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40"/>
+                                                <p>Python</p>
                                             </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>SQL & SSIS</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 95%;"></div>
-                                                <div class="skill-percent">95%</div>
+                                            <div class="skill-icon">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="40" height="40"/>
+                                                <p>Pandas</p>
                                             </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>Power BI</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 85%;"></div>
-                                                <div class="skill-percent">85%</div>
+                                            <div class="skill-icon">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" width="40" height="40"/>
+                                                <p>NumPy</p>
                                             </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>C# & .NET</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 90%;"></div>
-                                                <div class="skill-percent">90%</div>
+                                            <div class="skill-icon">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40" height="40"/>
+                                                <p>MySQL</p>
                                             </div>
-                                        </div>
-                                        <div class="skill-item padd-15">
-                                            <h5>Duck Creek</h5>
-                                            <div class="progress">
-                                                <div class="progress-in" style="width: 80%;"></div>
-                                                <div class="skill-percent">80%</div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/sqlserver.svg?raw=true" width="40" height="40"/>
+                                                <p>SQL Server</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Power-BI.svg?raw=true" width="40" height="40"/>
+                                                <p>Power BI</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Excel-Workbook.svg?raw=true" width="40" height="40"/>
+                                                <p>Excel</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/DotNet.svg?raw=true" width="40" height="40"/>
+                                                <p>.NET</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40" height="40"/>
+                                                <p>Git</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/VisualStudio-Light.svg?raw=true" width="40" height="40"/>
+                                                <p>Visual Studio</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/AWS-Light.svg?raw=true" width="40" height="40"/>
+                                                <p>AWS</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/snowflake.svg?raw=true" width="40" height="40"/>
+                                                <p>Snowflake</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/docker.svg?raw=true" width="40" height="40"/>
+                                                <p>Docker</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <i class="fa fa-cog" style="font-size: 40px;"></i>
+                                                <p>SSIS</p>
+                                            </div>
+                                            <div class="skill-icon">
+                                                <i class="fa fa-cogs" style="font-size: 40px;"></i>
+                                                <p>Duck Creek</p>
                                             </div>
                                         </div>
                                     </div>
@@ -289,7 +337,7 @@
                             <div class="portfolio-item-inner shadow-dark">
                                 <div class="portfolio-img">
                                     <img src="images/portfolio/ml-comparison.jpg" alt="Multi-Domain ML Model Comparison">
-                                    <p>Multi-Domain ML: Compared ML models for loan repayment, Mumbai house prices, and Snapchat review classification.</p>
+                                    <p>Multi-Domain ML  Compared ML models for loan repayment, Mumbai house prices, and Snapchat review classification.</p>
                                 </div>
                             </div>
                         </div>
