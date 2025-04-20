@@ -49,41 +49,49 @@
             font-weight: 600;
             text-transform: capitalize;
         }
-        .education .education-content .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .education .timeline-box {
-            flex: 0 0 50%;
-            max-width: 50%;
-            min-height: 300px;
-            margin-bottom: 30px;
-            box-sizing: border-box;
-        }
-        .education .timeline-box:first-child {
-            margin-right: 15px;
-        }
-        .education .timeline {
+        .education .education-content .timeline,
+        .experience .experience-content .timeline {
+            background-color: var(--bg-black-100);
+            border: 1px solid var(--bg-black-50);
+            border-radius: 10px;
             padding: 20px;
+            margin-bottom: 20px;
         }
-        .education .timeline-item img {
+        .education .timeline-item img,
+        .experience .timeline-item img {
             width: 60px;
             height: auto;
             margin-bottom: 15px;
             display: block;
         }
-        .education .timeline-item {
+        .education .timeline-item,
+        .experience .timeline-item {
             padding-left: 37px;
             padding-bottom: 20px;
+            position: relative;
+        }
+        .education .timeline-item .circle-dot,
+        .experience .timeline-item .circle-dot {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--skin-color);
+        }
+        /* Fix color switching for About, Experience, and Education */
+        .about-text p {
+            color: var(--text-black-900); /* Ensure About text changes with theme */
+        }
+        .timeline-date,
+        .timeline-title,
+        .timeline-text {
+            color: var(--text-black-900); /* Ensure Experience and Education text changes with theme */
         }
         @media (max-width: 767px) {
             .skills .skills-grid {
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            }
-            .education .timeline-box {
-                flex: 0 0 100%;
-                max-width: 100%;
-                margin-right: 0;
             }
         }
     </style>
@@ -180,35 +188,58 @@
                 </div>
             </section>
             <!-- About Section End -->
-            <!-- Experience Section Start -->
-            <section class="experience section" id="experience">
-                <div class="container">
-                    <div class="row">
-                        <div class="section-title padd-15">
-                            <h2>Experience</h2>
+<!-- Experience Section Start -->
+<section class="experience section" id="experience">
+    <div class="container">
+        <div class="row">
+            <div class="section-title padd-15">
+                <h2>Experience</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="experience-content padd-15">
+                <div class="row">
+                    <div class="timeline shadow-dark">
+                        <div class="timeline-item">
+                            <div class="circle-dot"></div>
+                            <h3 class="timeline-date">
+                                <i class="fa fa-calendar"></i> Aug 2021 - Aug 2024
+                            </h3>
+                            <h4 class="timeline-title">Analyst, Accenture - Pharmaceutical Client</h4>
+                            <div class="timeline-text">
+                                <ul>
+                                    <li>Led the complete revamp of client 2 websites, implemented 5+ automations, enhancing user experience and reducing manual effort by 40%</li>
+                                    <li>Analysed and provided resolution on 10+ highly critical issues, coordinating with multiple teams and product leads to provide coding resolutions and deploy changes in production</li>
+                                    <li>Reduced ServiceNow ticket count by 90% through process automation, team training, comprehensive documentation, and client consultation, resulting in significant improvements in overall service efficiency and customer satisfaction</li>
+                                    <li>Operated as a Lead Developer, developing features and overseeing data transfers with third-party vendors</li>
+                                    <li>Led production support team during manager absence, maintaining smooth operations and issue resolution</li>
+                                    <li>Frequently led client calls to discuss requirements, propose solutions, and provide updates on ongoing projects</li>
+                                    <li>Conducted code reviews and approvals for deployments, ensuring adherence to coding standards and quality</li>
+                                    <li>Collaborated with cross-functional teams including server teams, database administrators, and architects to ensure smooth operations and seamless implementations</li>
+                                    <li>Reduced response time and resolution time from more than 10 days to same-day response and within SLA time resolution</li>
+                                    <li>Authored technical articles on code and data flow, along with detailed process documentation for deeper understanding and future reference</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="experience-content padd-15">
-                            <div class="row">
-                                <div class="timeline-box padd-15">
-                                    <div class="timeline shadow-dark">
-                                        <div class="timeline-item">
-                                            <div class="circle-dot"></div>
-                                            <h3 class="timeline-date">
-                                                <i class="fa fa-calendar"></i> Aug 2021 - Aug 2024
-                                            </h3>
-                                            <h4 class="timeline-title">Custom Software Engineering Analyst, Accenture</h4>
-                                            <p class="timeline-text">Revamped client websites, implemented 5+ automations reducing manual effort by 40%, and resolved 10+ critical issues for pharmaceutical and insurance clients. Developed insurance systems for 30 U.S. states using Duck Creek, conducted code reviews, and reduced ServiceNow tickets by 90% through process automation.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="timeline-item">
+                           
+                            </h3>
+                            <h4 class="timeline-title">Associate, Accenture - Insurance Client</h4>
+                            <div class="timeline-text">
+                                <ul>
+                                    <li>Developed personal and commercial lines, with strong expertise in forms, underwriting, rating, and insurance regulations</li>
+                                    <li>Played a key role in the implementation of insurance systems for nearly 30 U.S. states and managed ongoing maintenance for 20 states using Duck Creek system</li>
+                                    <li>Closely worked with business teams to align technical solutions with business needs and compliance</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- Experience Section End -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Experience Section End -->
             <!-- Skills Section Start -->
             <section class="skills section" id="skills">
                 <div class="container">
@@ -239,12 +270,6 @@
                             </div>
                             <div class="skill-item">
                                 <div class="skill-item-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-                                    <p>MySQL</p>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-item-inner">
                                     <img src="https://github.com/syvixor/skills-icons/blob/main/icons/sqlserver.svg?raw=true" alt="SQL Server">
                                     <p>SQL Server</p>
                                 </div>
@@ -257,7 +282,7 @@
                             </div>
                             <div class="skill-item">
                                 <div class="skill-item-inner">
-                                    <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Excel-Workbook.svg?raw=true" alt="Excel">
+                                    <img src="https://github.com/sempostma/office365-icons/blob/master/svg/excel.svg?raw=true" alt="Excel">
                                     <p>Excel</p>
                                 </div>
                             </div>
@@ -265,12 +290,6 @@
                                 <div class="skill-item-inner">
                                     <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/DotNet.svg?raw=true" alt=".NET">
                                     <p>.NET</p>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-item-inner">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-                                    <p>Git</p>
                                 </div>
                             </div>
                             <div class="skill-item">
@@ -299,14 +318,8 @@
                             </div>
                             <div class="skill-item">
                                 <div class="skill-item-inner">
-                                    <i class="fa fa-cog" style="font-size: 40px;"></i>
-                                    <p>SSIS</p>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-item-inner">
-                                    <i class="fa fa-cogs" style="font-size: 40px;"></i>
-                                    <p>Duck Creek</p>
+                                    <img src="https://www.duckcreek.com/wp-content/uploads/2023/03/Duck_Creek_Logo_400x400.png?raw=true" alt="Docker">
+                                    <p>Duck Creek Policy</p>
                                 </div>
                             </div>
                         </div>
@@ -325,30 +338,22 @@
                     <div class="row">
                         <div class="education-content padd-15">
                             <div class="row">
-                                <div class="timeline-box padd-15">
-                                    <div class="timeline shadow-dark">
-                                        <div class="timeline-item">
-                                            <div class="circle-dot"></div>
-                                            <img src="images/nci.png" alt="NCI Logo">
-                                            <h3 class="timeline-date">
-                                                <i class="fa fa-calendar"></i> Sep 2024 - Sep 2025
-                                            </h3>
-                                            <h4 class="timeline-title">MSc in Data Analytics</h4>
-                                            <p class="timeline-text">National College of Ireland<br>Modules: Statistics, Data Governance, Business Intelligence, Machine Learning, Deep Learning, Generative AI<br>Research: Hybrid AI for Airbnb pricing; SLM-based customer support automation; ML model comparison.</p>
-                                        </div>
+                                <div class="timeline shadow-dark">
+                                    <div class="timeline-item">
+                                        <div class="circle-dot"></div>
+                                        <h3 class="timeline-date">
+                                            <i class="fa fa-calendar"></i> Sep 2024 - Sep 2025
+                                        </h3>
+                                        <h4 class="timeline-title">MSc in Data Analytics</h4>
+                                        <p class="timeline-text">National College of Ireland<br>Modules: Statistics, Data Governance, Business Intelligence, Machine Learning, Deep Learning, Generative AI<br>Research: Hybrid AI for Airbnb pricing; SLM-based customer support automation; ML model comparison.</p>
                                     </div>
-                                </div>
-                                <div class="timeline-box padd-15">
-                                    <div class="timeline shadow-dark">
-                                        <div class="timeline-item">
-                                            <div class="circle-dot"></div>
-                                            <img src="images/niet.png" alt="NIET Logo">
-                                            <h3 class="timeline-date">
-                                                <i class="fa fa-calendar"></i> Aug 2017 - Aug 2021
-                                            </h3>
-                                            <h4 class="timeline-title">B.Tech in Computer Science & Technology</h4>
-                                            <p class="timeline-text">Dr. A.P.J. Abdul Kalam University<br>First Class Honors<br>Modules: Data Structures, Operating Systems, Software Engineering, Database Management, AI</p>
-                                        </div>
+                                    <div class="timeline-item">
+                                        <div class="circle-dot"></div>
+                                        <h3 class="timeline-date">
+                                            <i class="fa fa-calendar"></i> Aug 2017 - Aug 2021
+                                        </h3>
+                                        <h4 class="timeline-title">B.Tech in Computer Science & Technology</h4>
+                                        <p class="timeline-text">Dr. A.P.J. Abdul Kalam University<br>First Class Honors<br>Modules: Data Structures, Operating Systems, Software Engineering, Database Management, AI</p>
                                     </div>
                                 </div>
                             </div>
@@ -428,18 +433,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="portfolio-item padd-15">
+                        <div class="portfolio-item padd-25">
                             <div class="portfolio-item-inner shadow-dark">
                                 <div class="portfolio-img">
-                                    <img src="images/portfolio/customer-support.jpg" alt="Customer Support Automation">
+                                    <img src="images/portfolio/dashboard.png" alt="Customer Support Automation">
                                     <p>Customer Support Automation: SLM-based model for ticket prioritization and knowledge base article prediction.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="portfolio-item padd-15">
+                        <div class="portfolio-item padd-20">
                             <div class="portfolio-item-inner shadow-dark">
                                 <div class="portfolio-img">
-                                    <img src="images/portfolio/ml-comparison.jpg" alt="Multi-Domain ML Model Comparison">
+                                    <img src="images/portfolio/architecture_diagram.png" alt="Multi-Domain ML Model Comparison">
                                     <p>Multi-Domain ML: Compared ML models for loan repayment, Mumbai house prices, and Snapchat review classification.</p>
                                 </div>
                             </div>
