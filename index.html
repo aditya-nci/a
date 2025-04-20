@@ -18,9 +18,12 @@
     <style>
         .skills .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             justify-items: center;
+        }
+        .skills .skill-item {
+            width: 100%;
         }
         .skills .skill-item .skill-item-inner {
             background-color: var(--bg-black-100);
@@ -29,7 +32,6 @@
             padding: 20px;
             text-align: center;
             transition: all 0.3s ease;
-            width: 100%;
         }
         .skills .skill-item .skill-item-inner:hover {
             box-shadow: 0 0 20px rgba(48,46,77,0.15);
@@ -54,18 +56,34 @@
         .education .timeline-box {
             flex: 0 0 50%;
             max-width: 50%;
+            min-height: 300px;
             margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+        .education .timeline-box:first-child {
+            margin-right: 15px;
+        }
+        .education .timeline {
+            padding: 20px;
         }
         .education .timeline-item img {
             width: 60px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: block;
         }
+        .education .timeline-item {
+            padding-left: 37px;
+            padding-bottom: 20px;
+        }
         @media (max-width: 767px) {
+            .skills .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
             .education .timeline-box {
                 flex: 0 0 100%;
                 max-width: 100%;
+                margin-right: 0;
             }
         }
     </style>
@@ -316,7 +334,7 @@
                                                 <i class="fa fa-calendar"></i> Sep 2024 - Sep 2025
                                             </h3>
                                             <h4 class="timeline-title">MSc in Data Analytics</h4>
-                                            <p class="timeline-text">National College of Ireland<br>Modules: Statistics, Data Governance, Business Intelligence, Machine Learning, Deep Learning, Generative AI<br>Research: Hybrid AI for Airbnb pricing in Dublin (Random Forest, XGBoost); SLM-based customer support automation; ML model comparison for loan repayment and house prices.</p>
+                                            <p class="timeline-text">National College of Ireland<br>Modules: Statistics, Data Governance, Business Intelligence, Machine Learning, Deep Learning, Generative AI<br>Research: Hybrid AI for Airbnb pricing; SLM-based customer support automation; ML model comparison.</p>
                                         </div>
                                     </div>
                                 </div>
