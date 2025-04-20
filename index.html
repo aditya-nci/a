@@ -16,18 +16,20 @@
     <link rel="stylesheet" href="CSS/skins/color-5.css" class="alternate-style" title="color-5" disabled>
     <link rel="stylesheet" href="CSS/style-switcher.css">
     <style>
-        .skills .skill-item {
-            margin-bottom: 30px;
-            flex: 0 0 100%;
-            max-width: 100%;
-            text-align: center;
+        .skills .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            justify-items: center;
         }
         .skills .skill-item .skill-item-inner {
             background-color: var(--bg-black-100);
             border: 1px solid var(--bg-black-50);
             border-radius: 10px;
             padding: 20px;
+            text-align: center;
             transition: all 0.3s ease;
+            width: 100%;
         }
         .skills .skill-item .skill-item-inner:hover {
             box-shadow: 0 0 20px rgba(48,46,77,0.15);
@@ -45,11 +47,26 @@
             font-weight: 600;
             text-transform: capitalize;
         }
+        .education .education-content .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .education .timeline-box {
+            flex: 0 0 50%;
+            max-width: 50%;
+            margin-bottom: 30px;
+        }
         .education .timeline-item img {
             width: 60px;
             height: auto;
             margin-bottom: 10px;
             display: block;
+        }
+        @media (max-width: 767px) {
+            .education .timeline-box {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -183,94 +200,96 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-                                <p>Python</p>
+                        <div class="skills-grid padd-15">
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                                    <p>Python</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas">
-                                <p>Pandas</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas">
+                                    <p>Pandas</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy">
-                                <p>NumPy</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy">
+                                    <p>NumPy</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-                                <p>MySQL</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
+                                    <p>MySQL</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/sqlserver.svg?raw=true" alt="SQL Server">
-                                <p>SQL Server</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/syvixor/skills-icons/blob/main/icons/sqlserver.svg?raw=true" alt="SQL Server">
+                                    <p>SQL Server</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Power-BI.svg?raw=true" alt="Power BI">
-                                <p>Power BI</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Power-BI.svg?raw=true" alt="Power BI">
+                                    <p>Power BI</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Excel-Workbook.svg?raw=true" alt="Excel">
-                                <p>Excel</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/microsoft/PowerBI-Icons/blob/main/SVG/Excel-Workbook.svg?raw=true" alt="Excel">
+                                    <p>Excel</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/DotNet.svg?raw=true" alt=".NET">
-                                <p>.NET</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/DotNet.svg?raw=true" alt=".NET">
+                                    <p>.NET</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
-                                <p>Git</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git">
+                                    <p>Git</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/VisualStudio-Light.svg?raw=true" alt="Visual Studio">
-                                <p>Visual Studio</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/VisualStudio-Light.svg?raw=true" alt="Visual Studio">
+                                    <p>Visual Studio</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/AWS-Light.svg?raw=true" alt="AWS">
-                                <p>AWS</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/tandpfun/skill-icons/blob/main/icons/AWS-Light.svg?raw=true" alt="AWS">
+                                    <p>AWS</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/snowflake.svg?raw=true" alt="Snowflake">
-                                <p>Snowflake</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/syvixor/skills-icons/blob/main/icons/snowflake.svg?raw=true" alt="Snowflake">
+                                    <p>Snowflake</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <img src="https://github.com/syvixor/skills-icons/blob/main/icons/docker.svg?raw=true" alt="Docker">
-                                <p>Docker</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <img src="https://github.com/syvixor/skills-icons/blob/main/icons/docker.svg?raw=true" alt="Docker">
+                                    <p>Docker</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <i class="fa fa-cog" style="font-size: 40px;"></i>
-                                <p>SSIS</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <i class="fa fa-cog" style="font-size: 40px;"></i>
+                                    <p>SSIS</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="skill-item padd-15">
-                            <div class="skill-item-inner">
-                                <i class="fa fa-cogs" style="font-size: 40px;"></i>
-                                <p>Duck Creek</p>
+                            <div class="skill-item">
+                                <div class="skill-item-inner">
+                                    <i class="fa fa-cogs" style="font-size: 40px;"></i>
+                                    <p>Duck Creek</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -299,6 +318,10 @@
                                             <h4 class="timeline-title">MSc in Data Analytics</h4>
                                             <p class="timeline-text">National College of Ireland<br>Modules: Statistics, Data Governance, Business Intelligence, Machine Learning, Deep Learning, Generative AI<br>Research: Hybrid AI for Airbnb pricing in Dublin (Random Forest, XGBoost); SLM-based customer support automation; ML model comparison for loan repayment and house prices.</p>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="timeline-box padd-15">
+                                    <div class="timeline shadow-dark">
                                         <div class="timeline-item">
                                             <div class="circle-dot"></div>
                                             <img src="images/niet.png" alt="NIET Logo">
