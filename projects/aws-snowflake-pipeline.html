@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Snowflake Pipeline Project | Aditya Pandey</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navigation.css">
+    <!-- Style Switcher -->
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="../CSS/style-switcher.css">
+    <link rel="stylesheet" href="../CSS/project-detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Main content Start -->
+        <div class="main-content">
+            <section class="project-detail section">
+                <div class="container">
+                    <a href="javascript:void(0);" onclick="navigateToSection('portfolio')" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                    <div class="project-header">
+                        <h1>End-to-End AWS Snowflake Data Pipeline</h1>
+                        <p>This project demonstrates a complete data pipeline that integrates Python, AWS S3, and Snowflake to process and analyze Yelp's business dataset.</p>
+                    </div>
+
+                    <div class="project-section">
+                        <div class="project-image">
+                            <img src="../images/portfolio/Picture.png" alt="AWS Snowflake Pipeline">
+                        </div>
+                        
+                        <h2>Project Overview</h2>
+                        <p>This project demonstrates a complete data pipeline that integrates Python, AWS S3, and Snowflake to process and analyze Yelp's business dataset. The pipeline enables sentiment analysis on review data, providing valuable insights for business decision-making.</p>
+                        
+                        <h2>Key Features</h2>
+                        <ul>
+                            <li>Automated data extraction and loading from source to Snowflake</li>
+                            <li>Integration between AWS S3 and Snowflake for efficient data storage</li>
+                            <li>Python-based sentiment analysis on customer reviews</li>
+                            <li>Comprehensive data transformation and cleaning</li>
+                            <li>Structured data model for business intelligence</li>
+                        </ul>
+                        
+                        <h2>Technical Implementation</h2>
+                        <p>The pipeline was built using the following technologies:</p>
+                        <ul>
+                            <li><strong>Python:</strong> Used for data processing, transformation, and sentiment analysis</li>
+                            <li><strong>AWS S3:</strong> Provides scalable object storage for the raw and processed data</li>
+                            <li><strong>Snowflake:</strong> Cloud data platform for data warehousing and analytics</li>
+                            <li><strong>Pandas:</strong> For data manipulation and analysis</li>
+                            <li><strong>NLTK:</strong> For natural language processing and sentiment analysis</li>
+                        </ul>
+                        
+                        <h2>Challenges and Solutions</h2>
+                        <p>One of the main challenges was efficiently processing large volumes of Yelp review data. This was addressed by implementing a chunked processing approach and optimizing the data loading into Snowflake. Additionally, the sentiment analysis algorithm was fine-tuned to better handle the context of business reviews.</p>
+                        
+                        <h2>Results</h2>
+                        <p>The completed pipeline successfully processes Yelp's business dataset, providing valuable insights into customer sentiment across different business categories. This enables businesses to identify trends, understand customer preferences, and make data-driven decisions.</p>
+                        
+                        <div class="project-links">
+                            <a href="https://github.com/aditya-pa/data-analytics-pipeline-python-snowflake" target="_blank" class="btn">View on GitHub <i class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Main Content End -->
+    </div>
+
+    <!-- Style Switcher Start -->
+    <div class="style-switcher">
+        <div class="style-switcher-toggler s-icon">
+            <i class="fa fa-cog fa-spin"></i>
+        </div>
+        <div class="day-night s-icon">
+            <i class="fas"></i>
+        </div>
+        <h4>Theme Colors</h4>
+        <div class="colors">
+            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+        </div>
+    </div>
+    <!-- Style Switcher End -->
+
+    <!-- JS -->
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-navigation.js"></script>
+</body>
+</html>

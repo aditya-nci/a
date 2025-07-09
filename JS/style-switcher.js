@@ -15,6 +15,9 @@ window.addEventListener("scroll",() =>{
 const alternateStyles = document.querySelectorAll(".alternate-style");
 function setActiveStyle(color)
 {
+    // Store the selected color in localStorage
+    localStorage.setItem('selectedColor', color);
+    
     alternateStyles.forEach((style) => {
         if (color === style.getAttribute("title"))
         {
@@ -33,15 +36,21 @@ dayNight.addEventListener("click", () => {
     dayNight.querySelector("i").classList.toggle("fa-moon");
     document.body.classList.toggle("dark");
 
+    // Store dark mode preference
+    localStorage.setItem('darkMode', document.body.classList.contains("dark"));
 })
 window.addEventListener("load", () => {
-    if (document.body.classList.contains("dark"))
-    {
+    // Apply dark mode if previously selected
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add("dark");
         dayNight.querySelector("i").classList.add("fa-sun");
     }
-    else
-    {
+    else {
         dayNight.querySelector("i").classList.add("fa-moon");
-
     }
+    
+    // Apply previously selected color or default to color-3
+    const savedColor = localStorage.getItem('selectedColor') || 'color-3';
+    setActiveStyle(savedColor);
 })

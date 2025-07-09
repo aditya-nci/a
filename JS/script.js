@@ -1,9 +1,153 @@
+// Remove navigation styles if they exist (for smooth transitions from project pages)
+function removeNavigationStyles() {
+    const styleTag = document.getElementById('navigation-styles');
+    if (styleTag) {
+        styleTag.remove();
+    }
+    
+    // Make body visible again with a fast fade-in
+    document.body.style.transition = "opacity 0.3s ease";
+    document.body.style.opacity = "1";
+}
+
+// Also modify the section's initial visibility for direct navigation
+function setSectionVisibility() {
+    const directNavigation = localStorage.getItem('directNavigation');
+    if (directNavigation === 'true') {
+        // Add the no-transition class to prevent any animations
+        document.documentElement.classList.add('no-transition');
+        document.body.classList.add('no-transition');
+        
+        // Add smooth-navigation class to initially hide the content
+        document.body.classList.add('smooth-navigation');
+        
+        // Hide all sections except the target one
+        const targetSection = localStorage.getItem('targetSection');
+        if (targetSection) {
+            document.querySelectorAll(".section").forEach(section => {
+                // Add direct-navigation class to all sections to prevent slide animation
+                section.classList.add('direct-navigation');
+                
+                if (section.id !== targetSection) {
+                    section.style.display = "none";
+                }
+            });
+        }
+    }
+}
+
+// Call this function early in the page load process
+document.addEventListener('DOMContentLoaded', setSectionVisibility, { once: true });
+
 // Typing animation
-var typed = new Typed(".typing", {
-    strings: ["Data Analyst", "Data Engineer", ".NET Developer", "SSIS Developer", "Data Scientist"],
-    typeSpeed: 100,
-    BackSpeed: 60,
-    loop: true
+document.addEventListener('DOMContentLoaded', function() {
+    // First, check if this is a direct navigation from a project page
+    const isDirectNavigation = localStorage.getItem('directNavigation');
+    if (isDirectNavigation === 'true') {
+        // First thing to do is to disable all animations/transitions immediately
+        document.documentElement.classList.add('no-transition');
+        document.body.classList.add('no-transition');
+        document.body.classList.add('smooth-navigation');
+
+        // Set up the target section early on
+        setSectionVisibility();
+    }
+    
+    // Call these functions in the correct order
+    var typed = new Typed(".typing", {
+        strings: ["Data Analyst", "Data Engineer", ".NET Developer", "SSIS Developer", "Data Scientist"],
+        typeSpeed: 100,
+        BackSpeed: 60,
+        loop: true
+    });
+    
+    // Check if there's a target section in localStorage (for navigation from project detail pages)
+    const targetSection = localStorage.getItem('targetSection');
+    const directNavigation = localStorage.getItem('directNavigation');
+    const navigationStartTime = localStorage.getItem('navigationStartTime');
+    
+    if (targetSection) {
+        // Find the section and activate it
+        const section = document.getElementById(targetSection);
+        if (section) {
+            // Apply special handling for direct navigation from project pages
+            if (directNavigation === 'true') {
+                // Calculate how long the navigation has taken
+                const navigationDuration = navigationStartTime ? (Date.now() - parseInt(navigationStartTime)) : 0;
+                
+                // Completely disable all transitions and animations
+                document.body.classList.add('no-transition');
+                
+                // Hide all sections immediately
+                const allSections = document.querySelectorAll(".section");
+                for (let i = 0; i < allSections.length; i++) {
+                    allSections[i].classList.remove("active");
+                    allSections[i].classList.remove("back-section");
+                    // Add direct-navigation class to prevent slide animation
+                    allSections[i].classList.add("direct-navigation");
+                }
+                
+                // Activate the target section without animation
+                section.classList.add("active");
+                
+                // Update the navigation links
+                const navLinks = document.querySelectorAll(".nav li a");
+                for (let i = 0; i < navLinks.length; i++) {
+                    navLinks[i].classList.remove("active");
+                    if (navLinks[i].getAttribute("href") === "#" + targetSection) {
+                        navLinks[i].classList.add("active");
+                    }
+                }
+                
+                // Fade in the body after everything is set up
+                setTimeout(() => {
+                    // Make all sections visible again but keep them properly activated
+                    for (let i = 0; i < allSections.length; i++) {
+                        if (allSections[i].style.display === "none") {
+                            allSections[i].style.display = "";
+                        }
+                    }
+                    
+                    // Remove the no-transition class after the section is activated
+                    document.documentElement.classList.remove('no-transition');
+                    document.body.classList.remove('no-transition');
+                    document.body.classList.remove('smooth-navigation');
+                    
+                    // Add fade-in class for smooth appearance
+                    document.body.classList.add('fade-in');
+                    
+                    // Clear the navigation flags
+                    localStorage.removeItem('directNavigation');
+                    localStorage.removeItem('navigationStartTime');
+                }, 50); // Small delay to ensure DOM is ready
+                
+            } else {
+                // Standard section activation for normal navigation
+                const allSections = document.querySelectorAll(".section");
+                for (let i = 0; i < allSections.length; i++) {
+                    allSections[i].classList.remove("active");
+                }
+                
+                // Activate the target section
+                section.classList.add("active");
+                
+                // Update the navigation
+                const navLinks = document.querySelectorAll(".nav li a");
+                for (let i = 0; i < navLinks.length; i++) {
+                    navLinks[i].classList.remove("active");
+                    if (navLinks[i].getAttribute("href") === "#" + targetSection) {
+                        navLinks[i].classList.add("active");
+                    }
+                }
+            }
+            
+            // Clear the stored target section
+            localStorage.removeItem('targetSection');
+        }
+    }
+    
+    // Make the page visible after all the setup is done
+    removeNavigationStyles();
 });
 
 // Aside
@@ -149,3 +293,18 @@ function asideSectionTogglerBTn() {
         allSection[i].classList.toggle("open");
     }
 }
+
+// Simple modern enhancements
+document.addEventListener('DOMContentLoaded', function() {
+    // Add subtle hover effects to cards
+    const cards = document.querySelectorAll('.shadow-dark');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});

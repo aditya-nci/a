@@ -7,8 +7,12 @@
     <title>AWS Snowflake Data Pipeline - Aditya Pandey</title>
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/skins/color-1.css">
-    <link rel="stylesheet" href="../CSS/project-detail.css">
+    <link rel="stylesheet" href="../CSS/navigation.css">
+    <!-- Style Switcher -->
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="../CSS/style-switcher.css">
     <link rel="stylesheet" href="../CSS/project-detail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -24,12 +28,12 @@
                 <span></span>
             </div>
             <ul class="nav">
-                <li><a href="../index.html#home"><i class="fa fa-home"></i>Home</a></li>
-                <li><a href="../index.html#experience"><i class="fa fa-briefcase"></i>Experience</a></li>
-                <li><a href="../index.html#skills"><i class="fa fa-tools"></i>Skills</a></li>
-                <li><a href="../index.html#education"><i class="fa fa-graduation-cap"></i>Education</a></li>
-                <li><a href="../index.html#portfolio" class="active"><i class="fa fa-briefcase"></i>Projects</a></li>
-                <li><a href="../index.html#contact"><i class="fa fa-comments"></i>Contact</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('home')"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('experience')"><i class="fa fa-briefcase"></i>Experience</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('skills')"><i class="fa fa-tools"></i>Skills</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('education')"><i class="fa fa-graduation-cap"></i>Education</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('portfolio')" class="active"><i class="fa fa-briefcase"></i>Projects</a></li>
+                <li><a href="javascript:void(0);" onclick="navigateToSection('contact')"><i class="fa fa-comments"></i>Contact</a></li>
             </ul>
         </div>
         <!-- Aside End -->
@@ -37,6 +41,9 @@
         <div class="main-content">
             <section class="project-detail section">
                 <div class="container">
+                    <a href="javascript:void(0);" onclick="navigateToSection('portfolio')" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
                     <div class="project-header">
                         <h1>AWS Snowflake Data Pipeline</h1>
                         <p>End-to-end data pipeline built with Python, Snowflake, and AWS S3 to analyze Yelp's business dataset and perform comprehensive sentiment analysis on customer reviews.</p>
@@ -522,8 +529,6 @@ extract_task >> sentiment_task >> load_task
             <span class="color-1" onclick="setActiveStyle('color-1')"></span>
             <span class="color-2" onclick="setActiveStyle('color-2')"></span>
             <span class="color-3" onclick="setActiveStyle('color-3')"></span>
-            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
-            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
         </div>
     </div>
     <!-- Style Switcher End -->
@@ -532,5 +537,6 @@ extract_task >> sentiment_task >> load_task
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
     <script src="../JS/script.js"></script>
     <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-navigation.js"></script>
 </body>
 </html>

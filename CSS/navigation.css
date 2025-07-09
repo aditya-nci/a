@@ -1,0 +1,42 @@
+/* For smooth navigation */
+.no-transition,
+.no-transition * {
+    transition: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+}
+
+/* This will prevent any flicker */
+.smooth-navigation {
+    opacity: 0;
+}
+
+/* Disable the slide animation completely for direct navigation */
+.direct-navigation {
+    animation: none !important;
+    transform: translateX(0%) !important;
+}
+
+/* Override the slideSection animation */
+.section.active:not(.direct-navigation) {
+    animation: slideSection 1s ease;
+}
+
+/* Sections with direct-navigation class should have no animation */
+.section.active.direct-navigation {
+    animation: none !important;
+    transform: translateX(0%) !important;
+}
+
+/* Ensure page fades in smoothly */
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
