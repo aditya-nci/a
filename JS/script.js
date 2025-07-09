@@ -16,15 +16,32 @@ const nav = document.querySelector(".nav"),
 for (let i = 0; i < totalNavList; i++) {
     const a = navList[i].querySelector("a");
     a.addEventListener("click", function() {
-        removeBackSection();
-        for (let j = 0; j < totalNavList; j++) {
-            if (navList[j].querySelector("a").classList.contains("active")) {
-                addBackSection(j);
+        // Get the currently active section before removing classes
+        let currentActiveIndex = -1;
+        for (let k = 0; k < totalSection; k++) {
+            if (allSection[k].classList.contains("active")) {
+                currentActiveIndex = k;
+                break;
             }
+        }
+        
+        // Remove active class from all nav items
+        for (let j = 0; j < totalNavList; j++) {
             navList[j].querySelector("a").classList.remove("active");
         }
+        
+        // Add active class to clicked nav item
         this.classList.add("active");
+        
+        // Show the target section
         showSection(this);
+        
+        // Add back-section class to the previously active section
+        removeBackSection();
+        if (currentActiveIndex >= 0) {
+            allSection[currentActiveIndex].classList.add("back-section");
+        }
+        
         if (window.innerWidth < 1200) {
             asideSectionTogglerBTn();
         }
@@ -37,40 +54,82 @@ function removeBackSection() {
     }
 }
 
-function addBackSection(num) {
-    allSection[num].classList.add("back-section");
-}
-
 function showSection(element) {
+    // Remove active class from all sections
     for (let i = 0; i < totalSection; i++) {
         allSection[i].classList.remove("active");
     }
+    
+    // Get the target section and add active class
     const target = element.getAttribute("href").split("#")[1];
-    document.querySelector("#" + target).classList.add("active");
+    const targetSection = document.querySelector("#" + target);
+    
+    if (targetSection) {
+        targetSection.classList.add("active");
+    }
 }
 
 function updateNav(element) {
+    // Remove active class from all nav items
     for (let i = 0; i < totalNavList; i++) {
         navList[i].querySelector("a").classList.remove("active");
-        const target = element.getAttribute("href").split("#")[1];
-        if (target === navList[i].querySelector("a").getAttribute("href").split("#")[1]) {
+    }
+    
+    // Get the target section id
+    const target = element.getAttribute("href").split("#")[1];
+    
+    // Find and activate the corresponding nav item
+    for (let i = 0; i < totalNavList; i++) {
+        const navTarget = navList[i].querySelector("a").getAttribute("href").split("#")[1];
+        if (target === navTarget) {
             navList[i].querySelector("a").classList.add("active");
+            break;
         }
     }
 }
 
 document.querySelector(".hire-me").addEventListener("click", function() {
-    const sectionIndex = this.getAttribute("data-section-index");
+    // Get the currently active section before switching
+    let currentActiveIndex = -1;
+    for (let i = 0; i < totalSection; i++) {
+        if (allSection[i].classList.contains("active")) {
+            currentActiveIndex = i;
+            break;
+        }
+    }
+    
+    // Show the contact section
     showSection(this);
     updateNav(this);
+    
+    // Add back-section class to the previously active section
     removeBackSection();
-    addBackSection(sectionIndex);
+    if (currentActiveIndex >= 0) {
+        allSection[currentActiveIndex].classList.add("back-section");
+    }
 });
 
 // Add event listener for Contact Me button
 document.querySelector(".home-info .btn").addEventListener("click", function() {
+    // Get the currently active section before switching
+    let currentActiveIndex = -1;
+    for (let i = 0; i < totalSection; i++) {
+        if (allSection[i].classList.contains("active")) {
+            currentActiveIndex = i;
+            break;
+        }
+    }
+    
+    // Show the contact section
     showSection(this);
     updateNav(this);
+    
+    // Add back-section class to the previously active section
+    removeBackSection();
+    if (currentActiveIndex >= 0) {
+        allSection[currentActiveIndex].classList.add("back-section");
+    }
+    
     if (window.innerWidth < 1200) {
         asideSectionTogglerBTn();
     }
