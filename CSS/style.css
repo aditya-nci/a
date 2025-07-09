@@ -894,6 +894,7 @@ h3.my-profession
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .education .timeline-item img,
@@ -912,6 +913,28 @@ h3.my-profession
     flex-direction: column;
 }
 
+.education .timeline-item:last-child,
+.experience .timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+/* Add vertical line connecting timeline items */
+.education .timeline-item::before,
+.experience .timeline-item::before {
+    content: '';
+    width: 2px;
+    position: absolute;
+    height: 100%;
+    left: 9px;
+    top: 0;
+    background-color: var(--skin-color);
+}
+
+.education .timeline-item:last-child::before,
+.experience .timeline-item:last-child::before {
+    display: none;
+}
+
 .education .timeline-item .circle-dot,
 .experience .timeline-item .circle-dot {
     position: absolute;
@@ -921,55 +944,7 @@ h3.my-profession
     height: 20px;
     border-radius: 50%;
     background-color: var(--skin-color);
-}
-
-.experience .timeline-item .header,
-.education .timeline-item .header {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-}
-
-.experience .timeline-item .header .timeline-title,
-.education .timeline-item .header .timeline-title {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.experience .timeline-item .header .right-content,
-.education .timeline-item .header .right-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.experience .timeline-item .header .timeline-date,
-.education .timeline-item .header .timeline-date {
-    margin: 0;
-    font-size: 14px;
-    color: var(--text-black-900);
-}
-
-.experience .timeline-text ul,
-.education .timeline-text ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 10px 0;
-}
-
-.experience .timeline-text li,
-.education .timeline-text li {
-    margin-bottom: 8px;
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-.education .timeline-text p {
-    margin: 10px 0;
-    font-size: 15px;
-    line-height: 1.5;
+    z-index: 1;
 }
 
 /* Text Color Fixes */
