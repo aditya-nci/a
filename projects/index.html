@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Aditya Pandey</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/skins/color-1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .projects-list {
+            padding: 40px 0;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .project-card {
+            background-color: var(--bg-black-100);
+            border: 1px solid var(--bg-black-50);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(48,46,77,0.15);
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card h3 {
+            color: var(--skin-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        .project-card p {
+            color: var(--text-black-700);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .project-card .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--skin-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+        .project-card .btn:hover {
+            background-color: var(--skin-color);
+            transform: translateY(-2px);
+        }
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: var(--text-black-900);
+            margin-bottom: 10px;
+        }
+        .page-title p {
+            font-size: 1.2rem;
+            color: var(--text-black-700);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container start -->
+    <div class="main-container">
+        <!-- Aside Start -->
+        <div class="aside">
+            <div class="logo">
+                <a href="../index.html"><span>A</span>ditya</a>
+            </div>
+            <div class="nav-toggler">
+                <span></span>
+            </div>
+            <ul class="nav">
+                <li><a href="../index.html#home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="../index.html#experience"><i class="fa fa-briefcase"></i>Experience</a></li>
+                <li><a href="../index.html#skills"><i class="fa fa-tools"></i>Skills</a></li>
+                <li><a href="../index.html#education"><i class="fa fa-graduation-cap"></i>Education</a></li>
+                <li><a href="../index.html#portfolio" class="active"><i class="fa fa-briefcase"></i>Projects</a></li>
+                <li><a href="../index.html#contact"><i class="fa fa-comments"></i>Contact</a></li>
+            </ul>
+        </div>
+        <!-- Aside End -->
+        <!-- Main content Start -->
+        <div class="main-content">
+            <section class="projects-list section">
+                <div class="container">
+                    <div class="page-title">
+                        <h1>My Projects</h1>
+                        <p>Detailed case studies of my data analytics and software development projects</p>
+                    </div>
+
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3><i class="fa fa-film"></i> Cross-Platform Film Analytics</h3>
+                            <p>Analysis of IMDb, Amazon, and Netflix film datasets to uncover trends in ratings, sales, and genre distribution across multiple streaming platforms.</p>
+                            <a href="cross-platform-film-analytics.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/Cross-Platform-Film-Analytics" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><i class="fa fa-shopping-cart"></i> Walmart Brazil Sales Analysis</h3>
+                            <p>Comprehensive analysis of Walmart Brazil's sales decline using advanced analytics, machine learning for delay prediction, and interactive dashboards.</p>
+                            <a href="walmart-brazil-sales.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/walmart-brazil-sales" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><i class="fa fa-comments"></i> Banking Complaint Classification</h3>
+                            <p>Automated banking complaint classifier using DistilBERT transformer model, achieving 87% accuracy on CFPB data.</p>
+                            <a href="banking-complaint-classification.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/Complaint-Classification" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><i class="fa fa-database"></i> SQL Business Insights</h3>
+                            <p>Comprehensive SQL analysis of restaurant customer data to answer key business questions and uncover actionable insights.</p>
+                            <a href="sql-business-insights.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/sql-business-insights" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><i class="fa fa-snowflake"></i> AWS Snowflake Data Pipeline</h3>
+                            <p>End-to-end data pipeline built with Python, Snowflake, and AWS S3 to analyze Yelp's business dataset and perform sentiment analysis.</p>
+                            <a href="aws-snowflake-data-pipeline.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/data-analytics-pipeline-python-snowflake" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+
+                        <div class="project-card">
+                            <h3><i class="fab fa-aws"></i> AWS Order Data Pipeline</h3>
+                            <p>Comprehensive AWS-based data pipeline demonstrating how to leverage various Amazon Web Services to build a scalable solution for order data.</p>
+                            <a href="aws-order-data-pipeline.html" class="btn">View Details</a>
+                            <a href="https://github.com/aditya-pa/aws-order-data-pipeline" target="_blank" class="btn" style="background-color: #333;">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Main content End -->
+    </div>
+    <!-- Main Container End -->
+    
+    <!-- Style Switcher Start -->
+    <div class="style-switcher">
+        <div class="style-switcher-toggler s-icon">
+            <i class="fas fa-cog fa-spin"></i>
+        </div>
+        <div class="day-night s-icon">
+            <i class="fas"></i>
+        </div>
+        <h4>Theme Colors</h4>
+        <div class="colors">
+            <span class="color-1" onclick="setActiveStyle('color-1')"></span>
+            <span class="color-2" onclick="setActiveStyle('color-2')"></span>
+            <span class="color-3" onclick="setActiveStyle('color-3')"></span>
+            <span class="color-4" onclick="setActiveStyle('color-4')"></span>
+            <span class="color-5" onclick="setActiveStyle('color-5')"></span>
+        </div>
+    </div>
+    <!-- Style Switcher End -->
+    
+    <!-- JS Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+</body>
+</html>
