@@ -845,3 +845,219 @@ h3.my-profession
         max-width: 100%;
     }
 }
+
+/* Skills Grid Styling */
+.skills .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-items: center;
+}
+
+.skills .skill-item {
+    width: 100%;
+}
+
+.skills .skill-item .skill-item-inner {
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.skills .skill-item .skill-item-inner:hover {
+    box-shadow: 0 0 20px rgba(48,46,77,0.15);
+}
+
+.skills .skill-item .skill-item-inner img,
+.skills .skill-item .skill-item-inner i {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.skills .skill-item .skill-item-inner p {
+    font-size: 16px;
+    color: var(--text-black-900);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Education and Experience Timeline Styling */
+.education .education-content .timeline,
+.experience .experience-content .timeline {
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.education .timeline-item img,
+.experience .timeline-item img {
+    width: 60px;
+    height: auto;
+    display: block;
+}
+
+.education .timeline-item,
+.experience .timeline-item {
+    padding-left: 37px;
+    padding-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.education .timeline-item .circle-dot,
+.experience .timeline-item .circle-dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--skin-color);
+}
+
+.experience .timeline-item .header,
+.education .timeline-item .header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.experience .timeline-item .header .timeline-title,
+.education .timeline-item .header .timeline-title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.experience .timeline-item .header .right-content,
+.education .timeline-item .header .right-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.experience .timeline-item .header .timeline-date,
+.education .timeline-item .header .timeline-date {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-black-900);
+}
+
+.experience .timeline-text ul,
+.education .timeline-text ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.experience .timeline-text li,
+.education .timeline-text li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.education .timeline-text p {
+    margin: 10px 0;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Text Color Fixes */
+.about-text p {
+    color: var(--text-black-900);
+}
+
+.timeline-date,
+.timeline-title,
+.timeline-text {
+    color: var(--text-black-900);
+}
+
+/* Portfolio Section */
+.portfolio-item {
+    flex: 1 1 33.33%;
+    max-width: 33.33%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.portfolio-item-inner {
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.portfolio-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.portfolio-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.portfolio-text {
+    padding: 15px;
+}
+
+.portfolio-text p {
+    font-size: 14px;
+    color: var(--text-black-900);
+    line-height: 1.5;
+    margin: 0;
+    display: block;
+}
+
+.portfolio-item-inner:hover .portfolio-img img {
+    transform: scale(1.1);
+}
+
+/* Media Queries */
+@media (max-width: 767px) {
+    .skills .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    .experience .timeline-item .header,
+    .education .timeline-item .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .experience .timeline-item .header .right-content,
+    .education .timeline-item .header .right-content {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .portfolio-item {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    
+    .portfolio-img {
+        height: 150px;
+    }
+    
+    .portfolio-text p {
+        font-size: 13px;
+    }
+}
