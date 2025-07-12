@@ -56,8 +56,9 @@
 .style-switcher .colors
 {
     display: flex;
-    flex-wrap: warp;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 10px;
 }
 .style-switcher .colors span
 {
@@ -65,24 +66,24 @@
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    border: 1px solid red;
+    border: 2px solid var(--bg-black-50);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.style-switcher .colors span:hover
+{
+    transform: scale(1.2);
+    border-color: var(--text-black-900);
 }
 .style-switcher .color-1
 {
-    background: #3a86ff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 .style-switcher .color-2
 {
-    background: #38b000;
+    background: linear-gradient(135deg, #38b000 0%, #5cbf2a 100%);
 }
 .style-switcher .color-3
 {
-    background: #2a9d8f;
-}
-.style-switcher .color-4
-{
-    background: #1854b4;
-}.style-switcher .color-5
-{
-    background: #f021b2;
+    background: linear-gradient(135deg, #2a9d8f 0%, #264653 100%);
 }
