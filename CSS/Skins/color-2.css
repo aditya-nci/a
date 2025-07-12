@@ -1,3 +1,6 @@
-:root{
-    --skin-color:#38b000; /* Modern green */
+:root {
+    --skin-color: #38b000;
+    --primary-gradient: linear-gradient(135deg, #38b000 0%, #5cbf2a 100%);
+    --secondary-gradient: linear-gradient(135deg, #a8e6cf 0%, #38b000 100%);
+    --accent-gradient: linear-gradient(135deg, #00d4aa 0%, #00f2fe 100%);
 }
