@@ -1,42 +1,227 @@
-/* For smooth navigation */
+/* Modern Navigation Styles */
+.aside {
+    width: 270px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-medium);
+}
+
+.aside .logo {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.aside .logo a {
+    font-size: 32px;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.aside .logo a:hover {
+    transform: scale(1.05);
+}
+
+.aside .logo a span {
+    font-family: 'Clicker Script', cursive;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.aside .nav-toggler {
+    height: 40px;
+    width: 45px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    position: fixed;
+    left: 300px;
+    top: 20px;
+    border-radius: 12px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.aside .nav-toggler span {
+    height: 2px;
+    width: 18px;
+    background: var(--primary-gradient);
+    display: inline-block;
+    position: relative;
+    border-radius: 2px;
+}
+
+.aside .nav-toggler span::before {
+    content: '';
+    height: 2px;
+    width: 18px;
+    background: var(--primary-gradient);
+    position: absolute;
+    top: -6px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.aside .nav-toggler span::after {
+    content: '';
+    height: 2px;
+    width: 18px;
+    background: var(--primary-gradient);
+    position: absolute;
+    top: 6px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.aside .nav {
+    margin-top: 30px;
+}
+
+.aside .nav li {
+    margin-bottom: 8px;
+    display: block;
+}
+
+.aside .nav li a {
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    color: var(--text-secondary);
+    padding: 16px 20px;
+    border-radius: 16px;
+    position: relative;
+    text-transform: capitalize;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    overflow: hidden;
+}
+
+.aside .nav li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--primary-gradient);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.aside .nav li a:hover,
+.aside .nav li a.active {
+    color: white;
+    transform: translateX(8px);
+    box-shadow: var(--shadow-medium);
+}
+
+.aside .nav li a:hover::before,
+.aside .nav li a.active::before {
+    width: 100%;
+}
+
+.aside .nav li a i {
+    margin-right: 15px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.aside .nav li a:hover i,
+.aside .nav li a.active i {
+    transform: scale(1.1);
+}
+
+/* Smooth navigation transitions */
 .no-transition,
 .no-transition * {
     transition: none !important;
     animation: none !important;
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
 }
 
-/* This will prevent any flicker */
 .smooth-navigation {
     opacity: 0;
 }
 
-/* Disable the slide animation completely for direct navigation */
 .direct-navigation {
     animation: none !important;
     transform: translateX(0%) !important;
 }
 
-/* Override the slideSection animation */
 .section.active:not(.direct-navigation) {
-    animation: slideSection 1s ease;
+    animation: slideSection 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Sections with direct-navigation class should have no animation */
 .section.active.direct-navigation {
     animation: none !important;
     transform: translateX(0%) !important;
 }
 
-/* Ensure page fades in smoothly */
 .fade-in {
-    animation: fadeIn 0.3s ease forwards;
+    animation: fadeIn 0.4s ease forwards;
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1199px) {
+    .aside {
+        left: -270px;
+    }
+    
+    .aside.open {
+        left: 0px;
+    }
+    
+    .aside .nav-toggler {
+        display: flex;
+        left: 30px;
+    }
+    
+    .aside .nav-toggler.open {
+        border-color: var(--primary-gradient);
+        background: var(--primary-gradient);
+    }
+    
+    .aside .nav-toggler.open span {
+        background: transparent;
+    }
+    
+    .aside .nav-toggler.open span::before {
+        transform: rotate(45deg);
+        top: 0;
+        background: white;
+    }
+    
+    .aside .nav-toggler.open span::after {
+        transform: rotate(-45deg);
+        top: 0;
+        background: white;
+    }
+    
+    .section {
+        left: 0;
+    }
+    
+    /* Removed conflicting .section.open rule that was causing layout issues */
 }
