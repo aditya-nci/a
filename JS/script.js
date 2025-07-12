@@ -1,310 +1,1744 @@
-// Remove navigation styles if they exist (for smooth transitions from project pages)
-function removeNavigationStyles() {
-    const styleTag = document.getElementById('navigation-styles');
-    if (styleTag) {
-        styleTag.remove();
-    }
-    
-    // Make body visible again with a fast fade-in
-    document.body.style.transition = "opacity 0.3s ease";
-    document.body.style.opacity = "1";
+@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+:root
+{
+--bg-black-900:#f2f2fc; 
+--bg-black-100:#fdf9ff; 
+--bg-black-50:#e8dfec; 
+--text-black-900:#302e4d;
+--text-black-700:#504e70; 
+}
+body.dark
+{
+    --bg-black-900:#151515; 
+    --bg-black-100:#222222; 
+    --bg-black-50:#393939; 
+    --text-black-900:#ffffff;
+    --text-black-700:#e9e9e9; 
+}
+body
+{
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: 'Poppins' sans-serif;
+}
+*
+{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+::before,::after
+{
+    box-sizing: border-box;
+}
+ul
+{
+    list-style: none;
 }
 
-// Also modify the section's initial visibility for direct navigation
-function setSectionVisibility() {
-    const directNavigation = localStorage.getItem('directNavigation');
-    if (directNavigation === 'true') {
-        // Add the no-transition class to prevent any animations
-        document.documentElement.classList.add('no-transition');
-        document.body.classList.add('no-transition');
-        
-        // Add smooth-navigation class to initially hide the content
-        document.body.classList.add('smooth-navigation');
-        
-        // Hide all sections except the target one
-        const targetSection = localStorage.getItem('targetSection');
-        if (targetSection) {
-            document.querySelectorAll(".section").forEach(section => {
-                // Add direct-navigation class to all sections to prevent slide animation
-                section.classList.add('direct-navigation');
-                
-                if (section.id !== targetSection) {
-                    section.style.display = "none";
-                }
-            });
-        }
+/* Timeline lists should have bullet points */
+.timeline-text ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.timeline-text ul li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: var(--text-black-700);
+}
+.section
+{
+    background: var(--bg-black-900);
+    min-height: 100vh;
+    display: block;
+    padding: 0 30px;
+    opacity: 1;
+    position: fixed;
+    left: 270px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+.section.back-section
+{
+    z-index: 1;
+}
+.section.active
+{
+  z-index: 2;
+  opacity: 1;  
+  animation: slideSection 1s ease;
+}
+@keyframes slideSection 
+{
+    0%
+    {
+        transform: translateX(100%);
+    }    
+    100%
+    {
+        transform: translateX(0%);
+    }
+}
+.hidden
+{
+    display: none !important;
+}
+/* .main-content
+{
+    padding-left: 270px;
+} */
+.padd-15
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container
+{
+    max-width: 1100px;
+    width: 100%;
+    margin:auto;
+}
+.section .container
+{   
+    padding-top: 60px;
+    padding-bottom: 70px;
+}
+.section-title
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 60px;
+}
+.section-title h2
+{
+    font-size: 40px;
+    color: var(--text-black-900);
+    font-weight: 700;    
+    position: relative;
+}
+.section-title h2::before
+{
+    content: '';
+    height: 4px;
+    width: 50px;
+    background-color: var(--skin-color);
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.section-title h2::after
+{
+    content: '';
+    height: 4px;
+    width: 25px;
+    background-color: var(--skin-color);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px ;
+}
+.row
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
+    justify-content: flex-start;
+}
+.btn
+{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 35px;
+    background-color: var(--skin-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+}
+.btn::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+.btn:hover::before
+{
+    left: 100%;
+}
+.btn:hover
+{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.btn:active
+{
+    transform: translateY(0);
+}
+.shadow-dark
+{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+}
+.shadow-dark:hover
+{
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+}
+.aside
+{
+    width: 270px;
+    background: var(--bg-black-100);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px;
+    height: 100%;
+    border-right: 1px solid var(--bg-black-50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+.aside .logo
+{
+    position: absolute;
+    top: 50px;
+    font-size: 30px;
+    text-transform: capitalize;
+}
+.aside .logo a
+{
+    color: var(--text-black-900);
+    font-weight: 700;
+    padding: 15px 20px;
+    font-size: 30px;
+    letter-spacing: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+.aside .logo a span
+{
+    font-family: 'Clicker script',cursive;
+    font-weight: 40px;
+}
+
+.aside .logo a::before
+{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-bottom: 5px solid var(--skin-color);
+    border-left: 5px solid var(--skin-color);
+    bottom: 0;
+    left: 0;
+}
+
+.aside .logo a::after
+{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-top: 5px solid var(--skin-color);
+    border-right: 5px solid var(--skin-color);
+    top: 0;
+    right: 0;
+}
+.aside .nav-toggler
+{
+    height: 40px;
+    width: 45px;
+    border: 1px solid var(--bg-black-50);
+    cursor: pointer;
+    position: fixed;
+    left: 300px;
+    top: 20px;
+    border-radius: 5px;
+    background: var(--bg-black-100);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+.aside .nav-toggler span
+{
+    height: 2px;
+    width: 18px;
+    background: var(--skin-color);
+    display: inline-block;
+    position: relative;
+}
+.aside .nav-toggler.open span
+{
+    background-color: transparent;
+}
+.aside .nav-toggler span::before
+{
+    content: '';
+    height: 2px;
+    width: 18px;
+    background: var(--skin-color);
+    position: absolute;
+    top: -6px;
+    left: 0;
+}
+.aside .nav-toggler.open span:before
+{
+    transform: rotate(45deg);
+    top: 0;
+}
+.aside .nav-toggler span::after
+{
+    content: '';
+    height: 2px;
+    width: 18px;
+    background: var(--skin-color);
+    position: absolute;
+    top: 6px;
+    left: 0;
+}
+.aside .nav-toggler.open span::after
+{
+    transform: rotate(-45deg);
+    top: 0;
+}
+.aside .nav
+{
+    margin-top: 50px;
+}
+.aside .nav li
+{
+    margin-bottom: 20px;
+    display: block;
+}
+.aside .nav li a
+{
+    font-size: 16px;
+    font-weight: 600;
+    display: block;
+    border-bottom: 1px solid var(--bg-black-50);
+    color: var(--text-black-900);
+    padding: 5px 15px;
+}
+.aside .nav li a.active
+{
+    color:var(--skin-color);
+}
+.aside .nav li a i
+{
+    margin-right: 15px;
+}
+.home
+{
+    min-height: 100vh;
+    display: flex;
+    color: var(--text-black-900);
+}
+h3.hello
+{
+    font-size: 28px;
+    margin: 15px 0;
+}
+h3.hello span
+{
+    font-family: 'Clicker Script',cursive;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--skin-color);
+}
+h3.my-profession
+{
+    font-size: 30px;
+    margin: 15px 0;
+}
+.typing
+{
+    color: var(--skin-color);
+}
+.home-info p
+{
+    margin-bottom: 70px;
+    font-size:20px;
+    color: var(--text-black-700); 
+}
+.home .home-info
+{
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+.home .home-img
+{
+    flex: 0 0 40%;
+    max-width: 40%;
+    text-align: center;
+    position: relative;
+}
+.home-img::before
+{
+    content: '';
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    left: -20px;
+    top: -40px;
+    border-top: 10px solid var(--skin-color);
+    border-left: 10px solid var(--skin-color);
+
+}
+.home-img::after
+{
+    content: '';
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    right: 20px;
+    bottom: -40px;
+    border-bottom: 10px solid var(--skin-color);
+    border-right: 10px solid var(--skin-color);
+
+}
+/* home */
+.home .home-img img
+{ 
+    margin: auto;
+    border-radius: 5px;
+    height: 400px;
+}
+/* About */
+.about .about-content
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.about .about-content .about-text
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.about .about-content .about-text h3
+{
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--text-black-900);
+}
+.about .about-content .about-text h3 span
+{
+    color: var(--skin-color);
+}
+.about .about-content .about-text p
+{
+    font-size: 16px;
+    line-height: 25px;
+    color: var(--text-black-7 00);
+}
+.about .about-content .personal-info
+{
+    flex: 0 0 60%;
+    max-width: 60%;
+    margin-top: 40px;
+}
+.about .about-content .personal-info .info-item
+{
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.about .about-content .personal-info .info-item p 
+{
+    font-weight: 600;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-black-900);
+    border-bottom: 1px solid var(--bg-black-50);
+}
+.about .about-content .personal-info .info-item p span
+{
+    font-weight: 400;
+    color: var(--text-black-700);
+    margin-left: 4px;
+    display: inline-block;
+}
+.about .about-content .personal-info .buttons
+{
+    margin-top: 30px; 
+}
+.about .about-content .personal-info .buttons .btn
+{
+    /* margin-right: 15px; */
+    margin-top: 10px;
+}
+.about .about-content .skills 
+{
+    flex: 0 0 40%;
+    max-width: 40%;
+    margin-top: 40px;
+}
+.about .about-content .skills .skill-item
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.about .about-content .skills .skill-item h5 
+{
+    line-height: 40px;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-black-900);
+    text-transform: capitalize;
+}
+.about .about-content .skills .skill-item .progress
+{
+    background: var(--bg-black-50);
+    height: 7px;
+    border-radius: 4px;
+    width: 100%;
+    position: relative;
+} 
+.about .about-content .skills .skill-item 
+{
+    margin-bottom: 25px;
+}
+.about .about-content .skills .skill-item .progress .progress-in
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 4px;
+    background-color: var(--skin-color);
+}
+.about .about-content .skills .skill-item .skill-percent
+{
+    position: absolute;
+    right: 0;
+    color: var(--text-black-900);
+    top: -40px;
+    font-weight: 400;
+    line-height: 40px;
+}
+.about .about-content .education,
+.about .about-content .experience
+{
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-top: 30px;
+    
+}
+.about .about-content h3 .title 
+{
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: var(--text-black-900);
+}
+.about .about-content .timeline-box
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.about .about-content .timeline
+{
+    background-color: var(--bg-black-100);
+    padding: 30px 15px;
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+}
+.about .about-content .timeline .timeline-item
+{
+    position: relative;
+    padding-left: 37px;
+    padding-bottom: 50px;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInLeft 0.8s ease forwards;
+}
+.about .about-content .timeline .timeline-item:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+.about .about-content .timeline .timeline-item:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+@keyframes slideInLeft 
+{
+    to 
+    {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+.about .about-content .timeline .timeline-item::before
+{
+    content: '';
+    width: 1px;
+    position: absolute;
+    height: 100%;
+    left: 7px;
+    top: 0;
+    background-color: var(--skin-color);
+}
+.about .about-content .timeline .circle-dot
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: var(--skin-color);
+}
+.about .about-content .timeline .timeline-date
+{
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: var(--text-black-700);
+}
+.about .about-content .timeline .timeline-date .fa
+{
+    margin-right: 5px;
+}
+.about .about-content .timeline .timeline-title
+{
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+    color: var(--text-black-900);
+}
+.about .about-content .timeline .timeline-text
+{
+    line-height: 25px;
+    font-size: 16px;
+    text-align: justify;
+    color: var(--text-black-700);
+}
+
+/* Timeline element transitions */
+.timeline-item .header .timeline-title {
+    transition: all 0.3s ease;
+}
+
+.timeline-item .header img {
+    transition: all 0.3s ease;
+}
+
+.timeline-item .timeline-text {
+    transition: all 0.3s ease;
+}
+
+.timeline-item .timeline-text ul li {
+    transition: all 0.3s ease;
+}
+
+.timeline-item .timeline-text p {
+    transition: all 0.3s ease;
+}
+
+/* Service */
+.service .container
+{
+    padding-bottom: 40px;
+}
+.service .service-item
+{
+    margin-bottom: 30px;
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+}
+.service .service-item .service-item-inner
+{
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+.service .service-item .service-item-inner:hover
+{
+    box-shadow: 0 0 20px rgba(48,46,77,0.15);
+}
+.service .service-item .service-item-inner .icon
+{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+
+}
+.service .service-item .service-item-inner .icon .fa
+{
+    font-size: 40px;
+    line-height: 60px;
+    color: var(--skin-color);  
+    transition: all 0.3s ease;
+}
+.service .service-item .service-item-inner:hover .icon
+{
+    background-color: var(--skin-color);
+}
+.service .service-item .service-item-inner:hover .icon .fa
+{
+    font-size: 25px;
+    color: #fff;
+}
+.service .service-item .service-item-inner h4
+{
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--text-black-900);
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.service .service-item .service-item-inner p
+{
+    font-size: 16px;
+    color: var(--text-black-700);
+    line-height: 25px;
+}
+/* Modern Portfolio Section */
+.portfolio .container
+{
+    padding-bottom: 40px;
+}
+
+.portfolio .portfolio-heading
+{
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 40px;
+}
+
+.portfolio .portfolio-heading h2
+{
+    color: var(--text-black-900);
+    font-weight: 500;
+}
+
+.portfolio .portfolio-item
+{
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    display: flex;
+    height: auto; /* Let content determine the height */
+}
+
+/* Modern Portfolio Cards */
+.portfolio .portfolio-item-inner
+{
+    background: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-height: 400px; /* Set minimum height */
+    text-decoration: none;
+    color: inherit;
+}
+
+.portfolio .portfolio-item-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.portfolio .portfolio-item-inner:hover::before {
+    opacity: 1;
+}
+
+.portfolio .portfolio-item-inner:hover
+{
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--skin-color);
+}
+
+.portfolio .portfolio-img
+{
+    width: 100%;
+    height: 220px; /* Fixed height for all images */
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio .portfolio-img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio .portfolio-item-inner:hover .portfolio-img::after {
+    opacity: 1;
+}
+
+.portfolio .portfolio-img img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.portfolio .portfolio-item-inner:hover .portfolio-img img
+{
+    transform: scale(1.05);
+}
+
+.portfolio .portfolio-text
+{
+    padding: 25px;
+    background: var(--bg-black-100);
+    position: relative;
+    z-index: 2;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portfolio .portfolio-text p:first-child
+{
+    font-size: 15px;
+    color: var(--text-black-700);
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.portfolio .portfolio-text p:first-child a {
+    color: var(--skin-color);
+    text-decoration: none;
+    font-weight: 600;
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    display: inline;
+    min-width: 0;
+    max-width: none;
+}
+
+.portfolio .portfolio-text p:first-child a:hover {
+    text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+    background: none;
+}
+
+.portfolio .portfolio-text p:last-child
+{
+    margin: 0;
+    padding-top: 15px;
+    border-top: 1px solid var(--bg-black-50);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.portfolio .portfolio-text p:last-child a
+{
+    /* Base styling for backward compatibility */
+    color: var(--skin-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.portfolio .portfolio-text p:last-child a::before,
+.portfolio .portfolio-text p:last-child span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.portfolio .portfolio-text p:last-child a:hover::before,
+.portfolio .portfolio-text p:last-child span:hover::before {
+    left: 100%;
+}
+
+/* Remove empty ruleset */
+/* .portfolio .portfolio-text p:last-child a:hover
+{
+}*/
+
+.portfolio .portfolio-text p:last-child .details-btn,
+.portfolio .portfolio-text p:last-child .github-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 5px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    text-align: center;
+    width: 48%;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.portfolio .portfolio-text p:last-child .details-btn {
+    background-color: var(--skin-color);
+}
+
+.portfolio .portfolio-text p:last-child .github-btn {
+    background-color: var(--text-black-700);
+}
+
+.portfolio .portfolio-text p:last-child .details-btn:hover,
+.portfolio .portfolio-text p:last-child .github-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio .portfolio-text p:last-child .details-btn:hover {
+    background-color: var(--skin-color);
+    opacity: 0.9;
+}
+
+.portfolio .portfolio-text p:last-child .github-btn:hover {
+    background-color: #333;
+}
+
+/* Portfolio button responsive layout */
+@media (max-width: 767px) {
+    .portfolio .portfolio-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .portfolio .portfolio-text p:last-child {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .portfolio .portfolio-text p:last-child .details-btn,
+    .portfolio .portfolio-text p:last-child .github-btn {
+        width: 100%;
     }
 }
 
-// Call this function early in the page load process
-document.addEventListener('DOMContentLoaded', setSectionVisibility, { once: true });
-
-// Typing animation
-document.addEventListener('DOMContentLoaded', function() {
-    // First, check if this is a direct navigation from a project page
-    const isDirectNavigation = localStorage.getItem('directNavigation');
-    if (isDirectNavigation === 'true') {
-        // First thing to do is to disable all animations/transitions immediately
-        document.documentElement.classList.add('no-transition');
-        document.body.classList.add('no-transition');
-        document.body.classList.add('smooth-navigation');
-
-        // Set up the target section early on
-        setSectionVisibility();
-    }
-    
-    // Call these functions in the correct order
-    var typed = new Typed(".typing", {
-        strings: ["Data Analyst", "Data Engineer", ".NET Developer", "SSIS Developer", "Data Scientist"],
-        typeSpeed: 100,
-        BackSpeed: 60,
-        loop: true
-    });
-    
-    // Check if there's a target section in localStorage (for navigation from project detail pages)
-    const targetSection = localStorage.getItem('targetSection');
-    const directNavigation = localStorage.getItem('directNavigation');
-    const navigationStartTime = localStorage.getItem('navigationStartTime');
-    
-    if (targetSection) {
-        // Find the section and activate it
-        const section = document.getElementById(targetSection);
-        if (section) {
-            // Apply special handling for direct navigation from project pages
-            if (directNavigation === 'true') {
-                // Calculate how long the navigation has taken
-                const navigationDuration = navigationStartTime ? (Date.now() - parseInt(navigationStartTime)) : 0;
-                
-                // Completely disable all transitions and animations
-                document.body.classList.add('no-transition');
-                
-                // Hide all sections immediately
-                const allSections = document.querySelectorAll(".section");
-                for (let i = 0; i < allSections.length; i++) {
-                    allSections[i].classList.remove("active");
-                    allSections[i].classList.remove("back-section");
-                    // Add direct-navigation class to prevent slide animation
-                    allSections[i].classList.add("direct-navigation");
-                }
-                
-                // Activate the target section without animation
-                section.classList.add("active");
-                
-                // Update the navigation links
-                const navLinks = document.querySelectorAll(".nav li a");
-                for (let i = 0; i < navLinks.length; i++) {
-                    navLinks[i].classList.remove("active");
-                    if (navLinks[i].getAttribute("href") === "#" + targetSection) {
-                        navLinks[i].classList.add("active");
-                    }
-                }
-                
-                // Fade in the body after everything is set up
-                setTimeout(() => {
-                    // Make all sections visible again but keep them properly activated
-                    for (let i = 0; i < allSections.length; i++) {
-                        if (allSections[i].style.display === "none") {
-                            allSections[i].style.display = "";
-                        }
-                    }
-                    
-                    // Remove the no-transition class after the section is activated
-                    document.documentElement.classList.remove('no-transition');
-                    document.body.classList.remove('no-transition');
-                    document.body.classList.remove('smooth-navigation');
-                    
-                    // Add fade-in class for smooth appearance
-                    document.body.classList.add('fade-in');
-                    
-                    // Clear the navigation flags
-                    localStorage.removeItem('directNavigation');
-                    localStorage.removeItem('navigationStartTime');
-                }, 50); // Small delay to ensure DOM is ready
-                
-            } else {
-                // Standard section activation for normal navigation
-                const allSections = document.querySelectorAll(".section");
-                for (let i = 0; i < allSections.length; i++) {
-                    allSections[i].classList.remove("active");
-                }
-                
-                // Activate the target section
-                section.classList.add("active");
-                
-                // Update the navigation
-                const navLinks = document.querySelectorAll(".nav li a");
-                for (let i = 0; i < navLinks.length; i++) {
-                    navLinks[i].classList.remove("active");
-                    if (navLinks[i].getAttribute("href") === "#" + targetSection) {
-                        navLinks[i].classList.add("active");
-                    }
-                }
-            }
-            
-            // Clear the stored target section
-            localStorage.removeItem('targetSection');
-        }
-    }
-    
-    // Make the page visible after all the setup is done
-    removeNavigationStyles();
-});
-
-// Aside
-const nav = document.querySelector(".nav"),
-      navList = nav.querySelectorAll("li"),
-      totalNavList = navList.length,
-      allSection = document.querySelectorAll(".section"),
-      totalSection = allSection.length;
-
-for (let i = 0; i < totalNavList; i++) {
-    const a = navList[i].querySelector("a");
-    a.addEventListener("click", function() {
-        // Get the currently active section before removing classes
-        let currentActiveIndex = -1;
-        for (let k = 0; k < totalSection; k++) {
-            if (allSection[k].classList.contains("active")) {
-                currentActiveIndex = k;
-                break;
-            }
-        }
-        
-        // Remove active class from all nav items
-        for (let j = 0; j < totalNavList; j++) {
-            navList[j].querySelector("a").classList.remove("active");
-        }
-        
-        // Add active class to clicked nav item
-        this.classList.add("active");
-        
-        // Show the target section
-        showSection(this);
-        
-        // Add back-section class to the previously active section
-        removeBackSection();
-        if (currentActiveIndex >= 0) {
-            allSection[currentActiveIndex].classList.add("back-section");
-        }
-        
-        if (window.innerWidth < 1200) {
-            asideSectionTogglerBTn();
-        }
-    });
+/* Animated skill items */
+.skill-item {
+    width: 100%;
+    perspective: 1000px;
 }
 
-function removeBackSection() {
-    for (let i = 0; i < totalSection; i++) {
-        allSection[i].classList.remove("back-section");
+.skill-item-inner {
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.skill-item-inner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: var(--skin-color);
+}
+
+.skill-item-inner img {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: contain;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    flex-shrink: 0;
+}
+
+.skill-item-inner p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-black-900);
+    flex-shrink: 0;
+}
+
+/* Enhanced timeline with subtle animations */
+.timeline-item {
+    padding-left: 37px;
+    padding-bottom: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.circle-dot {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--skin-color);
+    z-index: 1;
+    border: 2px solid var(--bg-black-100);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.circle-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: var(--skin-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+/* Enhanced timeline hover effects for different parts */
+.timeline-item:hover .circle-dot {
+    box-shadow: 0 0 20px rgba(0,0,0,0.3), 0 0 0 2px var(--skin-color);
+}
+
+.timeline-item:hover .circle-dot::before {
+    width: 8px;
+    height: 8px;
+}
+
+/* Individual hover effects for timeline parts */
+.timeline-item .header:hover .timeline-title {
+    color: var(--skin-color);
+    transform: translateX(5px);
+}
+
+.timeline-item .header:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.timeline-item .timeline-text:hover {
+    background-color: var(--bg-black-50);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-item .timeline-text:hover ul li {
+    transform: translateX(10px);
+}
+
+.timeline-item .timeline-text:hover p {
+    color: var(--text-black-900);
+    font-weight: 500;
+}
+
+/* Enhanced buttons with 3D effect */
+.btn {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 35px;
+    background-color: var(--skin-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+}
+.btn::before
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+.btn:hover::before
+{
+    left: 100%;
+}
+.btn:hover
+{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.btn:active
+{
+    transform: translateY(0);
+}
+
+/* Enhanced navigation with subtle animations */
+.nav li a {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.nav li a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav li a:hover::before {
+    left: 100%;
+}
+
+/* Simple home image hover effect */
+.home-img img {
+    transition: transform 0.3s ease;
+}
+
+.home-img:hover img {
+    transform: scale(1.02);
+}
+
+/* Enhanced service cards */
+.service-item-inner {
+    background-color: var(--bg-black-100);
+    border: 1px solid var(--bg-black-50);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.service-item-inner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.service-item-inner:hover::before {
+    opacity: 1;
+}
+
+.service-item-inner:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: var(--skin-color);
+}
+
+.service-item-inner .icon {
+    transition: all 0.3s ease;
+}
+
+.service-item-inner:hover .icon {
+    transform: rotateY(360deg);
+}
+
+/* Smooth section transitions */
+.section {
+    transition: all 0.5s ease;
+}
+
+.section.active {
+    animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-function showSection(element) {
-    // Remove active class from all sections
-    for (let i = 0; i < totalSection; i++) {
-        allSection[i].classList.remove("active");
+/* ===== Contact Section Styles ===== */
+.contact-content {
+    margin-top: 50px;
+}
+
+.contact-content .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Contact Info Side */
+.contact-info-side {
+    padding: 30px;
+}
+
+.contact-subtitle {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.contact-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(45deg, var(--skin-color), #ff6b6b);
+    border-radius: 2px;
+}
+
+.contact-description {
+    font-size: 16px;
+    color: var(--text-black-700);
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.contact-info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: var(--bg-black-100);
+    border-radius: 15px;
+    border: 1px solid var(--bg-black-50);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-info-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.contact-info-item:hover::before {
+    left: 100%;
+}
+
+.contact-info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: var(--skin-color);
+}
+
+.contact-info-item .icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, var(--skin-color), #ff6b6b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.contact-info-item:hover .icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.info-content h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-black-900);
+    margin-bottom: 5px;
+}
+
+.info-content p {
+    font-size: 15px;
+    color: var(--text-black-700);
+    margin: 0;
+}
+
+.info-content a {
+    color: var(--skin-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.info-content a:hover {
+    color: var(--text-black-900);
+}
+
+/* Contact Form Side */
+.contact-form-side {
+    padding: 30px;
+}
+
+.contact-form-container {
+    background: var(--bg-black-100);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid var(--bg-black-50);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(45deg, var(--skin-color), #ff6b6b);
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-black-900);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid var(--bg-black-50);
+    border-radius: 12px;
+    background: var(--bg-black-900);
+    color: var(--text-black-900);
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    outline: none;
+    resize: none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: var(--skin-color);
+    box-shadow: 0 0 0 3px rgba(255, 105, 135, 0.1);
+}
+
+.input-group label {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: var(--text-black-700);
+    font-size: 16px;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    background: var(--bg-black-900);
+    padding: 0 5px;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label {
+    top: -8px;
+    left: 15px;
+    font-size: 12px;
+    color: var(--skin-color);
+    font-weight: 600;
+}
+
+.textarea-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, var(--skin-color), #ff6b6b);
+    transition: width 0.3s ease;
+}
+
+.input-group input:focus ~ .input-border,
+.input-group textarea:focus ~ .input-border {
+    width: 100%;
+}
+
+.submit-btn {
+    background: linear-gradient(45deg, var(--skin-color), #ff6b6b);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 105, 135, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+/* Dark Mode Adjustments */
+body.dark .contact-form-container {
+    background: var(--bg-black-100);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+body.dark .input-group input,
+body.dark .input-group textarea {
+    background: var(--bg-black-900);
+    border-color: var(--bg-black-50);
+}
+
+body.dark .input-group label {
+    background: var(--bg-black-900);
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .contact-content .row {
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
     
-    // Get the target section and add active class
-    const target = element.getAttribute("href").split("#")[1];
-    const targetSection = document.querySelector("#" + target);
-    
-    if (targetSection) {
-        targetSection.classList.add("active");
+    .contact-form-container {
+        padding: 30px;
     }
 }
 
-function updateNav(element) {
-    // Remove active class from all nav items
-    for (let i = 0; i < totalNavList; i++) {
-        navList[i].querySelector("a").classList.remove("active");
+@media (max-width: 767px) {
+    .contact-subtitle {
+        font-size: 28px;
     }
     
-    // Get the target section id
-    const target = element.getAttribute("href").split("#")[1];
+    .form-title {
+        font-size: 24px;
+    }
     
-    // Find and activate the corresponding nav item
-    for (let i = 0; i < totalNavList; i++) {
-        const navTarget = navList[i].querySelector("a").getAttribute("href").split("#")[1];
-        if (target === navTarget) {
-            navList[i].querySelector("a").classList.add("active");
-            break;
-        }
+    .contact-form-container {
+        padding: 25px;
+    }
+    
+    .contact-info-item {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .contact-info-item .icon {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .submit-btn {
+        padding: 12px 30px;
+        font-size: 14px;
     }
 }
 
-document.querySelector(".hire-me").addEventListener("click", function() {
-    // Get the currently active section before switching
-    let currentActiveIndex = -1;
-    for (let i = 0; i < totalSection; i++) {
-        if (allSection[i].classList.contains("active")) {
-            currentActiveIndex = i;
-            break;
-        }
+@media (max-width: 575px) {
+    .contact-info-side,
+    .contact-form-side {
+        padding: 15px;
     }
     
-    // Show the contact section
-    showSection(this);
-    updateNav(this);
-    
-    // Add back-section class to the previously active section
-    removeBackSection();
-    if (currentActiveIndex >= 0) {
-        allSection[currentActiveIndex].classList.add("back-section");
-    }
-});
-
-// Add event listener for Contact Me button
-document.querySelector(".home-info .btn").addEventListener("click", function() {
-    // Get the currently active section before switching
-    let currentActiveIndex = -1;
-    for (let i = 0; i < totalSection; i++) {
-        if (allSection[i].classList.contains("active")) {
-            currentActiveIndex = i;
-            break;
-        }
+    .contact-subtitle {
+        font-size: 24px;
     }
     
-    // Show the contact section
-    showSection(this);
-    updateNav(this);
-    
-    // Add back-section class to the previously active section
-    removeBackSection();
-    if (currentActiveIndex >= 0) {
-        allSection[currentActiveIndex].classList.add("back-section");
-    }
-    
-    if (window.innerWidth < 1200) {
-        asideSectionTogglerBTn();
-    }
-});
-
-const navTogglerBTn = document.querySelector(".nav-toggler"),
-      aside = document.querySelector(".aside");
-
-navTogglerBTn.addEventListener("click", () => {
-    asideSectionTogglerBTn();
-});
-
-function asideSectionTogglerBTn() {
-    aside.classList.toggle("open");
-    navTogglerBTn.classList.toggle("open");
-    for (let i = 0; i < totalSection; i++) {
-        allSection[i].classList.toggle("open");
+    .form-title {
+        font-size: 20px;
     }
 }
 
-// Simple modern enhancements
-document.addEventListener('DOMContentLoaded', function() {
-    // Add subtle hover effects to cards
-    const cards = document.querySelectorAll('.shadow-dark');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
+/* Additional Contact Form Enhancements */
+
+/* Smooth hover effects for all interactive elements */
+.contact-info-item,
+.input-group input,
+.input-group textarea,
+.submit-btn {
+    will-change: transform;
+}
+
+/* Enhanced mobile experience */
+@media (max-width: 480px) {
+    .contact-content {
+        margin-top: 30px;
+    }
+    
+    .contact-info-side,
+    .contact-form-side {
+        padding: 10px;
+    }
+    
+    .contact-form-container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .contact-subtitle {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .form-title {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+    
+    .contact-description {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    
+    .contact-info-item {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .contact-info-item .icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .info-content h4 {
+        font-size: 16px;
+    }
+    
+    .info-content p {
+        font-size: 14px;
+    }
+    
+    .input-group input,
+    .input-group textarea {
+        padding: 12px 15px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+    
+    .input-group label {
+        font-size: 14px;
+        top: 12px;
+        left: 15px;
+    }
+    
+    .input-group input:focus + label,
+    .input-group input:valid + label,
+    .input-group textarea:focus + label,
+    .input-group textarea:valid + label {
+        font-size: 11px;
+    }
+    
+    .submit-btn {
+        padding: 12px 25px;
+        font-size: 13px;
+        border-radius: 25px;
+    }
+    
+    .contact-form {
+        gap: 20px;
+    }
+}
+
+/* Accessibility improvements */
+.contact-form input:focus,
+.contact-form textarea:focus,
+.submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 105, 135, 0.3);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .contact-info-item {
+        border-width: 2px;
+    }
+    
+    .input-group input,
+    .input-group textarea {
+        border-width: 2px;
+    }
+    
+    .submit-btn {
+        border: 2px solid var(--skin-color);
+    }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .contact-info-item,
+    .contact-form-container,
+    .submit-btn,
+    .input-group input,
+    .input-group textarea,
+    .contact-info-item .icon {
+        transition: none;
+        animation: none;
+    }
+    
+    .contact-info-item::before,
+    .submit-btn::before {
+        display: none;
+    }
+}
+
+/* Print styles */
+@media print {
+    .contact-form-container {
+        box-shadow: none;
+        border: 2px solid #000;
+    }
+    
+    .submit-btn {
+        background: #000 !important;
+        color: #fff !important;
+    }
+}
