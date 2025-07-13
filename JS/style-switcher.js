@@ -40,13 +40,14 @@ dayNight.addEventListener("click", () => {
     localStorage.setItem('darkMode', document.body.classList.contains("dark"));
 })
 window.addEventListener("load", () => {
-    // Apply dark mode if previously selected
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    if (isDarkMode) {
+    // Check if dark mode preference exists
+    const darkModePref = localStorage.getItem('darkMode');
+    if (darkModePref === 'true') {
         document.body.classList.add("dark");
         dayNight.querySelector("i").classList.add("fa-sun");
-    }
-    else {
+    } else {
+        // Default to light mode
+        document.body.classList.remove("dark");
         dayNight.querySelector("i").classList.add("fa-moon");
     }
     
