@@ -2,504 +2,289 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cross-Platform Film Analytics - Aditya Pandey</title>
+    <title>Cross-Platform Film Analytics – Insights & Visualizations</title>
     <!-- CSS Files -->
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/skins/color-1.css">
+    <link rel="stylesheet" href="CSS/skins/color-1.css" class="alternate-style" title="color-1">
+    <link rel="stylesheet" href="CSS/skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="CSS/skins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="CSS/skins/color-6.css" class="alternate-style" title="color-6" disabled>
+    <link rel="stylesheet" href="CSS/skins/color-7.css" class="alternate-style" title="color-7" disabled>
+    <link rel="stylesheet" href="CSS/skins/color-8.css" class="alternate-style" title="color-8" disabled>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="CSS/navigation.css" class="alternate-style" title="color-1" disabled>
-    <link rel="stylesheet" href="CSS/style-switcher.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .project-detail-page {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow-x: hidden;
+        :root {
+            --bg-main: #181a20;
+            --bg-card: #23262f;
+            --bg-card-light: #fff;
+            --text-main: #fff;
+            --text-secondary: #b5b5b5;
+            --accent: var(--skin-color, #ffb86b);
+            --accent-alt: var(--skin-color-alt, #ffb86b);
+            --shadow: 0 8px 32px rgba(0,0,0,0.18);
         }
-        
-        .project-detail-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-alt) 100%);
+            color: var(--text-main);
+            transition: background 0.4s, color 0.4s;
         }
-        
-        .project-header-section {
-            padding: 100px 0 50px;
-            position: relative;
-            z-index: 2;
+        body.light {
+            --bg-main: #f7f7fa;
+            --bg-card: #fff;
+            --text-main: #23262f;
+            --text-secondary: #555;
         }
-        
-        .project-hero {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
-        
-        .project-hero h1 {
-            font-size: 3.5rem;
+        .header-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .header-card h1 {
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #f0f0f0);
+            background: linear-gradient(135deg, #fff, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 0.7rem;
         }
-        
-        .project-hero .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-        
-        .project-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .meta-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .meta-item i {
-            font-size: 2rem;
-            color: var(--skin-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .meta-item h4 {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .meta-item p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .project-image {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            margin: 2rem 0;
-        }
-        
-        .detail-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .detail-section h2 {
-            color: white;
-            font-size: 2.5rem;
+        .header-card .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
-        
-        .detail-section h3 {
-            color: var(--skin-color);
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .detail-section p, .detail-section li {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .detail-section li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--skin-color);
-            font-weight: bold;
-        }
-        
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 0.7rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
-        
         .tech-item {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 18px;
             font-weight: 600;
             font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
-        
-        .tech-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 1.5rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .btn-action {
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: flex;
+        .back-btn {
+            display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-action:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .back-to-home {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            gap: 0.7rem;
+            background: var(--bg-card);
+            color: var(--accent);
             border-radius: 50px;
-            padding: 1rem 1.5rem;
-            color: white;
-            text-decoration: none;
+            padding: 0.7rem 1.5rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 1000;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            transition: background 0.3s, color 0.3s;
         }
-        
-        .back-to-home:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
+        .back-btn:hover {
+            background: var(--accent);
+            color: #fff;
         }
-        
-        .results-grid {
+        .insight-section {
+            background: var(--bg-card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .insight-section h2 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .insight-section h3 {
+            font-size: 1.3rem;
+            color: var(--accent-alt);
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+        }
+        .insight-section ul {
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+        }
+        .insight-section li {
+            color: var(--text-main);
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+        }
+        .graph-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
             margin: 2rem 0;
         }
-        
-        .result-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .graph-card {
+            background: var(--bg-card);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--skin-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-label {
-            color: white;
+        .graph-card h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.7rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
         }
-        
-        .result-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
+        .graph-card iframe, .graph-card img {
+            width: 100%;
+            min-height: 340px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+            background: #fff;
         }
-        
-        @media (max-width: 768px) {
-            .project-hero {
-                padding: 2rem;
-            }
-            
-            .project-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .detail-section {
-                padding: 2rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .back-to-home {
-                position: relative;
-                top: auto;
-                left: auto;
-                margin: 2rem 0;
-            }
+        .graph-card img {
+            object-fit: cover;
+        }
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 2rem 0 0 0;
+        }
+        @media (max-width: 700px) {
+            .header-card h1 { font-size: 2rem; }
+            .container { padding: 1rem 0.3rem; }
+            .insight-section { padding: 1.2rem 0.7rem; }
+            .graph-grid { gap: 1rem; }
         }
     </style>
 </head>
-<body class="project-detail-page">
-    <a href="index.html" class="back-to-home">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
-    </a>
-    
-    <div class="project-header-section">
-        <div class="container">
-            <div class="project-hero">
-                <h1>Cross-Platform Film Analytics</h1>
-                <p class="subtitle">Multi-Platform Data Analysis | Python | Machine Learning</p>
-                
-                <div class="project-meta-grid">
-                    <div class="meta-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h4>Duration</h4>
-                        <p>3 Months</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-users"></i>
-                        <h4>Team Size</h4>
-                        <p>Individual Project</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Status</h4>
-                        <p>Completed</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-code"></i>
-                        <h4>Category</h4>
-                        <p>Data Analytics</p>
-                    </div>
-                </div>
-                
-                <div class="tech-stack">
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Pandas</span>
-                    <span class="tech-item">Plotly</span>
-                    <span class="tech-item">Streamlit</span>
-                    <span class="tech-item">Machine Learning</span>
-                    <span class="tech-item">Data Visualization</span>
-                </div>
-                
-                <img src="images/portfolio/IMDB.png?raw=true" alt="Cross-Platform Film Analytics" class="project-image">
-                
-                <div class="action-buttons">
-                    <a href="https://github.com/aditya-pa/Cross-Platform-Film-Analytics" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github"></i> View Source Code
-                    </a>
-                    <a href="index.html#portfolio" class="btn-action btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back to Portfolio
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+<body>
     <div class="container">
-        <div class="detail-section">
-            <h2><i class="fas fa-bullseye"></i> Project Overview</h2>
-            <p>This comprehensive data analytics project analyzes film performance across multiple streaming platforms including IMDb, Amazon Prime, and Netflix. The goal was to uncover trends in ratings, sales, and genre distribution to provide actionable insights for content creators and streaming platforms.</p>
-            <p>Using advanced data analysis techniques and machine learning models, this project processes large datasets to identify patterns that can inform business decisions in the entertainment industry.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-target"></i> Project Objectives</h2>
-            <ul>
-                <li>Analyze film performance metrics across different streaming platforms</li>
-                <li>Identify rating trends and genre preferences among viewers</li>
-                <li>Create interactive visualizations for stakeholder insights</li>
-                <li>Build predictive models for film success metrics</li>
-                <li>Compare content strategies across platforms</li>
-                <li>Generate data-driven recommendations for content acquisition</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
-            
-            <h3><i class="fas fa-database"></i> Data Collection & Processing</h3>
-            <ul>
-                <li>Collected and integrated datasets from IMDb, Amazon Prime, and Netflix</li>
-                <li>Performed extensive data cleaning and preprocessing using Pandas</li>
-                <li>Handled missing values and data inconsistencies across platforms</li>
-                <li>Standardized rating scales and genre classifications</li>
-            </ul>
-            
-            <h3><i class="fas fa-chart-bar"></i> Analysis & Modeling</h3>
-            <ul>
-                <li>Conducted statistical analysis and correlation studies</li>
-                <li>Applied machine learning algorithms for rating prediction</li>
-                <li>Performed genre-based clustering and trend analysis</li>
-                <li>Implemented time-series analysis for temporal patterns</li>
-            </ul>
-            
-            <h3><i class="fas fa-desktop"></i> Visualization & Dashboard</h3>
-            <ul>
-                <li>Created interactive dashboards using Plotly and Streamlit</li>
-                <li>Designed intuitive data visualizations for stakeholder presentations</li>
-                <li>Implemented real-time filtering and drill-down capabilities</li>
-                <li>Generated automated reports with key insights</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-trophy"></i> Key Results & Insights</h2>
-            
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-number">15%</div>
-                    <div class="result-label">Rating Variance</div>
-                    <div class="result-description">Variance in rating patterns across platforms</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">82%</div>
-                    <div class="result-label">Model Accuracy</div>
-                    <div class="result-description">Prediction accuracy for film ratings</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">20%</div>
-                    <div class="result-label">Higher Engagement</div>
-                    <div class="result-description">Netflix originals vs. licensed content</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">50K+</div>
-                    <div class="result-label">Films Analyzed</div>
-                    <div class="result-description">Total films across all platforms</div>
-                </div>
-            </div>
-            
-            <h3><i class="fas fa-lightbulb"></i> Major Findings</h3>
-            <ul>
-                <li>Drama and Comedy genres show highest cross-platform consistency in ratings</li>
-                <li>Netflix originals tend to have 20% higher user engagement than licensed content</li>
-                <li>IMDb ratings correlate strongly with commercial success on Amazon Prime</li>
-                <li>Seasonal trends significantly impact genre preferences</li>
-                <li>Platform-specific recommendation algorithms influence rating distributions</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-rocket"></i> Impact & Business Value</h2>
-            <ul>
-                <li>Provided data-driven insights for content acquisition strategies</li>
-                <li>Identified underperforming genres with potential for improvement</li>
-                <li>Created predictive models to assess new content potential</li>
-                <li>Enabled cross-platform performance benchmarking</li>
-                <li>Generated ROI analysis for content investment decisions</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-road"></i> Challenges & Solutions</h2>
-            
-            <h3><i class="fas fa-exclamation-triangle"></i> Data Integration Challenges</h3>
-            <p>Each platform uses different rating scales and genre classifications. We developed a standardization framework to ensure consistent analysis across platforms.</p>
-            
-            <h3><i class="fas fa-database"></i> Scale & Performance</h3>
-            <p>Processing large datasets required optimization of data pipelines and implementation of efficient algorithms for real-time analysis.</p>
-            
-            <h3><i class="fas fa-chart-line"></i> Model Accuracy</h3>
-            <p>Achieved 82% prediction accuracy through feature engineering and ensemble modeling techniques.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-graduation-cap"></i> Skills Demonstrated</h2>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        <div class="header-card">
+            <h1>Cross-Platform Film Analytics</h1>
+            <div class="subtitle">Key Insights & Interactive Visualizations</div>
             <div class="tech-stack">
-                <span class="tech-item">Data Analysis</span>
-                <span class="tech-item">Machine Learning</span>
-                <span class="tech-item">Python Programming</span>
-                <span class="tech-item">Statistical Analysis</span>
-                <span class="tech-item">Data Visualization</span>
-                <span class="tech-item">Business Intelligence</span>
-                <span class="tech-item">Problem Solving</span>
-                <span class="tech-item">Project Management</span>
+                <span class="tech-item">Python</span>
+                <span class="tech-item">Pandas</span>
+                <span class="tech-item">Plotly</span>
+                <span class="tech-item">Dash</span>
+                <span class="tech-item">Seaborn</span>
+                <span class="tech-item">MongoDB</span>
+                <span class="tech-item">Jupyter</span>
             </div>
+        </div>
+        <div class="insight-section">
+            <h2><i class="fas fa-lightbulb"></i> Key Insights</h2>
+            <ul>
+                <li><b>IMDB:</b> Action/Adventure films dominate revenue, but Drama/Biography score higher ratings. Ratings cluster between 6-8, showing audience consensus.</li>
+                <li><b>Amazon Prime:</b> Explosive growth post-2015, diverse directors, strong international presence (India, UK, Canada).</li>
+                <li><b>Netflix:</b> Genre diversity, top actors and directors more evenly distributed, strong global reach.</li>
+                <li><b>Combined:</b> Streaming platforms favor niche and international content, while IMDB remains traditional. Ratings and genre trends reflect platform strategies.</li>
+            </ul>
+            <h3><i class="fas fa-cogs"></i> Data Cleaning & Preparation</h3>
+            <ul>
+                <li>Missing values handled by filling or dropping.</li>
+                <li>Standardized columns for merging.</li>
+                <li>Extracted primary genres, calculated metrics (average ratings, counts).</li>
+            </ul>
+        </div>
+        <div class="graph-grid">
+            <div class="graph-card">
+                <h4>IMDB: Revenue vs. Rating by Genre</h4>
+                <iframe src="images/projects/Film-analytics/IMDB_revenue_vs_rating_by_genre.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>IMDB: Rating Distribution (KDE)</h4>
+                <iframe src="images/projects/Film-analytics/IMDB_rating_distribution_kde.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>IMDB: Top 10 Genres by Movie Count</h4>
+                <iframe src="images/projects/Film-analytics/IMDB_top_10_genres_by_movie_count.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>IMDB: Top 10 Genres by Average Rating</h4>
+                <iframe src="images/projects/Film-analytics/IMDB_top_10_genres_by_avg_rating.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>IMDB: Average Rating by Year</h4>
+                <iframe src="images/projects/Film-analytics/IMDB_avg_rating_by_year.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>Amazon: Movies Released per Year</h4>
+                <iframe src="images/projects/Film-analytics/AMAZON_number_of_movies_released_per_year.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>Amazon: Top 10 Directors</h4>
+                <iframe src="images/projects/Film-analytics/AMAZON_top_10_directors_by_movie_count.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>Amazon: Top 10 Countries</h4>
+                <iframe src="images/projects/Film-analytics/AMAZON_top_10_countries_by_movie_count.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>Combined: Top 10 Genres</h4>
+                <iframe src="images/projects/Film-analytics/ALLDATA_top_10_genres.html"></iframe>
+            </div>
+            <div class="graph-card">
+                <h4>Combined: Word Cloud of Titles</h4>
+                <img src="images/projects/Film-analytics/ALLDATA_wordcloud_titles.png" alt="Word Cloud">
+            </div>
+            <div class="graph-card" style="grid-column: 1/-1;">
+                <h4>Interactive Dashboard</h4>
+                <iframe src="images/projects/Film-analytics/index.html" style="min-height:600px;"></iframe>
+            </div>
+        </div>
+        <div class="insight-section">
+            <h2><i class="fas fa-rocket"></i> Conclusion</h2>
+            <ul>
+                <li>Genre popularity and ratings are platform-dependent, shaped by audience and recommendation algorithms.</li>
+                <li>Streaming platforms drive diversity and internationalization, while IMDB remains a traditional reference.</li>
+                <li>Methodological rigor in cleaning and merging data is essential for robust insights.</li>
+                <li>Future work: sentiment analysis, network analysis, predictive modeling of content success.</li>
+            </ul>
+        </div>
+        <div class="footer">
+            © 2025 Cross-Platform Film Analytics Project
         </div>
     </div>
-    
-    <!-- Style Switcher -->
-    <div class="style-switcher">
-        <div class="style-switcher-toggler s-icon">
-            <i class="fas fa-cog fa-spin"></i>
-        </div>
-        <div class="style-switcher-wrap">
-            <div class="switcher-head">
-                <h4>Style Switcher</h4>
-            </div>
-            <div class="colors">
-                <h5>Colors</h5>
-                <span class="color-1" onclick="setActiveStyle('color-1')"></span>
-                <span class="color-2" onclick="setActiveStyle('color-2')"></span>
-                <span class="color-3" onclick="setActiveStyle('color-3')"></span>
-                <span class="color-4" onclick="setActiveStyle('color-4')"></span>
-                <span class="color-5" onclick="setActiveStyle('color-5')"></span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="JS/script.js"></script>
     <script src="JS/style-switcher.js"></script>
+    <script>
+        // Sync theme and color skin with main page, including cross-tab changes
+        function applyThemeAndColor() {
+            var mode = localStorage.getItem('theme-mode') || 'dark';
+            document.body.classList.toggle('light', mode === 'light');
+            var color = localStorage.getItem('color-theme') || 'color-1';
+            var links = document.querySelectorAll('.alternate-style');
+            links.forEach(function(link) {
+                link.disabled = link.getAttribute('title') !== color;
+            });
+            // Remove manual accent color override!
+            // Skin CSS files will set --skin-color and --skin-color-alt
+        }
+        applyThemeAndColor();
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'theme-mode' || e.key === 'color-theme') {
+                applyThemeAndColor();
+            }
+        });
+        document.addEventListener('themeChange', applyThemeAndColor);
+        document.addEventListener('colorChange', applyThemeAndColor);
+    </script>
 </body>
 </html>

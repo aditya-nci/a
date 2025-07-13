@@ -521,121 +521,42 @@ const projectData = {
 
 // Open project detail modal
 function openProjectModal(projectId) {
-    const project = projectData[projectId];
-    if (!project) {
+    // Only show modal for projects other than 'film-analytics'
+    if (projectId === 'film-analytics') {
+        // Create or show a floating modal with iframe
+        let modal = document.getElementById('filmAnalyticsModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'filmAnalyticsModal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100vw';
+            modal.style.height = '100vh';
+            modal.style.background = 'rgba(0,0,0,0.85)';
+            modal.style.zIndex = '9999';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.innerHTML = `
+                <div style="position:relative;width:90vw;height:90vh;max-width:1200px;max-height:800px;background:#222;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.4);overflow:hidden;">
+                    <button id="closeFilmAnalyticsModal" style="position:absolute;top:18px;right:18px;z-index:10;background:#fff;color:#222;border:none;border-radius:50%;width:40px;height:40px;font-size:1.5rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">&times;</button>
+                    <iframe src="film-analytics-detail.html" style="width:100%;height:100%;border:none;border-radius:18px;background:#fff;"></iframe>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            document.body.style.overflow = 'hidden';
+            document.getElementById('closeFilmAnalyticsModal').onclick = function() {
+                modal.remove();
+                document.body.style.overflow = '';
+            };
+        } else {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
         return;
     }
-    
-    const modal = document.getElementById('projectModal');
-    if (!modal) {
-        return;
-    }
-    
-    const modalBody = document.getElementById('modalBody');
-    if (!modalBody) {
-        console.error('Modal body element not found');
-        return;
-    }
-    
-    // Build demo button if exists
-    const demoButton = project.demo ? 
-        `<a href="${project.demo}" target="_blank" class="modal-btn-action modal-btn-demo">
-            <i class="fa fa-external-link-alt"></i> Live Demo
-        </a>` : '';
-    
-    // Build tech stack items
-    const techStackItems = project.techStack.map(tech => 
-        `<span class="modal-tech-item">${tech}</span>`
-    ).join('');
-    
-    modalBody.innerHTML = `
-        <div class="modal-project-hero">
-            <h1>${project.title}</h1>
-            <p class="subtitle">${project.subtitle}</p>
-            
-            <div class="modal-meta-grid">
-                <div class="modal-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h4>Duration</h4>
-                    <p>${project.duration}</p>
-                </div>
-                <div class="modal-meta-item">
-                    <i class="fas fa-users"></i>
-                    <h4>Team Size</h4>
-                    <p>${project.teamSize}</p>
-                </div>
-                <div class="modal-meta-item">
-                    <i class="fas fa-chart-line"></i>
-                    <h4>Status</h4>
-                    <p>${project.status}</p>
-                </div>
-                <div class="modal-meta-item">
-                    <i class="fas fa-code"></i>
-                    <h4>Category</h4>
-                    <p>${project.category}</p>
-                </div>
-            </div>
-            
-            <div class="modal-tech-stack">
-                ${techStackItems}
-            </div>
-            
-            <img src="${project.image}" alt="${project.title}" class="modal-project-image">
-            
-            <div class="modal-action-buttons">
-                <a href="${project.github}" target="_blank" class="modal-btn-action modal-btn-primary">
-                    <i class="fab fa-github"></i> View Source Code
-                </a>
-                ${demoButton}
-                <button onclick="closeProjectModal()" class="modal-btn-action modal-btn-secondary">
-                    <i class="fas fa-times"></i> Close
-                </button>
-            </div>
-        </div>
-        
-        <div class="modal-detail-section">
-            <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
-            <p>This is a comprehensive project showcasing modern development practices and advanced technical implementations. The project demonstrates expertise in ${project.category.toLowerCase()} and delivers significant business value through innovative solutions.</p>
-            
-            <h3><i class="fas fa-star"></i> Key Features</h3>
-            <ul>
-                <li>Advanced technical implementation using modern technologies</li>
-                <li>Scalable architecture designed for production environments</li>
-                <li>Comprehensive testing and quality assurance</li>
-                <li>Performance optimization and best practices</li>
-                <li>Documentation and deployment automation</li>
-            </ul>
-        </div>
-        
-        <div class="modal-detail-section">
-            <h2><i class="fas fa-chart-bar"></i> Technical Impact</h2>
-            <div class="modal-results-grid">
-                <div class="modal-result-card">
-                    <div class="modal-result-number">95%+</div>
-                    <div class="modal-result-label">Efficiency</div>
-                    <div class="modal-result-description">Performance improvement</div>
-                </div>
-                <div class="modal-result-card">
-                    <div class="modal-result-number">100%</div>
-                    <div class="modal-result-label">Reliability</div>
-                    <div class="modal-result-description">System uptime</div>
-                </div>
-                <div class="modal-result-card">
-                    <div class="modal-result-number">50%+</div>
-                    <div class="modal-result-label">Cost Savings</div>
-                    <div class="modal-result-description">Resource optimization</div>
-                </div>
-                <div class="modal-result-card">
-                    <div class="modal-result-number">24/7</div>
-                    <div class="modal-result-label">Availability</div>
-                    <div class="modal-result-description">Production ready</div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    // ...existing code for other projects...
 }
 
 // Close project detail modal
