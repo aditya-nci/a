@@ -292,93 +292,102 @@ function initLazyLoading() {
     images.forEach(img => imageObserver.observe(img));
 }
 
+// Contact Form Handling
 function initializeContactForm() {
-    const contactForm = document.querySelector('.contact-form');
-    if (!contactForm) return;
+    const form = document.querySelector('.contact-form');
+    if (!form) return;
 
-    const submitBtn = contactForm.querySelector('.submit-btn');
-    const btnText = contactForm.querySelector('.btn-text');
-    const btnIcon = contactForm.querySelector('.btn-icon');
-    
-    contactForm.addEventListener('submit', function(e) {
-        if (submitBtn && btnText && btnIcon) {
-            submitBtn.disabled = true;
-            btnText.textContent = 'Sending...';
-            btnIcon.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
-            submitBtn.style.opacity = '0.7';
+    const submitBtn = form.querySelector('.submit-btn');
+    if (!submitBtn) return;
+
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnIcon = submitBtn.querySelector('.btn-icon');
+
+    // Handle form submission
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Clear any existing messages
+        const existingMessages = form.querySelectorAll('.form-message');
+        existingMessages.forEach(msg => msg.remove());
+
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
         }
-    });
-    
-    const inputs = contactForm.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('input', function() {
-            this.classList.toggle('has-value', this.value.trim() !== '');
-        });
-        
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
-        });
-    });
 
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const subjectInput = document.getElementById('subject');
-    const messageInput = document.getElementById('message');
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        btnIcon.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
 
-    if (nameInput) {
-        nameInput.addEventListener('input', () => validateField(nameInput, nameInput.value.trim().length >= 2, 'Name must be at least 2 characters'));
-    }
-    if (emailInput) {
-        emailInput.addEventListener('input', () => {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            validateField(emailInput, emailRegex.test(emailInput.value), 'Please enter a valid email address');
-        });
-    }
-    if (subjectInput) {
-        subjectInput.addEventListener('input', () => validateField(subjectInput, subjectInput.value.trim().length >= 3, 'Subject must be at least 3 characters'));
-    }
-    if (messageInput) {
-        messageInput.addEventListener('input', () => validateField(messageInput, messageInput.value.trim().length >= 10, 'Message must be at least 10 characters'));
-    }
-    
-    function validateField(field, isValid, errorMessage) {
-        const inputGroup = field.closest('.input-group');
-        let errorElement = inputGroup.querySelector('.error-message');
-        
-        if (errorElement) {
-            errorElement.remove();
-        }
-        
-        if (!isValid && field.value.trim() !== '') {
-            inputGroup.classList.add('error');
-            errorElement = document.createElement('span');
-            errorElement.className = 'error-message';
-            errorElement.textContent = errorMessage;
-            inputGroup.appendChild(errorElement);
-        } else {
-            inputGroup.classList.remove('error');
-        }
-    }
+        try {
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
 
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animationDelay = `${Array.from(entry.target.parentElement.children).indexOf(entry.target) * 0.1}s`;
-                entry.target.classList.add('animate-in');
+            // Get form ID and construct URL
+            const formId = form.getAttribute('data-form-id');
+            const formspreeUrl = `https://formspree.io/f/${formId}`;
+
+            // Send the form data
+            const response = await fetch(formspreeUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        });
-    }, observerOptions);
 
-    document.querySelectorAll('.contact-info-item').forEach(item => observer.observe(item));
-    const formContainer = document.querySelector('.contact-form-container');
-    if (formContainer) {
-        observer.observe(formContainer);
-    }
+            // Show success message
+            btnText.textContent = 'Sent!';
+            btnIcon.innerHTML = '<i class="fa fa-check"></i>';
+            submitBtn.classList.add('success');
+
+            const successMsg = document.createElement('div');
+            successMsg.className = 'form-message form-success';
+            successMsg.innerHTML = '<i class="fa fa-check-circle"></i> Message sent successfully!';
+            form.appendChild(successMsg);
+
+            // Reset form
+            form.reset();
+
+            // Reset button after delay
+            setTimeout(() => {
+                btnText.textContent = 'Send Message';
+                btnIcon.innerHTML = '<i class="fa fa-paper-plane"></i>';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('success');
+                successMsg.remove();
+            }, 3000);
+
+        } catch (error) {
+            console.error('Form submission error:', error);
+
+            // Show error message
+            btnText.textContent = 'Error!';
+            btnIcon.innerHTML = '<i class="fa fa-exclamation-circle"></i>';
+
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'form-message form-error';
+            errorMsg.innerHTML = '<i class="fa fa-exclamation-circle"></i> Failed to send message. Please try again.';
+            form.appendChild(errorMsg);
+
+            // Reset button after delay
+            setTimeout(() => {
+                btnText.textContent = 'Send Message';
+                btnIcon.innerHTML = '<i class="fa fa-paper-plane"></i>';
+                submitBtn.disabled = false;
+            }, 3000);
+        }
+    });
 }
 
 function initializeProjectCards() {
