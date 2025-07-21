@@ -264,27 +264,6 @@
     </div>
     <script src="JS/script.js"></script>
     <script src="JS/style-switcher.js"></script>
-    <script>
-        // Sync theme and color skin with main page, including cross-tab changes
-        function applyThemeAndColor() {
-            var mode = localStorage.getItem('theme-mode') || 'dark';
-            document.body.classList.toggle('light', mode === 'light');
-            var color = localStorage.getItem('color-theme') || 'color-1';
-            var links = document.querySelectorAll('.alternate-style');
-            links.forEach(function(link) {
-                link.disabled = link.getAttribute('title') !== color;
-            });
-            // Remove manual accent color override!
-            // Skin CSS files will set --skin-color and --skin-color-alt
-        }
-        applyThemeAndColor();
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'theme-mode' || e.key === 'color-theme') {
-                applyThemeAndColor();
-            }
-        });
-        document.addEventListener('themeChange', applyThemeAndColor);
-        document.addEventListener('colorChange', applyThemeAndColor);
-    </script>
+    <script src="JS/project-detail-shared.js"></script>
 </body>
 </html>

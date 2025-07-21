@@ -1,0 +1,358 @@
+/* 
+   🏠 HOME PAGE EXCLUSIVE STYLES
+   ========================================
+   WARNING: These styles are ONLY for the home page
+   Uses specific selectors to prevent affecting other pages
+*/
+
+/* Home Section Exclusive Styles */
+.home.section {
+    background: var(--bg-black-100);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Subtle background pattern for depth */
+.home.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Ensure content is above background */
+.home.section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Home Container Styling */
+.home.section .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Home Row Layout */
+.home.section .row {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+/* Home Info Section */
+.home.section .home-info {
+    flex: 1;
+    min-width: 400px;
+    animation: slideInLeft 1s ease-out;
+}
+
+/* Enhanced Typography */
+.home.section .hello {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-black-900);
+    margin-bottom: 10px;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+.home.section .name {
+    color: var(--skin-color);
+    font-weight: 700;
+}
+
+.home.section .my-profession {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-black-900);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+.home.section .my-profession .typing {
+    color: var(--skin-color);
+    font-weight: 700;
+}
+
+/* Enhanced Description */
+.home.section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-black-700);
+    margin-bottom: 30px;
+    max-width: 600px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* Enhanced Contact Button - Subtle improvement */
+.home.section .btn {
+    background: var(--skin-color);
+    color: var(--text-black-900);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 35px;
+    border-radius: 40px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+.home.section .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+/* Home Image Section */
+.home.section .home-img {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+    animation: slideInRight 1s ease-out;
+}
+
+.home.section .home-img img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 50% 30% 60% 40%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    padding: 10px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.1) inset;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.home.section .home-img img:hover {
+    transform: scale(1.05) rotate(2deg);
+    border-radius: 60% 40% 30% 50%;
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Add decorative elements around image */
+.home.section .home-img::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, #ff6b6b, transparent);
+    border-radius: 50%;
+    animation: pulse 3s ease-in-out infinite;
+    z-index: -1;
+}
+
+.home.section .home-img::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(45deg, #4ecdc4, transparent);
+    border-radius: 50%;
+    animation: pulse 3s ease-in-out infinite 1.5s;
+    z-index: -1;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+}
+
+/* Floating Elements - Very subtle */
+.home.section .floating-element {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.home.section .floating-element:nth-child(1) {
+    top: 20%;
+    left: 10%;
+}
+
+.home.section .floating-element:nth-child(2) {
+    top: 60%;
+    right: 20%;
+}
+
+.home.section .floating-element:nth-child(3) {
+    bottom: 20%;
+    left: 15%;
+}
+
+/* Social Media Highlight */
+.home.section .social-links {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    animation: fadeInUp 1s ease-out 1s both;
+}
+
+.home.section .social-links a {
+    width: 50px;
+    height: 50px;
+    background: var(--bg-black-50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-black-900);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--bg-black-50);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.home.section .social-links a:hover {
+    background: var(--skin-color);
+    color: var(--text-black-900);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Stats Counter */
+.home.section .stats {
+    margin-top: 50px;
+    display: flex;
+    gap: 40px;
+    animation: fadeInUp 1s ease-out 1.2s both;
+}
+
+.home.section .stat-item {
+    text-align: center;
+}
+
+.home.section .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--skin-color);
+    margin-bottom: 5px;
+}
+
+.home.section .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-black-700);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home.section .row {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 40px 0;
+    }
+    
+    .home.section .home-info {
+        min-width: auto;
+    }
+    
+    .home.section .my-profession {
+        font-size: 2.2rem;
+    }
+    
+    .home.section p {
+        font-size: 1.1rem;
+    }
+    
+    .home.section .stats {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .home.section .home-img img {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home.section .my-profession {
+        font-size: 1.8rem;
+    }
+    
+    .home.section .hello {
+        font-size: 1.4rem;
+    }
+    
+    .home.section p {
+        font-size: 1rem;
+    }
+    
+    .home.section .btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+}
