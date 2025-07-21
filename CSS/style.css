@@ -785,7 +785,7 @@ section.home .container .row .home-img.padd-15 {
     padding: 10px 0;
     font-size: 16px;
     color: var(--text-black-900);
-    border-bottom: 1px solid var(--bg-black-50);
+    border-bottom: 1px solid transparent;
 }
 .about .about-content .personal-info .info-item p span
 {
@@ -872,14 +872,26 @@ section.home .container .row .home-img.padd-15 {
     flex: 0 0 100%;
     max-width: 100%;
 }
-.about .about-content .timeline
+.about .about-content .timeline,
+.experience-content .timeline,
+.education-content .timeline
 {
-    background-color: var(--bg-black-100);
+    background: #ffffff;
     padding: 30px 15px;
-    border: 1px solid var(--bg-black-50);
-    border-radius: 10px;
+    border: none;
+    border-radius: 16px;
     width: 100%;
     position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.about .about-content .timeline:hover,
+.experience-content .timeline:hover,
+.education-content .timeline:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    border-color: #007acc;
 }
 .about .about-content .timeline .timeline-item
 {
@@ -1106,13 +1118,13 @@ section.home .container .row .home-img.padd-15 {
 /* Modern Portfolio Cards */
 .portfolio .portfolio-item-inner
 {
-    background: var(--bg-black-100);
-    border: 1px solid var(--bg-black-50);
-    border-radius: 10px;
+    background: #ffffff;
+    border: none;
+    border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1143,8 +1155,8 @@ section.home .container .row .home-img.padd-15 {
 .portfolio .portfolio-item-inner:hover
 {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    border-color: var(--skin-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: #007acc;
 }
 
 .portfolio .portfolio-img
@@ -1189,7 +1201,7 @@ section.home .container .row .home-img.padd-15 {
 .portfolio .portfolio-text
 {
     padding: 25px;
-    background: var(--bg-black-100);
+    background: #ffffff;
     position: relative;
     z-index: 2;
     flex-grow: 1;
@@ -1230,7 +1242,7 @@ section.home .container .row .home-img.padd-15 {
 {
     margin: 0;
     padding-top: 15px;
-    border-top: 1px solid var(--bg-black-50);
+    border-top: 1px solid transparent;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -1303,6 +1315,31 @@ section.home .container .row .home-img.padd-15 {
 
 .portfolio .portfolio-text p:last-child .github-btn:hover {
     background-color: #333;
+}
+
+/* Dark theme portfolio cards */
+body.dark .portfolio .portfolio-item-inner {
+    background: #1e293b;
+    border-color: #374151;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .portfolio .portfolio-item-inner:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .portfolio .portfolio-text {
+    background: #1e293b;
+    color: #ffffff;
+}
+
+body.dark .portfolio .portfolio-text p:first-child {
+    color: #e2e8f0;
+}
+
+body.dark .portfolio .portfolio-heading h2 {
+    color: #ffffff;
 }
 
 /* Animated skill items */
@@ -2091,21 +2128,49 @@ a:hover {
 }
 
 .project-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    border: none;
     border-radius: 20px;
     padding: 1.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    border-color: var(--skin-color);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    border-color: #007acc;
+}
+
+/* Dark theme support for project cards */
+body.dark .project-card {
+    background: #1e293b;
+    border-color: #374151;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .project-card:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark theme support for timeline containers */
+body.dark .about .about-content .timeline,
+body.dark .experience-content .timeline,
+body.dark .education-content .timeline {
+    background: #1e293b;
+    border-color: #374151;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .about .about-content .timeline:hover,
+body.dark .experience-content .timeline:hover,
+body.dark .education-content .timeline:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
 .project-card::before {
