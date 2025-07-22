@@ -5,6 +5,112 @@
    Uses specific selectors to prevent affecting other pages
 */
 
+/* 🚨 ULTRA-CRITICAL MOBILE OVERRIDES - MAXIMUM SPECIFICITY 🚨 */
+@media screen and (max-width: 768px) {
+    /* NUCLEAR OPTION: Force hide image with every possible selector combination */
+    .home.section .container .row .home-img,
+    .home.section .home-img,
+    .home-img,
+    div.home-img,
+    .padd-15.home-img,
+    .home.section .home-img.padd-15,
+    .home .home-img,
+    section.home .home-img,
+    .row .home-img,
+    .container .home-img {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        min-width: 0 !important;
+        max-width: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        flex: 0 0 0 !important;
+        flex-basis: 0 !important;
+        flex-grow: 0 !important;
+        flex-shrink: 0 !important;
+        position: absolute !important;
+        left: -99999px !important;
+        top: -99999px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        transform: scale(0) !important;
+        z-index: -999999 !important;
+    }
+    
+    /* Force container to absolute full width */
+    .home.section .container {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Force row to absolute full width */
+    .home.section .row,
+    .home.section .container .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* Force home-info to absolute full width */
+    .home.section .home-info,
+    .home-info,
+    .home.section .home-info.padd-15,
+    .home-info.padd-15,
+    .home.section .container .row .home-info {
+        min-width: 100vw !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        flex: 1 1 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Nuclear override for ALL padd-15 classes */
+    .padd-15,
+    .home.section .padd-15,
+    .home .padd-15,
+    .container .padd-15,
+    .row .padd-15,
+    .home-info.padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Force all text elements to full width */
+    .home.section .hello,
+    .home.section .my-profession,
+    .home.section p,
+    .home.section .btn,
+    .home.section .social-links,
+    .home.section .stats {
+        max-width: 100vw !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        box-sizing: border-box !important;
+    }
+}
+
 /* Home Section Exclusive Styles */
 .home.section {
     background: var(--bg-black-100);
@@ -304,55 +410,4 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 500;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .home.section .row {
-        flex-direction: column;
-        text-align: center;
-        gap: 40px;
-        padding: 40px 0;
-    }
-    
-    .home.section .home-info {
-        min-width: auto;
-    }
-    
-    .home.section .my-profession {
-        font-size: 2.2rem;
-    }
-    
-    .home.section p {
-        font-size: 1.1rem;
-    }
-    
-    .home.section .stats {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-    
-    .home.section .home-img img {
-        max-width: 350px;
-    }
-}
-
-@media (max-width: 480px) {
-    .home.section .my-profession {
-        font-size: 1.8rem;
-    }
-    
-    .home.section .hello {
-        font-size: 1.4rem;
-    }
-    
-    .home.section p {
-        font-size: 1rem;
-    }
-    
-    .home.section .btn {
-        padding: 15px 30px;
-        font-size: 1rem;
-    }
 }

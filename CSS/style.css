@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-    /* Professional Blue Color Palette */
+    /* Default theme colors - will be overridden by skin files */
     --skin-color: #007acc;
     --primary-gradient: linear-gradient(135deg, #007acc 0%, #005999 100%);
     --secondary-gradient: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
@@ -34,8 +34,7 @@
 }
 
 body.dark {
-    /* Dark Theme */
-    --skin-color: #4a90e2;
+    /* Dark Theme - inherit skin color from selected theme */
     --bg-primary: #0f0f23;
     --bg-secondary: #1a1a2e;
     --bg-tertiary: #16213e;
@@ -560,6 +559,10 @@ ul {
 
 /* Responsive */
 @media (max-width: 1199px) {
+    .main-content {
+        padding-left: 30px;
+    }
+    
     .home .home-info {
         flex: 0 0 100%;
         max-width: 100%;
@@ -580,6 +583,93 @@ ul {
 
 /* Responsive Design for Home */
 @media (max-width: 768px) {
+    /* Prevent horizontal overflow */
+    * {
+        box-sizing: border-box !important;
+    }
+    
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .main-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    .container {
+        padding: 0 5px;
+    }
+    
+    /* Hide the image completely on mobile */
+    .home .home-img,
+    .home .home-img img,
+    section.home .home-img,
+    div.home-img {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Optimize content for full width */
+    .home .home-info {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: center;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Remove extra padding from content elements */
+    .home .home-info .padd-15 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    /* Fix row margins that create blank spaces */
+    .home .row,
+    section.home .container .row,
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 0 !important;
+    }
+    
+    /* Remove padd-15 margins for mobile */
+    .home-info.padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Expand stats to full width */
+    .home .stats {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        margin: 30px 0;
+        padding: 20px 0;
+    }
+    
+    .home .stat-item {
+        flex: 1;
+        text-align: center;
+        margin: 0 5px;
+    }
+    
+    /* Expand social links */
+    .home .social-links {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin: 25px 0;
+    }
+    
     .hero-content {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -598,6 +688,92 @@ ul {
     .hero-card {
         max-width: 320px;
         margin: 0 auto;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .main-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .container {
+        padding: 0 5px;
+    }
+    
+    .padd-15 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    
+    /* Further optimize home section for very small screens */
+    .home .container {
+        padding: 0 !important;
+    }
+    
+    /* Fix row margins completely */
+    .home .row,
+    section.home .container .row,
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Completely remove padd-15 */
+    .home-info.padd-15,
+    .padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .home .home-info {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .home .home-info h3.hello {
+        font-size: clamp(20px, 5vw, 28px);
+        padding: 0 5px;
+    }
+    
+    .home .home-info h3.my-profession {
+        font-size: clamp(18px, 4.5vw, 24px);
+        padding: 0 5px;
+    }
+    
+    .home .home-info p {
+        font-size: 14px;
+        margin-bottom: 25px;
+        padding: 0 5px;
+    }
+    
+    .home .stats {
+        width: 100%;
+        padding: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .stats .stat-item {
+        margin-bottom: 10px;
+        flex: 1;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    .home .social-links {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
     }
 }
 
@@ -695,33 +871,114 @@ section.home .container .row .home-img.padd-15 {
 }
 
 @media (max-width: 767px) {
+    /* Prevent horizontal overflow */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
     section.home .container .row {
         grid-template-columns: 1fr !important;
-        gap: 40px !important;
+        gap: 10px !important;
         text-align: center;
-        padding: 40px 0;
+        padding: 20px 0;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    section.home .container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    /* Fix row margins that create blank spaces */
+    .home .row,
+    section.home .container .row,
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 0 !important;
+    }
+    
+    /* Remove padd-15 margins for mobile */
+    .home-info.padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Hide the image completely on mobile */
+    .home .home-img,
+    .home .home-img img,
+    section.home .home-img,
+    div.home-img {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Optimize content for full width */
+    .home .home-info {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: center;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Remove extra padding from content elements */
+    .home .home-info .padd-15 {
+        padding-left: 0px;
+        padding-right: 0px;
     }
     
     .home .home-info h3.hello {
         font-size: clamp(24px, 6vw, 32px);
+        margin-bottom: 10px;
+        padding: 0 10px;
     }
     
     .home .home-info h3.my-profession {
         font-size: clamp(20px, 5vw, 28px);
+        margin-bottom: 20px;
+        padding: 0 10px;
     }
     
     .home .home-info p {
         font-size: 16px;
         max-width: 100%;
         text-align: center;
-    }
-    
-    .home .home-img img {
-        max-width: 300px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        padding: 0 10px;
     }
     
     .home .home-info .btn {
         align-self: center;
+        margin-bottom: 30px;
+    }
+    
+    /* Optimize stats for mobile */
+    .stats {
+        margin-top: 20px;
+    }
+    
+    .stat-item {
+        margin-bottom: 15px;
+    }
+    
+    /* Optimize social links for mobile */
+    .social-links {
+        margin-top: 20px;
+        justify-content: center;
     }
 }
 
