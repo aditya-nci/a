@@ -1,0 +1,718 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Clicker+Script&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+    /* Default theme colors - will be overridden by skin files */
+    --skin-color: #007acc;
+    --primary-gradient: linear-gradient(135deg, #007acc 0%, #005999 100%);
+    --secondary-gradient: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    --accent-gradient: linear-gradient(135deg, #6c7b7f 0%, #4a5568 100%);
+    
+    /* Light Theme */
+    --bg-primary: #fafbff;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-glass: rgba(255, 255, 255, 0.25);
+    
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --text-light: #a0aec0;
+    
+    --border-color: rgba(226, 232, 240, 0.8);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Legacy variables for compatibility */
+    --bg-black-900: var(--bg-primary);
+    --bg-black-100: var(--bg-secondary);
+    --bg-black-50: var(--bg-tertiary);
+    --text-black-900: var(--text-primary);
+    --text-black-700: var(--text-secondary);
+}
+
+body.dark {
+    /* Dark Theme - inherit skin color from selected theme */
+    --bg-primary: #0f0f23;
+    --bg-secondary: #1a1a2e;
+    --bg-tertiary: #16213e;
+    --bg-card: rgba(26, 26, 46, 0.8);
+    --bg-glass: rgba(255, 255, 255, 0.1);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #e2e8f0;
+    --text-muted: #a0aec0;
+    --text-light: #718096;
+    
+    --border-color: rgba(75, 85, 99, 0.3);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    /* Legacy variables for compatibility */
+    --bg-black-900: var(--bg-primary);
+    --bg-black-100: var(--bg-secondary);
+    --bg-black-50: var(--bg-tertiary);
+    --text-black-900: var(--text-primary);
+    --text-black-700: var(--text-secondary);
+}
+
+html {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    line-height: 1.6;
+    font-size: 16px;
+    font-family: 'Inter', 'Poppins', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Hide scrollbars for webkit browsers when not needed */
+body::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* For Firefox */
+html {
+    scrollbar-width: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+::before, ::after {
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-gradient);
+}
+
+/* Disable all transitions when this class is applied */
+.no-transition,
+.no-transition *,
+.no-transition *:before,
+.no-transition *:after {
+    transition: none !important;
+    animation: none !important;
+}
+
+.section {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    display: none;
+    padding: 0 30px;
+    position: fixed;
+    left: 270px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Special positioning for home section only - no gap */
+.section#home {
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.section.active {
+    display: block;
+    z-index: 10;
+}
+
+/* Prevent home section content from going under sidebar during transitions */
+.home.section {
+    padding-left: 40px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.main-content {
+    padding-left: 270px;
+    padding-right: 5px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+.padd-15 {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 0 15px;
+}
+
+.section .container {   
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Reduce top padding specifically for home section */
+.home.section .container {
+    padding-top: 0px;
+    padding-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+/* Modern Button Styles */
+.btn {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 32px;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+    box-shadow: var(--shadow-medium);
+    text-align: center;
+    letter-spacing: 0.5px;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+    background: var(--secondary-gradient);
+}
+
+.btn:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-gradient);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-large);
+}
+
+/* Section Title Styling */
+.section-title {
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative;
+    text-transform: capitalize;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+/* Home Section */
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    color: var(--text-primary);
+    position: relative;
+    background: var(--bg-primary);
+}
+
+.home .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.home .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    min-height: auto;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.home .home-info {
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+
+.home .home-img {
+    flex: 0 0 40%;
+    max-width: 40%;
+    text-align: center;
+}
+
+.home .home-info h3.hello {
+    font-size: 28px;
+    margin: 15px 0;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.home .home-info h3.hello span.name {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--skin-color);
+}
+
+.home .home-info h3.my-profession {
+    font-size: 30px;
+    margin: 15px 0;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.home .home-info h3.my-profession .typing {
+    color: var(--skin-color);
+}
+
+.home .home-info p {
+    margin: 20px 0 70px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.home .home-img img {
+    margin: auto;
+    border-radius: 5px;
+    height: 400px;
+    width: 300px;
+    object-fit: cover;
+}
+
+/* About Section */
+.about {
+    padding: 80px 0;
+}
+
+.about .about-content {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Dark mode adjustments */
+body.dark {
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2c2c2c;
+    --bg-card: rgba(255, 255, 255, 0.1);
+    --bg-glass: rgba(0, 0, 0, 0.3);
+    
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --text-light: #f5f5f5;
+    
+    --border-color: rgba(255, 255, 255, 0.2);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced Hover Effects */
+.hover-effect {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-effect:hover {
+    transform: translateY(-2px);
+}
+
+/* Modern Focus States */
+*:focus {
+    outline: 2px solid rgba(102, 126, 234, 0.5);
+    outline-offset: 2px;
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+p {
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* Modern Link Styles */
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-gradient);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Large screens */
+@media (max-width: 1199px) {
+    .main-content {
+        padding-left: 30px;
+    }
+    
+    .home .home-info {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .home .home-img {
+        flex: 0 0 100%;
+        max-width: 100%;
+        order: -1;
+        margin-bottom: 40px;
+    }
+    
+    .home .row {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    /* Simple and clean mobile layout */
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .main-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+    
+    .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    .padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Hide the image completely on mobile */
+    .home .home-img,
+    .home .home-img img,
+    section.home .home-img,
+    div.home-img {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    
+    /* Optimize content for full width */
+    .home .home-info {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: center;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* Remove extra padding from content elements */
+    .home .home-info .padd-15 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    /* Fix row margins that create blank spaces */
+    .home .row,
+    section.home .container .row,
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        gap: 0 !important;
+    }
+    
+    /* Fix stats overflow on mobile */
+    .home .stats {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 30px 0;
+        padding: 0 10px;
+    }
+
+    .home .stat-item {
+        flex: 1 1 calc(50% - 15px);
+        max-width: 150px;
+        min-width: 120px;
+        text-align: center;
+        margin: 0;
+        padding: 10px 5px;
+    }
+    
+    .home .stat-item .stat-number {
+        font-size: clamp(20px, 4vw, 28px);
+        font-weight: 700;
+        color: var(--skin-color);
+        margin-bottom: 5px;
+    }
+    
+    .home .stat-item .stat-label {
+        font-size: clamp(10px, 2.5vw, 14px);
+        color: var(--text-secondary);
+        line-height: 1.2;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Remove padd-15 margins for mobile */
+    .home-info.padd-15 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .home .home-info .btn {
+        display: inline-block;
+        width: auto;
+        max-width: 100%;
+        padding: 12px 24px;
+        font-size: 15px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .home .home-info h3.hello {
+        font-size: clamp(22px, 5.5vw, 28px);
+        margin-bottom: 10px;
+        padding: 0 15px;
+    }
+    
+    .home .home-info h3.hello span.name {
+        font-size: clamp(26px, 6.5vw, 32px);
+    }
+    
+    /* Mobile padding for home section */
+    .home.section {
+        padding-top: 150px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .home .home-info h3.my-profession {
+        font-size: clamp(20px, 5vw, 28px);
+        margin-bottom: 20px;
+        padding: 0 15px;
+    }
+    
+    .home .home-info p {
+        font-size: 16px;
+        max-width: 100%;
+        text-align: center;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        padding: 0 15px;
+    }
+    
+    .home .home-info .btn {
+        align-self: center;
+        margin-bottom: 30px;
+    }
+    
+    /* Mobile button fix */
+    section.home .home-info a.btn {
+        display: block !important;
+        width: auto !important;
+        max-width: 80% !important;
+        margin: 20px auto !important;
+        padding: 15px 25px !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        white-space: nowrap;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .main-content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .container {
+        padding: 0 5px;
+    }
+    
+    .padd-15 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .home .container {
+        padding: 0 !important;
+    }
+    
+    .home .home-info {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        box-sizing: border-box;
+    }
+    
+    .home .home-info h3.hello {
+        font-size: clamp(18px, 4.5vw, 24px);
+        padding: 0 5px;
+    }
+    
+    .home .home-info h3.hello span.name {
+        font-size: clamp(20px, 5.5vw, 28px);
+    }
+    
+    .home .home-info h3.my-profession {
+        font-size: clamp(18px, 4.5vw, 24px);
+        padding: 0 5px;
+    }
+    
+    .home .home-info p {
+        font-size: 14px;
+        margin-bottom: 25px;
+        padding: 0 5px;
+    }
+}

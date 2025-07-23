@@ -108,6 +108,13 @@
         padding-left: 10px !important;
         padding-right: 10px !important;
         box-sizing: border-box !important;
+        text-align: center !important;
+    }
+    
+    /* Center social links specifically */
+    .home.section .social-links {
+        justify-content: center !important;
+        display: flex !important;
     }
 }
 

@@ -1,0 +1,300 @@
+/* ========================================
+   EXPERIENCE SECTION STYLES
+   ======================================== */
+
+/* Experience Section */
+.experience.section {
+    background: var(--bg-primary);
+    min-height: 100vh;
+    padding: 80px 0;
+}
+
+.experience .section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 30px;
+}
+
+.experience .section-title h2 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Experience Content */
+.experience-content {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/* Timeline Styles */
+.experience .timeline {
+    background: var(--bg-secondary);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    box-shadow: var(--shadow-glass);
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+/* Timeline line - hidden */
+.timeline::before {
+    display: none;
+}
+
+.experience .timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 80px;
+    padding: 16px;
+    padding-left: 80px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.experience .timeline-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    transform: translateX(4px);
+}
+
+.experience .timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.experience .circle-dot {
+    position: absolute;
+    left: 32px;
+    top: 25px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    border: 3px solid var(--bg-secondary);
+    box-shadow: 0 0 0 3px var(--border-color);
+    z-index: 2;
+    transition: all 0.2s ease;
+}
+
+.experience .timeline-item:hover .circle-dot {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.experience .timeline-item .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 20px;
+}
+
+.experience .timeline-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+    max-width: 60%;
+}
+
+.experience .timeline-item .right-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    min-width: 200px;
+}
+
+.experience .timeline-date {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    margin: 0;
+    white-space: nowrap;
+}
+
+.experience .timeline-date i {
+    margin-right: 8px;
+    color: var(--skin-color);
+}
+
+.experience .timeline-item .right-content img {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    object-fit: contain;
+    background: white;
+    padding: 4px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.experience .timeline-item .right-content img:hover {
+    transform: scale(1.1);
+    border-color: var(--skin-color);
+}
+
+.experience .timeline-text {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+.experience .timeline-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience .timeline-text ul li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.experience .timeline-text ul li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--skin-color);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Shadow Dark Effect */
+.experience .shadow-dark {
+    box-shadow: var(--shadow-large);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.experience .shadow-dark:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glass);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .experience.section {
+        padding: 80px 20px;
+    }
+    
+    .experience .section-title {
+        padding: 0 15px;
+    }
+    
+    .experience .section-title h2 {
+        font-size: 36px;
+    }
+    
+    .experience .timeline {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+    
+    .experience .timeline::before {
+        display: none;
+    }
+    
+    .experience .timeline-item {
+        padding-left: 60px;
+        margin-bottom: 40px;
+    }
+    
+    .experience .circle-dot {
+        left: 20px;
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--bg-secondary);
+        box-shadow: 0 0 0 2px var(--border-color);
+    }
+    
+    .experience .timeline-item .header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .experience .timeline-title {
+        font-size: 20px;
+        max-width: 100%;
+    }
+    
+    .experience .timeline-item .right-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .experience .timeline-item .right-content img {
+        width: 35px;
+        height: 35px;
+        max-width: 35px;
+        max-height: 35px;
+    }
+    
+    .experience .timeline-date {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .experience .timeline-text {
+        font-size: 14px;
+    }
+    
+    .experience .timeline-text ul li {
+        padding-left: 20px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience .section-title h2 {
+        font-size: 28px;
+    }
+    
+    .experience .timeline {
+        padding: 20px 15px;
+        margin: 0 5px;
+    }
+    
+    .experience .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .experience .circle-dot {
+        left: 18px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    .experience .timeline-title {
+        font-size: 18px;
+    }
+    
+    .experience .timeline-text ul li {
+        padding-left: 18px;
+        font-size: 13px;
+    }
+}
