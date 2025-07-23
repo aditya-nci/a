@@ -379,6 +379,8 @@
         max-width: 100% !important;
         box-sizing: border-box !important;
         word-wrap: break-word !important;
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
         border-radius: 12px !important;
     }
     
@@ -387,6 +389,22 @@
         height: 40px !important;
         font-size: 16px !important;
         flex-shrink: 0 !important;
+    }
+    
+    /* Force email text to break properly */
+    .contact-info-item .info-content {
+        min-width: 0 !important;
+        overflow-wrap: break-word !important;
+        word-break: break-all !important;
+    }
+    
+    .contact-info-item .info-content p,
+    .contact-info-item .info-content a {
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+        max-width: 100% !important;
     }
     
     /* Form specific fixes - FORCE proper sizing */
