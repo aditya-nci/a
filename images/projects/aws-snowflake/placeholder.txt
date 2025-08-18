@@ -1,0 +1,12 @@
+Placeholder images for AWS Snowflake Analytics Project:
+
+Required images:
+1. hero-image.jpg - Main project hero image
+2. data-pipeline.png - Data pipeline flow diagram
+3. snowflake-tables.png - Snowflake table structure
+4. sentiment-analysis.png - Sentiment analysis results
+5. s3-partitioning.png - S3 data partitioning
+6. business-insights.png - Business insights dashboard
+7. udf-function.png - User Defined Function code
+
+These placeholder files should be replaced with actual project images.

@@ -348,27 +348,33 @@ ul {
 
 /* GitHub Button Styling */
 .btn-github {
-    background: #24292e;
+    background: linear-gradient(135deg, #24292e, #1a1e22);
     color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 25px;
-    font-size: 13px;
+    border: 2px solid transparent;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 0.75rem;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(36, 41, 46, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     white-space: nowrap;
+    min-width: 180px;
 }
 
 .btn-github:hover {
-    background: #1a1e22;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
+    background: linear-gradient(135deg, #1a1e22, #0d1117);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(36, 41, 46, 0.5);
     color: white;
     text-decoration: none;
 }
@@ -381,37 +387,62 @@ ul {
     font-size: 16px;
 }
 
-/* Project Actions Container */
-.project-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+/* Project Actions Container with higher specificity */
+.project-card .project-actions {
+    display: flex !important;
+    gap: 1rem !important;
+    margin-top: auto !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0.5rem 0 !important;
+}
+
+/* Mobile Responsive for Project Actions */
+@media (max-width: 768px) {
+    .project-card .project-actions {
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+        padding: 1rem 0 !important;
+    }
+    
+    .project-card .project-actions .btn-github,
+    .project-card .project-actions .btn-view-project,
+    .project-card .project-actions .btn-demo {
+        width: 100% !important;
+        max-width: 220px !important;
+        padding: 14px 24px !important;
+        min-width: auto !important;
+    }
 }
 
 /* Live Demo Button Styling */
-.btn-demo {
-    background: var(--accent-gradient);
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 25px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
+/* Live Demo Button Styling with higher specificity */
+.project-card .project-actions .btn-demo {
+    background: linear-gradient(135deg, #ff6b35, #f7931e) !important;
+    color: white !important;
+    border: 2px solid transparent !important;
+    padding: 12px 24px !important;
+    border-radius: 30px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    text-decoration: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+    text-transform: capitalize !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    min-width: 110px !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
 }
 
 .btn-demo::before {
@@ -431,10 +462,13 @@ ul {
 
 .btn-demo:hover {
     background: var(--accent-gradient);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(108, 123, 127, 0.4);
-    color: white;
-    text-decoration: none;
+.project-card .project-actions .btn-demo:hover {
+    background: linear-gradient(135deg, #f7931e, #ff6b35) !important;
+    transform: translateY(-2px) scale(1.01) !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
 }
 
 .btn-demo:hover i {
@@ -1624,398 +1658,6 @@ body.dark .project-card:hover {
 
 /* ===== End Modern Project Cards ===== */
 
-/* ===== Project Detail Modal ===== */
-.project-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease;
-}
-
-.project-modal.active {
-    display: flex;
-}
-
-.modal-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-}
-
-.modal-content {
-    position: relative;
-    width: 95%;
-    max-width: 1200px;
-    max-height: 90vh;
-    background: var(--primary-gradient);
-    border-radius: 20px;
-    overflow: hidden;
-    z-index: 10001;
-    animation: slideInUp 0.4s ease;
-}
-
-.modal-header {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10002;
-}
-
-.modal-close {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
-}
-
-.modal-body {
-    padding: 2rem;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: white;
-}
-
-.modal-body::-webkit-scrollbar {
-    width: 8px;
-}
-
-.modal-body::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-}
-
-.modal-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
-/* Modal Project Hero */
-.modal-project-hero {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 3rem;
-    margin-bottom: 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.modal-project-hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #fff, #f0f0f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.modal-project-hero .subtitle {
-    font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 2rem;
-    font-weight:  500;
-}
-
-.modal-meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.modal-meta-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal-meta-item i {
-    font-size: 2rem;
-    color: var(--skin-color);
-    margin-bottom: 0.5rem;
-}
-
-.modal-meta-item h4 {
-    color: white;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.modal-meta-item p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-}
-
-.modal-tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 2rem 0;
-}
-
-.modal-tech-item {
-    background: var(--primary-gradient);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.modal-tech-item:hover {
-    transform: translateY(-3px);
-}
-
-.modal-project-image {
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    margin: 2rem 0;
-}
-
-.modal-action-buttons {
-    display: flex;
-    gap: 1.5rem;
-    margin: 3rem 0;
-    flex-wrap: wrap;
-}
-
-.modal-btn-action {
-    padding: 1rem 2rem;
-    border-radius: 15px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    border: none;
-    cursor: pointer;
-}
-
-.modal-btn-primary {
-    background: var(--primary-gradient);
-    color: white;
-}
-
-.modal-btn-secondary {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.modal-btn-demo {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-}
-
-.modal-btn-action:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Modal Detail Sections */
-.modal-detail-section {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 3rem;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.modal-detail-section h2 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.modal-detail-section h3 {
-    color: var(--skin-color);
-    font-size: 1.8rem;
-    margin: 2rem 0 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.modal-detail-section p, .modal-detail-section li {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.8;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-.modal-detail-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.modal-detail-section li {
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: 1rem;
-}
-
-.modal-detail-section li::before {
-    content: '▶';
-    position: absolute;
-    left: 0;
-    color: var(--skin-color);
-    font-weight: bold;
-}
-
-/* Modal Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(100px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 98%;
-        max-height: 95vh;
-        border-radius: 15px;
-    }
-    
-    .modal-project-hero {
-        padding: 2rem;
-    }
-    
-    .modal-project-hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .modal-detail-section {
-        padding: 2rem;
-    }
-    
-    .modal-action-buttons {
-        flex-direction: column;
-    }
-    
-    .modal-meta-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Projects Section Mobile Fixes */
-    .projects-container {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-        padding-right: 0;
-    }
-    
-    .project-card {
-        margin-right: 0;
-        padding: 1.25rem;
-    }
-    
-    /* Ensure portfolio section has consistent padding */
-    .portfolio .container {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    /* Contact Section Mobile Fixes */
-    .contact .contact-content.padd-15 {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-        margin-top: 20px;
-    }
-    
-    .contact .contact-content .row {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding-right: 0;
-        margin-right: 0;
-    }
-    
-    .contact-info-side,
-    .contact-form-side {
-        margin-right: 0;
-        margin-bottom: 20px;
-        padding: 25px 20px;
-        border-radius: 16px;
-    }
-    
-    .contact-form-container {
-        padding-right: 0;
-        margin-right: 0;
-    }
-    
-    .contact-info-items {
-        gap: 16px;
-    }
-    
-    .contact-info-item {
-        padding: 12px;
-        margin-right: 0;
-    }
-    
-    /* FINAL OVERRIDE - Ensure consistent padding for all sections */
-    .main-content {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-    }
-    
-    /* Force home section padding */
-    .home .home-info.padd-15,
-    .home .home-info .padd-15,
     .home-info.padd-15 {
         padding-left: 20px !important;
         padding-right: 20px !important;

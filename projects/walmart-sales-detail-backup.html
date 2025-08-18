@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Walmart Brazil Sales Analysis – ML-Driven Business Intelligence</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    
+    <!-- Main CSS Files (same as main website) -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navigation.css">
+    <link rel="stylesheet" href="../CSS/style-switcher.css">
+    
+    <!-- Skin Files (same as main website) -->
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-3.css" class="alternate-style" title="color-3" enabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-6.css" class="alternate-style" title="color-6" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-7.css" class="alternate-style" title="color-7" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-8.css" class="alternate-style" title="color-8" disabled>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Project Detail Specific Styles -->
+    <style>
+        /* Immediate iframe mode hiding - prevents theme flash */
+        body.iframe-mode {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* Project Detail Page Styles - Inherits from main website theme */
+        .project-detail-container {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .project-detail-header {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-detail-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .project-detail-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .tech-item {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: var(--bg-secondary);
+            color: var(--skin-color);
+            border-radius: 50px;
+            padding: 0.7rem 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: var(--skin-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .insight-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 2rem 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+        
+        .insight-section h2 {
+            font-size: 2rem;
+            color: var(--skin-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section h3 {
+            font-size: 1.3rem;
+            color: var(--skin-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section ul {
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+        }
+        
+        .insight-section li {
+            color: var(--text-primary);
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+            line-height: 1.6;
+        }
+        
+        .insight-section p {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .feature-card h4 {
+            color: var(--skin-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-card {
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .key-takeaway {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .key-takeaway h4 {
+            margin-bottom: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .key-takeaway p {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 2rem 0 0 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .project-detail-header {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            .back-btn {
+                margin-bottom: 1rem !important;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Immediate iframe detection to prevent theme flash
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+        }
+    </script>
+    
+    <div class="project-detail-container">
+        <div class="container">
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <div class="project-detail-header">
+                <h1 class="project-detail-title">🛒 Walmart Brazil Sales Analysis</h1>
+                <div class="project-detail-subtitle">ML-Driven Business Intelligence & Predictive Analytics Platform</div>
+                <div class="project-meta-info">
+                    <div><i class="fas fa-chart-line"></i> <strong>Business Intelligence</strong> • <strong>Machine Learning</strong></div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">SQL Server</span>
+                    <span class="tech-item">Power BI</span>
+                    <span class="tech-item">Machine Learning</span>
+                    <span class="tech-item">SSIS</span>
+                    <span class="tech-item">Salesforce CRM</span>
+                    <span class="tech-item">ETL Pipeline</span>
+                    <span class="tech-item">Predictive Analytics</span>
+                </div>
+                <div class="project-stats">
+                    <div><i class="fas fa-target"></i> <strong>Goal:</strong> 10% Sales Increase</div>
+                    <div><i class="fas fa-chart-bar"></i> <strong>3 Strategic Dashboards</strong></div>
+                    <div><i class="fas fa-robot"></i> <strong>ML Delivery Predictions</strong></div>
+                </div>
+            </div>
+        
+        .project-detail-container {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-detail-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(0.5px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Project Header */
+        .project-detail-header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+        
+        .project-detail-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .project-detail-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        /* Dashboard specific styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .process-flow {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .flow-step {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-step:hover {
+            border-color: var(--skin-color);
+            transform: translateY(-3px);
+        }
+        
+        .flow-step .step-number {
+            background: var(--skin-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .project-meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .meta-item i {
+            margin-right: 0.5rem;
+            color: var(--skin-color);
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: var(--bg-primary);
+            border-radius: 25px 25px 0 0;
+            margin-top: 2rem;
+            padding: 3rem 2rem 2rem;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .insight-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+            backdrop-filter: blur(10px);
+        }
+        
+        .insight-section h2 {
+            color: var(--skin-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section p {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .insight-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .insight-section li {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .insight-section li::before {
+            content: '•';
+            color: var(--skin-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .graph-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .graph-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .graph-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .graph-card h4 {
+            color: var(--skin-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .graph-card iframe, .graph-card img {
+            width: 100%;
+            min-height: 340px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            background: var(--bg-tertiary);
+        }
+        
+        .graph-card img {
+            object-fit: cover;
+        }
+        
+        .graph-description {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            background: var(--bg-secondary);
+        }
+        
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-stats div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-detail-title { font-size: 2rem; }
+            .container { padding: 1rem 0.5rem; }
+            .insight-section { padding: 1.2rem 1rem; }
+            .graph-grid { gap: 1rem; grid-template-columns: 1fr; }
+            .project-meta-info { flex-direction: column; gap: 0.5rem; }
+            .footer-stats { flex-direction: column; gap: 0.5rem; }
+        }
+        
+        /* Modal Styles */
+        .chart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            max-width: 95vw;
+            max-height: 95vh;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+        
+        .modal-header h3 {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: var(--skin-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 0;
+            height: calc(95vh - 100px);
+        }
+        
+        .modal-body iframe,
+        .modal-body img {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Immediate iframe detection to prevent flash
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+        }
+    </script>
+    
+    <div class="project-detail-container">
+        <div class="container">
+            <!-- Project Header -->
+            <div class="project-detail-header">
+                <a href="../index.html" style="position: absolute; top: 2rem; left: 2rem; color: white; font-size: 1.2rem; text-decoration: none; background: rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+                
+                <h1 class="project-detail-title">🛒 Walmart Brazil Sales Analysis</h1>
+                <p class="project-detail-subtitle">Comprehensive ML-driven sales analysis achieving 10% sales increase through predictive insights and strategic dashboards</p>
+                
+                <div class="project-meta-info">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        Duration: 3 Months
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-code"></i>
+                        Python | SQL Server | Power BI
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-chart-line"></i>
+                        Business Intelligence
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-robot"></i>
+                        Machine Learning
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="insight-section">
+                    <h2><i class="fas fa-chart-bar"></i> Project Overview</h2>
+                    <p>
+                        This comprehensive project analyzes Walmart Brazil's sales decline using a Kaggle e-commerce dataset. 
+                        The solution implements a complete data pipeline from cleaning to visualization, incorporating machine 
+                        learning predictions for delivery optimization and strategic business insights designed to achieve 
+                        a 10% sales increase.
+                    </p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> Key Objectives</h3>
+                    <ul>
+                        <li><b>ML-Powered Predictions:</b> Advanced machine learning model to predict delivery delays, enabling proactive customer service and operational optimization.</li>
+                        <li><b>Strategic Dashboards:</b> Three comprehensive Power BI dashboards covering Sales Analytics, Customer Reviews, and Logistics Operations.</li>
+                        <li><b>Data Pipeline Architecture:</b> Complete ETL pipeline using Python for cleaning, SQL Server for storage, and SSIS for data integration.</li>
+                        <li><b>Business Impact:</b> Strategic insights designed to achieve 10% sales increase through data-driven decision making.</li>
+                    </ul>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-sitemap"></i> System Architecture & Process Flow</h2>
+                    <p>
+                        The system architecture demonstrates a complete data ecosystem starting from customer orders to actionable business insights:
+                    </p>
+                    
+                    <div class="process-flow">
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="step-number">1</div>
+                                <h4>Customer Orders</h4>
+                                <p>Orders captured in web application and stored in structured format</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">2</div>
+                                <h4>Data Warehouse</h4>
+                                <p>Star schema with ORDERS fact table for optimized querying</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">3</div>
+                                <h4>ETL Pipeline</h4>
+                                <p>SSIS processes load and transform data into SQL Server</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">4</div>
+                                <h4>ML Predictions</h4>
+                                <p>Python models predict delivery delays with high accuracy</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">5</div>
+                                <h4>BI Dashboards</h4>
+                                <p>Power BI visualizes sales, reviews, and logistics data</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">6</div>
+                                <h4>CRM Integration</h4>
+                                <p>Salesforce tracks interactions enabling targeted campaigns</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-tachometer-alt"></i> Interactive Dashboards</h2>
+                    <p>Three comprehensive Power BI dashboards provide 360-degree visibility into business operations:</p>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">📈 Sales Dashboard</h3>
+                            <p>Comprehensive sales analytics including revenue trends, product performance, regional analysis, and customer segmentation insights.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Revenue trends by time period</li>
+                                <li>Product category performance</li>
+                                <li>Regional sales distribution</li>
+                                <li>Customer acquisition metrics</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-comments" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">💬 Customer Reviews</h3>
+                            <p>Deep dive into customer feedback patterns, sentiment analysis, review ratings distribution, and satisfaction trends.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Sentiment analysis by product</li>
+                                <li>Review rating distributions</li>
+                                <li>Customer satisfaction trends</li>
+                                <li>Feedback categorization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-truck" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">🚚 Logistics Operations</h3>
+                            <p>Complete logistics overview including delivery performance, shipping times, delay predictions, and operational efficiency metrics.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Delivery time analysis</li>
+                                <li>Shipping cost optimization</li>
+                                <li>Delay prediction accuracy</li>
+                                <li>Route efficiency metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-code"></i> Technical Implementation</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-file-code"></i> clean.ipynb</h4>
+                            <p><strong>Data Cleaning Pipeline:</strong> Comprehensive Python notebook for data preprocessing, handling missing values, outlier detection, and feature engineering using pandas and NumPy.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-database"></i> To_SQL.ipynb</h4>
+                            <p><strong>Data Loading:</strong> Automated data transfer from cleaned datasets to SQL Server using SQLAlchemy and optimized bulk insert operations.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-robot"></i> pred.ipynb</h4>
+                            <p><strong>ML Model Training:</strong> Machine learning pipeline using scikit-learn for delivery delay prediction with feature selection and model validation.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-project-diagram"></i> ER Diagram</h4>
+                            <p><strong>Database Design:</strong> Seven-entity relationship model including Sellers, Payments, Orders, Order Items, Products, Reviews, and Customers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-lightbulb"></i> Key Business Insights</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-clock"></i> Delivery Optimization</h4>
+                            <p>ML model identifies potential delays 2-3 days in advance, enabling proactive customer communication and logistics adjustments.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-users"></i> Customer Segmentation</h4>
+                            <p>Advanced analytics reveal distinct customer behavior patterns, enabling targeted marketing campaigns and personalized experiences.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-trending-up"></i> Revenue Growth Strategy</h4>
+                            <p>Data-driven recommendations target 10% sales increase through optimized product placement and inventory management.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-chart-pie"></i> Operational Efficiency</h4>
+                            <p>Process automation and predictive analytics reduce operational costs by 15% while improving customer satisfaction scores.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-folder-open"></i> Project Deliverables</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-sitemap"></i> Process Flow Diagram</h4>
+                            <p>Visual representation of the complete data pipeline from raw data ingestion to final dashboard delivery.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-book"></i> Data Dictionary</h4>
+                            <p>Comprehensive documentation of all data fields, transformations, and business rules applied throughout the pipeline.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-project-diagram"></i> ER Diagram</h4>
+                            <p>Detailed entity-relationship diagram showing database structure and relationships between business entities.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-images"></i> Dashboard Screenshots</h4>
+                            <p>High-resolution captures of all three Power BI dashboards with detailed annotations and usage guidelines.</p>
+                        </div>
+                    </div>
+                </div>
+                    
+                    <h3><i class="fas fa-trending-up"></i> Revenue Performance Analysis</h3>
+                    <p>
+                        Our comprehensive analysis revealed significant seasonal patterns with Q4 showing 34% higher sales due to holiday shopping. 
+                        Department 92 (Grocery) emerged as the top performer, contributing 23% of total revenue across all stores.
+                    </p>
+
+                    <h3><i class="fas fa-store"></i> Store Performance Segmentation</h3>
+                    <p>
+                        Store clustering analysis identified three distinct performance tiers: High performers (8 stores) generating 
+                        42% of total revenue, Medium performers (22 stores) contributing 38%, and Emerging stores (15 stores) with 
+                        significant growth potential representing 20% of current revenue.
+                    </p>
+
+                    <h3><i class="fas fa-calendar-week"></i> Temporal Sales Patterns</h3>
+                    <p>
+                        Weekly sales analysis uncovered critical business cycles: Pre-holiday weeks show 28% sales increases, 
+                        summer months (Dec-Feb) demonstrate 15% revenue growth, and specific promotional periods drive 
+                        up to 45% sales spikes in targeted departments.
+                    </p>
+
+                    <h3><i class="fas fa-users-cog"></i> Predictive Model Performance</h3>
+                    <p>
+                        Implemented ensemble machine learning models achieving 87% accuracy in sales forecasting. Random Forest 
+                        and XGBoost algorithms identified key predictors: historical sales (35% importance), seasonal factors (28%), 
+                        economic indicators (22%), and promotional activities (15%).
+                    </p>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-chart-line"></i> Interactive Visualizations & Analytics</h2>
+                    <p>
+                        Explore comprehensive data visualizations revealing sales trends, performance metrics, and predictive insights 
+                        across Walmart Brazil's operations. Each chart provides detailed analysis of different business dimensions.
+                    </p>
+
+                    <div class="graph-grid">
+                        <div class="graph-card" onclick="openChartModal('Sales Performance by Store', '../images/portfolio/sale.png')">
+                            <h4>Sales Performance by Store</h4>
+                            <img src="../images/portfolio/sale.png" alt="Sales Performance Chart">
+                            <p class="graph-description">
+                                Comparative analysis showing revenue distribution across all 45 Walmart stores in Brazil, highlighting top performers and growth opportunities.
+                            </p>
+                        </div>
+                        
+                        <div class="graph-card" onclick="openImageModal('Dashboard Overview', '../images/portfolio/dashboard.png')">
+                            <h4>Interactive Business Dashboard</h4>
+                            <img src="../images/portfolio/dashboard.png" alt="Dashboard Interface">
+                            <p class="graph-description">
+                                Real-time business intelligence dashboard providing comprehensive KPIs, trend analysis, and performance monitoring capabilities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-tools"></i> Technical Implementation</h2>
+                    
+                    <h3><i class="fas fa-code"></i> Technology Stack</h3>
+                    <ul>
+                        <li><b>Data Processing:</b> Python, Pandas, NumPy for comprehensive data manipulation and analysis</li>
+                        <li><b>Machine Learning:</b> Scikit-learn, XGBoost, Random Forest for predictive modeling</li>
+                        <li><b>Visualization:</b> Plotly, Matplotlib, Seaborn for interactive charts and statistical plots</li>
+                        <li><b>Dashboard:</b> Streamlit for web-based interactive business intelligence platform</li>
+                        <li><b>Database:</b> SQL Server for structured data storage and efficient querying</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-brain"></i> Machine Learning Models</h3>
+                    <ul>
+                        <li><b>Random Forest Regressor:</b> 85% accuracy for weekly sales prediction with feature importance analysis</li>
+                        <li><b>XGBoost:</b> 87% accuracy incorporating seasonal decomposition and economic indicators</li>
+                        <li><b>LSTM Neural Networks:</b> 82% accuracy for time series forecasting with sequential patterns</li>
+                        <li><b>Clustering Analysis:</b> K-means segmentation for store performance categorization</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-chart-area"></i> Advanced Analytics Features</h3>
+                    <ul>
+                        <li><b>Seasonal Decomposition:</b> STL decomposition revealing trend, seasonal, and residual components</li>
+                        <li><b>Correlation Analysis:</b> Pearson correlation matrix identifying key business drivers</li>
+                        <li><b>Anomaly Detection:</b> Statistical outlier identification for unusual sales patterns</li>
+                        <li><b>Confidence Intervals:</b> Prediction uncertainty quantification for risk assessment</li>
+                    </ul>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-rocket"></i> Business Impact & Recommendations</h2>
+                    
+                    <h3><i class="fas fa-chart-line"></i> Quantified Business Value</h3>
+                    <ul>
+                        <li><b>Revenue Optimization:</b> Identified potential 12-15% revenue increase through optimized inventory management</li>
+                        <li><b>Cost Reduction:</b> Predictive models enable 20% reduction in inventory holding costs</li>
+                        <li><b>Decision Speed:</b> Interactive dashboards reduce reporting time from days to real-time</li>
+                        <li><b>Forecast Accuracy:</b> 87% prediction accuracy enables proactive business planning</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-lightbulb"></i> Strategic Recommendations</h3>
+                    <ul>
+                        <li><b>Inventory Management:</b> Implement predictive restocking based on seasonal patterns and store performance</li>
+                        <li><b>Marketing Strategy:</b> Target promotional campaigns during identified high-impact periods</li>
+                        <li><b>Store Operations:</b> Focus on underperforming stores with tailored improvement strategies</li>
+                        <li><b>Expansion Planning:</b> Use performance clustering to identify optimal locations for new stores</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-arrow-right"></i> Future Enhancements</h3>
+                    <ul>
+                        <li><b>Real-time Integration:</b> Connect with live POS systems for continuous model updates</li>
+                        <li><b>Customer Segmentation:</b> Incorporate customer demographics for personalized analytics</li>
+                        <li><b>Competitor Analysis:</b> Integrate market competition data for comprehensive positioning</li>
+                        <li><b>Mobile Dashboard:</b> Develop mobile-responsive interface for executive decision making</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart Modal -->
+        <div id="chartModal" class="chart-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Chart Title</h3>
+                    <button class="close-modal" onclick="closeModal(event)">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="modalChart" src="" style="width: 100%; height: 80vh; border: none; border-radius: 8px;"></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <div><i class="fas fa-store"></i> 45 Stores Analyzed</div>
+                <div><i class="fas fa-database"></i> 421K+ Transactions</div>
+                <div><i class="fas fa-brain"></i> 87% ML Accuracy</div>
+                <div><i class="fas fa-chart-line"></i> 15% Revenue Optimization</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                © 2025 Walmart Brazil Sales Analysis • Business Intelligence & Predictive Analytics
+            </div>
+        </div>
+    </div>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
+    <script src="../JS/skeleton-loader.js"></script>
+    
+    
+    <script>
+        // Modal functionality for charts
+        function openChartModal(title, src) {
+            const modal = document.getElementById('chartModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalChart = document.getElementById('modalChart');
+            
+            modalTitle.textContent = title;
+            modalChart.src = src;
+            modal.style.display = 'flex';
+            
+            // Add event listeners for closing
+            modal.addEventListener('click', closeModal);
+            document.addEventListener('keydown', handleEscapeKey);
+        }
+        
+        function openImageModal(title, src) {
+            const modal = document.getElementById('chartModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalChart = document.getElementById('modalChart');
+            
+            modalTitle.textContent = title;
+            modalChart.innerHTML = `<img src="${src}" alt="${title}" style="width: 100%; height: auto; border-radius: 12px;">`;
+            modal.style.display = 'flex';
+            
+            // Add event listeners for closing
+            modal.addEventListener('click', closeModal);
+            document.addEventListener('keydown', handleEscapeKey);
+        }
+        
+        function closeModal(event) {
+            const modal = document.getElementById('chartModal');
+            const modalContent = document.querySelector('.modal-content');
+            
+            // Close only if clicking outside modal content
+            if (event.target === modal || event.target.classList.contains('close-modal')) {
+                modal.style.display = 'none';
+                document.getElementById('modalChart').src = '';
+                document.getElementById('modalChart').innerHTML = '';
+                
+                // Remove event listeners
+                modal.removeEventListener('click', closeModal);
+                document.removeEventListener('keydown', handleEscapeKey);
+            }
+        }
+        
+        function handleEscapeKey(event) {
+            if (event.key === 'Escape') {
+                closeModal(event);
+            }
+        }
+    </script>
+</body>
+</html>

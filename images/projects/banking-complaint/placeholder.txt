@@ -1,0 +1,13 @@
+Placeholder images for Banking Complaint Classification Project:
+
+Required images:
+1. hero-image.jpg - Main project hero image
+2. architecture.png - System architecture diagram
+3. model-performance.png - Model accuracy metrics
+4. streamlit-app.png - Streamlit interface screenshot
+5. gradio-app.png - Gradio interface screenshot
+6. word-cloud.png - Complaint word cloud
+7. eda-charts.png - Exploratory data analysis charts
+8. confusion-matrix.png - Model confusion matrix
+
+These placeholder files should be replaced with actual project images.

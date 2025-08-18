@@ -1,635 +1,801 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Include meta tags and CSS from film analytics template -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWS Order Analytics Pipeline - Aditya Pandey</title>
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/navigation.css">
-    <link rel="stylesheet" href="CSS/Skins/color-1.css">
-    <link rel="stylesheet" href="CSS/style-switcher.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>☁️ AWS Order Analytics Pipeline | Cloud-Native Data Platform</title>
+    <meta name="description" content="Scalable cloud-native analytics pipeline on AWS delivering real-time order insights through serverless architecture">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        .project-detail-page {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        .project-detail-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-        }
-        
-        .project-header-section {
-            padding: 100px 0 50px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .project-hero {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .project-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .project-hero .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-        
-        .project-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .meta-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .meta-item i {
-            font-size: 2rem;
-            color: var(--skin-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .meta-item h4 {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .meta-item p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .project-image {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            margin: 2rem 0;
-        }
-        
-        .detail-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .detail-section h2 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .detail-section h3 {
-            color: var(--skin-color);
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .detail-section p, .detail-section li {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .detail-section li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--skin-color);
-            font-weight: bold;
-        }
-        
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .tech-item {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .tech-item:hover {
-            transform: translateY(-3px);
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 1.5rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .btn-action {
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-demo {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-        }
-        
-        .btn-action:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .back-to-home {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .back-to-home:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .result-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .result-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--skin-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-label {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .architecture-diagram {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .service-flow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .service-item {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            min-width: 120px;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .arrow {
-            color: var(--skin-color);
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .project-hero {
-                padding: 2rem;
-            }
-            
-            .project-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .detail-section {
-                padding: 2rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .back-to-home {
-                position: relative;
-                top: auto;
-                left: auto;
-                margin: 2rem 0;
-            }
-            
-            .service-flow {
-                flex-direction: column;
-            }
-            
-            .arrow {
-                transform: rotate(90deg);
-            }
-        }
+/* Immediate iframe mode hiding - prevents theme flash */
+body.iframe-mode {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Project Detail Page Styles - Inherits from main website theme */
+.project-detail-container {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.project-detail-header {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.project-detail-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.project-detail-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.project-meta-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    flex-wrap: wrap;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.tech-item {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 18px;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: var(--shadow-light);
+    transition: transform 0.2s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-2px);
+}
+
+.project-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: var(--bg-secondary);
+    color: var(--skin-color);
+    border-radius: 50px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--skin-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.insight-section {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.insight-section h2 {
+    font-size: 2rem;
+    color: var(--skin-color);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.insight-section h3 {
+    font-size: 1.3rem;
+    color: var(--skin-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.insight-section ul {
+    margin: 0 0 1rem 1.5rem;
+    padding: 0;
+}
+
+.insight-section li {
+    color: var(--text-primary);
+    margin-bottom: 0.7rem;
+    font-size: 1.08rem;
+    line-height: 1.6;
+}
+
+.insight-section p {
+    color: var(--text-primary);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.graph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.graph-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.graph-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+}
+
+.graph-card iframe {
+    position: relative;
+    z-index: 1;
+}
+
+.graph-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.graph-card h4 {
+    color: var(--skin-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.graph-card iframe, .graph-card img {
+    width: 100%;
+    min-height: 340px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    background: var(--bg-tertiary);
+    pointer-events: auto;
+}
+
+.chart-preview {
+    width: 100%;
+    min-height: 340px;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.chart-preview:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-primary);
+}
+
+.preview-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.preview-placeholder p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.click-instruction {
+    font-size: 0.9rem;
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    margin-top: 1rem !important;
+}
+
+.graph-card:hover .click-instruction {
+    color: var(--skin-color) !important;
+}
+
+.dark .graph-card iframe {
+    background: #1a1a1a !important;
+    color-scheme: dark;
+}
+
+.dashboard-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+}
+
+.dashboard-card iframe {
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.dashboard-card h4 {
+    color: var(--skin-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.dashboard-card iframe, .dashboard-card img {
+    width: 100%;
+    min-height: 340px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    background: var(--bg-tertiary);
+    pointer-events: auto;
+}
+
+.dashboard-preview {
+    width: 100%;
+    min-height: 340px;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.dashboard-preview:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-primary);
+}
+
+.dashboard-preview .preview-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.dashboard-preview .preview-placeholder p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.dashboard-preview .click-instruction {
+    font-size: 0.9rem;
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    margin-top: 1rem !important;
+}
+
+.dashboard-preview .graph-card:hover .click-instruction {
+    color: var(--skin-color) !important;
+}
+
+.dashboard-preview .dark .graph-card iframe {
+    background: #1a1a1a !important;
+    color-scheme: dark;
+}
+
+.feature-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+}
+
+.feature-card iframe {
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.feature-card h4 {
+    color: var(--skin-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.feature-card iframe, .feature-card img {
+    width: 100%;
+    min-height: 340px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    background: var(--bg-tertiary);
+    pointer-events: auto;
+}
+
+.feature-preview {
+    width: 100%;
+    min-height: 340px;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.feature-preview:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-primary);
+}
+
+.feature-preview .preview-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.feature-preview .preview-placeholder p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.feature-preview .click-instruction {
+    font-size: 0.9rem;
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    margin-top: 1rem !important;
+}
+
+.feature-preview .graph-card:hover .click-instruction {
+    color: var(--skin-color) !important;
+}
+
+.feature-preview .dark .graph-card iframe {
+    background: #1a1a1a !important;
+    color-scheme: dark;
+}
+
+.result-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.result-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+}
+
+.result-card iframe {
+    position: relative;
+    z-index: 1;
+}
+
+.result-card .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.result-card h4 {
+    color: var(--skin-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.result-card iframe, .result-card img {
+    width: 100%;
+    min-height: 340px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-light);
+    background: var(--bg-tertiary);
+    pointer-events: auto;
+}
+
+.result-preview {
+    width: 100%;
+    min-height: 340px;
+    border-radius: 12px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.result-preview:hover {
+    border-color: var(--accent-color);
+    background: var(--bg-primary);
+}
+
+.result-preview .preview-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.result-preview .preview-placeholder p {
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.result-preview .click-instruction {
+    font-size: 0.9rem;
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    margin-top: 1rem !important;
+}
+
+.result-preview .graph-card:hover .click-instruction {
+    color: var(--skin-color) !important;
+}
+
+.result-preview .dark .graph-card iframe {
+    background: #1a1a1a !important;
+    color-scheme: dark;
+}
+
+.action-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    margin: 4rem 0 2rem 0 !important;
+    flex-wrap: wrap !important;
+    padding: 0 1rem !important;
+}
+
+.btn-action {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px 32px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border-radius: 50px !important;
+    border: 2px solid !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    min-width: 180px !important;
+    text-align: center !important;
+    gap: 0.5rem !important;
+    opacity: 1 !important;
+    animation: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--skin-color), #ff9500) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff9500, var(--skin-color)) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 149, 0, 0.3) !important;
+}
+
+.btn-secondary {
+    background: transparent !important;
+    color: var(--skin-color) !important;
+    border-color: var(--skin-color) !important;
+}
+
+.btn-secondary:hover {
+    background: var(--skin-color) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-demo {
+    background: linear-gradient(135deg, #ff6b35, #f7931e) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+.btn-demo:hover {
+    background: linear-gradient(135deg, #f7931e, #ff6b35) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3) !important;
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 4rem;
+}
+
+.footer .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.footer .footer-content div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer .footer-content div i {
+    font-size: 1.2rem;
+}
+
+.footer .footer-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+    .project-detail-header {
+        padding: 2rem 0 !important;
+    }
+    
+    .project-detail-title {
+        font-size: 2.5rem;
+    }
+    
+    .main-content {
+        padding: 2rem 1rem;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .insight-section {
+        padding: 1.5rem;
+    }
+    
+    .dashboard-grid,
+    .features-grid,
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .flow-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.5rem !important;
+        margin: 3rem 0 2rem 0 !important;
+    }
+    
+    .btn-action {
+        width: 100% !important;
+        max-width: 300px !important;
+        padding: 18px 32px !important;
+    }
+}
     </style>
 </head>
-<body class="project-detail-page">
-    <a href="index.html" class="back-to-home">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
-    </a>
+<body>
+    <script>
+        // Immediate iframe detection to prevent theme flash
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+        }
+    </script>
     
-    <div class="project-header-section">
+    <div class="project-detail-container">
         <div class="container">
-            <div class="project-hero">
-                <h1>AWS Order Analytics Pipeline</h1>
-                <p class="subtitle">Real-time Analytics | Microservices | Cloud Architecture</p>
-                
-                <div class="project-meta-grid">
-                    <div class="meta-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h4>Duration</h4>
-                        <p>4 Months</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-users"></i>
-                        <h4>Team Size</h4>
-                        <p>Individual Project</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Status</h4>
-                        <p>Production Ready</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-code"></i>
-                        <h4>Category</h4>
-                        <p>Cloud & Analytics</p>
-                    </div>
+            <div class="project-detail-header">
+                <h1 class="project-detail-title">☁️ AWS Order Analytics Pipeline</h1>
+                <p class="project-detail-subtitle">Scalable cloud-native analytics pipeline on AWS delivering real-time order insights through serverless architecture</p>
+                <div class="project-meta-info">
+                    <div><i class="fas fa-calendar-alt"></i> Duration: 8 Weeks</div>
+                    <div><i class="fas fa-cloud"></i> AWS | Serverless | Analytics</div>
+                    <div><i class="fas fa-chart-line"></i> Real-time Processing</div>
+                    <div><i class="fas fa-database"></i> Big Data Platform</div>
                 </div>
-                
-                <div class="tech-stack">
-                    <span class="tech-item">AWS Lambda</span>
-                    <span class="tech-item">DynamoDB</span>
-                    <span class="tech-item">API Gateway</span>
-                    <span class="tech-item">Kinesis</span>
-                    <span class="tech-item">CloudWatch</span>
-                    <span class="tech-item">Python</span>
-                    <span class="tech-item">Real-time Analytics</span>
+            </div>
+                <div class="insight-section">
+                    <h2><i class="fab fa-aws"></i> Project Overview</h2>
+                <p>Enterprise-grade cloud-native analytics pipeline built on AWS, designed to process millions of order transactions in real-time. This serverless architecture leverages AWS managed services to deliver scalable, cost-effective, and highly available analytics platform for business intelligence and operational insights.</p>
+                    <h3><i class="fas fa-bullseye"></i> Key Objectives</h3>
+                    <ul>
+                        <li><b>Serverless Architecture:</b> Implement fully serverless solution using AWS Lambda, API Gateway, and managed services for maximum scalability.</li>
+                        <li><b>Real-time Processing:</b> Process order data streams in real-time using Kinesis Data Streams and AWS Lambda for immediate insights.</li>
+                        <li><b>Cost Optimization:</b> Design cost-effective architecture with pay-per-use model and automated scaling based on demand.</li>
+                        <li><b>Business Intelligence:</b> Deliver comprehensive analytics dashboards with QuickSight for executive decision making.</li>
+                    </ul>
                 </div>
-                
-                <img src="images/portfolio/order.png?raw=true" alt="AWS Order Analytics Pipeline" class="project-image">
-                
-                <div class="action-buttons">
-                    <a href="https://github.com/aditya-pa/AWS-Order-Analytics-Pipeline" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github"></i> View Source Code
-                    </a>
-                    <a href="index.html#portfolio" class="btn-action btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back to Portfolio
-                    </a>
+                <div class="insight-section">
+                    <h2><i class="fas fa-sitemap"></i> AWS Cloud Architecture</h2>
+                <p>The solution leverages multiple AWS services in a cohesive architecture designed for scalability and performance:</p>
+                <ul>
+                    <li><b>Data Ingestion:</b> API Gateway captures order data with Lambda authorization</li>
+                    <li><b>Stream Processing:</b> Kinesis Data Streams handle real-time order flow</li>
+                    <li><b>Data Processing:</b> Lambda functions process and enrich order data</li>
+                    <li><b>Data Storage:</b> S3 and DynamoDB store processed analytics data</li>
+                    <li><b>Analytics Engine:</b> Athena queries data lake for complex analytics</li>
+                    <li><b>Visualization:</b> QuickSight delivers interactive business dashboards</li>
+                </ul>
                 </div>
+                <div class="insight-section">
+                    <h2><i class="fab fa-aws"></i> AWS Services Implementation</h2>
+                    <p>Comprehensive utilization of AWS managed services for enterprise-grade analytics platform:</p>
+                <ul>
+                    <li><b>API Gateway:</b> Secure, scalable API endpoints for ingesting order data</li>
+                    <li><b>Kinesis Data Streams:</b> Real-time data streaming and processing</li>
+                    <li><b>Lambda:</b> Serverless compute for data transformation and enrichment</li>
+                    <li><b>S3:</b> Durable, scalable storage for raw and processed data</li>
+                    <li><b>DynamoDB:</b> NoSQL database for fast, flexible analytics storage</li>
+                    <li><b>Athena:</b> Serverless query service for ad-hoc analytics</li>
+                    <li><b>QuickSight:</b> Business intelligence dashboards and reporting</li>
+                    </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <div><i class="fab fa-aws"></i> 8 AWS Services</div>
+                <div><i class="fas fa-bolt"></i> Serverless Architecture</div>
+                <div><i class="fas fa-chart-line"></i> Real-time Analytics</div>
+                <div><i class="fas fa-shield-alt"></i> Enterprise Security</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                © 2025 AWS Order Analytics Pipeline • Cloud-Native Big Data Platform
             </div>
         </div>
     </div>
     
-    <div class="container">
-        <div class="detail-section">
-            <h2><i class="fas fa-shopping-cart"></i> E-commerce Analytics Challenge</h2>
-            <p>Modern e-commerce businesses require real-time insights into order patterns, customer behavior, and operational metrics to maintain competitive advantage. Traditional batch processing systems create delays in decision-making and miss critical business opportunities.</p>
-            <p>This project demonstrates a comprehensive real-time order analytics pipeline that processes millions of order events, providing instant insights for business optimization and customer experience enhancement.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-bullseye"></i> Project Objectives</h2>
-            <ul>
-                <li>Build real-time order processing and analytics pipeline</li>
-                <li>Implement scalable microservices architecture on AWS</li>
-                <li>Provide instant insights for business decision making</li>
-                <li>Ensure high availability and fault tolerance</li>
-                <li>Optimize for cost-effectiveness and performance</li>
-                <li>Enable real-time monitoring and alerting capabilities</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-sitemap"></i> System Architecture</h2>
-            
-            <div class="architecture-diagram">
-                <h3 style="color: white; margin-bottom: 2rem;">Real-time Order Analytics Architecture</h3>
-                <div class="service-flow">
-                    <div class="service-item">Order Events</div>
-                    <div class="arrow">→</div>
-                    <div class="service-item">API Gateway</div>
-                    <div class="arrow">→</div>
-                    <div class="service-item">Kinesis</div>
-                    <div class="arrow">→</div>
-                    <div class="service-item">Lambda</div>
-                    <div class="arrow">→</div>
-                    <div class="service-item">DynamoDB</div>
-                </div>
-            </div>
-            
-            <h3><i class="fas fa-layer-group"></i> Core AWS Services</h3>
-            <ul>
-                <li><strong>API Gateway:</strong> RESTful API for order event ingestion</li>
-                <li><strong>Kinesis Data Streams:</strong> Real-time data streaming and buffering</li>
-                <li><strong>Lambda Functions:</strong> Serverless processing and analytics</li>
-                <li><strong>DynamoDB:</strong> NoSQL database for high-performance storage</li>
-                <li><strong>CloudWatch:</strong> Monitoring, logging, and alerting</li>
-                <li><strong>SNS:</strong> Real-time notifications and alerts</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-cogs"></i> Technical Implementation</h2>
-            
-            <h3><i class="fas fa-stream"></i> Real-time Data Ingestion</h3>
-            <ul>
-                <li>High-throughput API Gateway for order event collection</li>
-                <li>Kinesis Data Streams for reliable event streaming</li>
-                <li>Auto-scaling based on event volume and traffic patterns</li>
-                <li>Error handling and dead letter queues for failed events</li>
-                <li>Event validation and schema enforcement</li>
-            </ul>
-            
-            <h3><i class="fas fa-bolt"></i> Stream Processing</h3>
-            <ul>
-                <li>Lambda functions triggered by Kinesis events</li>
-                <li>Real-time aggregations and metric calculations</li>
-                <li>Event enrichment with customer and product data</li>
-                <li>Parallel processing for high-volume order streams</li>
-                <li>State management for complex analytics operations</li>
-            </ul>
-            
-            <h3><i class="fas fa-database"></i> Data Storage & Retrieval</h3>
-            <ul>
-                <li>DynamoDB tables optimized for analytics queries</li>
-                <li>Global Secondary Indexes for flexible data access</li>
-                <li>Time-series data storage for trend analysis</li>
-                <li>Caching strategies for frequently accessed metrics</li>
-                <li>Data retention policies and archival processes</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-chart-bar"></i> Analytics & Insights</h2>
-            
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-number">1M+</div>
-                    <div class="result-label">Orders/Day</div>
-                    <div class="result-description">Processing capacity achieved</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">&lt;100ms</div>
-                    <div class="result-label">Latency</div>
-                    <div class="result-description">End-to-end processing time</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">99.99%</div>
-                    <div class="result-label">Availability</div>
-                    <div class="result-description">System uptime maintained</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">70%</div>
-                    <div class="result-label">Cost Savings</div>
-                    <div class="result-description">Vs traditional infrastructure</div>
-                </div>
-            </div>
-            
-            <h3><i class="fas fa-chart-line"></i> Real-time Metrics</h3>
-            <ul>
-                <li>Order volume and revenue tracking by time periods</li>
-                <li>Customer segmentation and behavior analysis</li>
-                <li>Product performance and inventory insights</li>
-                <li>Geographic sales distribution and trends</li>
-                <li>Payment method and transaction analysis</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-brain"></i> Advanced Analytics Features</h2>
-            
-            <h3><i class="fas fa-robot"></i> Anomaly Detection</h3>
-            <ul>
-                <li>Machine learning models for fraud detection</li>
-                <li>Unusual pattern identification in order behavior</li>
-                <li>Automated alerting for suspicious activities</li>
-                <li>Real-time risk scoring for transactions</li>
-            </ul>
-            
-            <h3><i class="fas fa-chart-pie"></i> Predictive Analytics</h3>
-            <ul>
-                <li>Demand forecasting based on historical patterns</li>
-                <li>Customer lifetime value predictions</li>
-                <li>Inventory optimization recommendations</li>
-                <li>Seasonal trend analysis and projections</li>
-            </ul>
-            
-            <h3><i class="fas fa-bell"></i> Smart Alerting</h3>
-            <ul>
-                <li>Dynamic threshold-based alerting system</li>
-                <li>Multi-channel notification delivery (email, SMS, Slack)</li>
-                <li>Escalation policies for critical issues</li>
-                <li>Custom alert rules for business-specific metrics</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-rocket"></i> Business Impact</h2>
-            <ul>
-                <li>Enabled real-time decision making for business operations</li>
-                <li>Reduced time-to-insight from hours to seconds</li>
-                <li>Improved customer experience through faster order processing</li>
-                <li>Enhanced fraud detection reducing financial losses by 45%</li>
-                <li>Optimized inventory management saving 25% in holding costs</li>
-                <li>Increased sales conversion rates through personalized recommendations</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-shield-alt"></i> Security & Compliance</h2>
-            
-            <h3><i class="fas fa-lock"></i> Data Protection</h3>
-            <ul>
-                <li>End-to-end encryption for sensitive order data</li>
-                <li>PCI DSS compliance for payment information</li>
-                <li>Role-based access control (RBAC) implementation</li>
-                <li>Data masking for non-production environments</li>
-            </ul>
-            
-            <h3><i class="fas fa-eye"></i> Monitoring & Auditing</h3>
-            <ul>
-                <li>Comprehensive audit trails for all data access</li>
-                <li>Real-time security monitoring and threat detection</li>
-                <li>Compliance reporting and data governance</li>
-                <li>Automated backup and disaster recovery procedures</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-tools"></i> Technical Challenges & Solutions</h2>
-            
-            <h3><i class="fas fa-expand-arrows-alt"></i> High-Volume Processing</h3>
-            <p>Implemented event-driven architecture with auto-scaling to handle peak traffic loads during sales events and holiday seasons.</p>
-            
-            <h3><i class="fas fa-clock"></i> Real-time Requirements</h3>
-            <p>Optimized data flow and processing logic to achieve sub-100ms latency for critical business metrics.</p>
-            
-            <h3><i class="fas fa-sync-alt"></i> Data Consistency</h3>
-            <p>Designed eventual consistency models with compensating transactions for handling distributed system challenges.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-graduation-cap"></i> Skills Demonstrated</h2>
-            <div class="tech-stack">
-                <span class="tech-item">Serverless Architecture</span>
-                <span class="tech-item">Real-time Processing</span>
-                <span class="tech-item">Microservices</span>
-                <span class="tech-item">AWS Cloud</span>
-                <span class="tech-item">NoSQL Databases</span>
-                <span class="tech-item">Stream Analytics</span>
-                <span class="tech-item">DevOps</span>
-                <span class="tech-item">Performance Optimization</span>
-            </div>
-        </div>
-    </div>
+    <!-- Include Scripts -->
+    <script src="../includes/style-switcher.html"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
     
-    <!-- Style Switcher -->
-    <div class="style-switcher">
-        <div class="style-switcher-toggler s-icon">
-            <i class="fas fa-cog fa-spin"></i>
-        </div>
-        <div class="style-switcher-wrap">
-            <div class="switcher-head">
-                <h4>Style Switcher</h4>
-            </div>
-            <div class="colors">
-                <h5>Colors</h5>
-                <span class="color-1" onclick="setActiveStyle('color-1')"></span>
-                <span class="color-2" onclick="setActiveStyle('color-2')"></span>
-                <span class="color-3" onclick="setActiveStyle('color-3')"></span>
-                <span class="color-4" onclick="setActiveStyle('color-4')"></span>
-                <span class="color-5" onclick="setActiveStyle('color-5')"></span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="JS/script.js"></script>
-    <script src="JS/style-switcher.js"></script>
+    <script>
+        // Show content after everything loads when in iframe
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.parent !== window) {
+                // We're in an iframe, show content after a brief delay
+                setTimeout(function() {
+                    document.body.style.setProperty('visibility', 'visible', 'important');
+                    document.body.style.setProperty('opacity', '1', 'important');
+                }, 100);
+            }
+        });
+    </script>
 </body>
 </html>

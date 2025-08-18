@@ -38,6 +38,17 @@
             }
         });
         
+        // Send theme update to iframe if modal is open
+        const iframe = document.querySelector('#projectIframe');
+        if (iframe && iframe.contentWindow) {
+            const isDark = document.body.classList.contains('dark');
+            iframe.contentWindow.postMessage({
+                action: 'setTheme',
+                isDark: isDark,
+                activeStyle: color
+            }, '*');
+        }
+        
         // Dispatch custom event for cross-tab synchronization
         window.dispatchEvent(new CustomEvent('colorChange', { detail: { color } }));
     }
@@ -57,6 +68,19 @@
         // Store dark mode preference
         localStorage.setItem('darkMode', isDark);
         localStorage.setItem('theme-mode', isDark ? 'dark' : 'light');
+        
+        // Send theme update to iframe if modal is open
+        const iframe = document.querySelector('#projectIframe');
+        if (iframe && iframe.contentWindow) {
+            const activeStyleLink = document.querySelector('link[class="alternate-style"]:not([disabled])');
+            const activeStyle = activeStyleLink ? activeStyleLink.getAttribute('title') : 'color-1';
+            
+            iframe.contentWindow.postMessage({
+                action: 'setTheme',
+                isDark: isDark,
+                activeStyle: activeStyle
+            }, '*');
+        }
         
         // Dispatch custom event for cross-tab synchronization
         window.dispatchEvent(new CustomEvent('themeChange', { detail: { isDark } }));

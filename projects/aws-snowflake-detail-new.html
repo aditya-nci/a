@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include meta tags and CSS from film analytics template -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❄️ AWS Snowflake Data Pipeline | Enterprise Data Warehouse Platform</title>
+    <meta name="description" content="Enterprise-grade data warehouse solution combining AWS cloud services with Snowflake for scalable analytics and business intelligence">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* AWS Snowflake Specific Styles */
+        .project-detail-container {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-detail-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(0.5px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Project Header */
+        .project-detail-header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+        
+        .project-detail-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .project-detail-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .project-meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .meta-item i {
+            margin-right: 0.5rem;
+            color: var(--skin-color);
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: var(--bg-primary);
+            border-radius: 25px 25px 0 0;
+            margin-top: 2rem;
+            padding: 3rem 2rem 2rem;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .insight-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+            backdrop-filter: blur(10px);
+        }
+        
+        .insight-section h2 {
+            color: var(--skin-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insight-section p {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .insight-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .insight-section li {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .insight-section li::before {
+            content: '•';
+            color: var(--skin-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Dashboard specific styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .feature-card h4 {
+            color: var(--skin-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .process-flow {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .flow-step {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-step:hover {
+            border-color: var(--skin-color);
+            transform: translateY(-3px);
+        }
+        
+        .flow-step .step-number {
+            background: var(--skin-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .technology-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tech-stack-card {
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .tech-stack-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .aws-icon {
+            background: #FF9900;
+        }
+        
+        .snowflake-icon {
+            background: #29B5E8;
+        }
+        
+        .python-icon {
+            background: #3776AB;
+        }
+        
+        .sql-icon {
+            background: #336791;
+        }
+        
+        .tech-stack-card h4 {
+            color: var(--skin-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .tech-stack-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .result-card {
+            background: var(--bg-tertiary);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .result-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--skin-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        
+        .btn-primary {
+            background: var(--skin-color);
+            color: white;
+            border-color: var(--skin-color);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--skin-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-demo {
+            background: transparent;
+            color: var(--skin-color);
+            border-color: var(--skin-color);
+        }
+        
+        .btn-demo:hover {
+            background: var(--skin-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--skin-color);
+            color: white;
+            border-color: var(--skin-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 2rem 0 0 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .project-detail-header {
+                padding: 2rem 0 !important;
+            }
+            
+            .project-detail-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-content {
+                padding: 2rem 1rem;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .insight-section {
+                padding: 1.5rem;
+            }
+            
+            .dashboard-grid,
+            .features-grid,
+            .technology-stack,
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Immediate iframe detection to prevent theme flash
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+        }
+    </script>
+    
+    <div class="project-detail-container">
+        <div class="container">
+            <!-- Project Header -->
+            <div class="project-detail-header">
+                <a href="../index.html" style="position: absolute; top: 2rem; left: 2rem; color: white; font-size: 1.2rem; text-decoration: none; background: rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;">
+                    <i class="fas fa-arrow-left"></i> Back to Portfolio
+                </a>
+                
+                <h1 class="project-detail-title">❄️ AWS Snowflake Data Pipeline</h1>
+                <p class="project-detail-subtitle">Enterprise-grade data warehouse solution combining AWS cloud services with Snowflake for scalable analytics and business intelligence</p>
+                
+                <div class="project-meta-info">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        Duration: 10 Weeks
+                    </div>
+                    <div class="meta-item">
+                        <i class="fab fa-aws"></i>
+                        AWS | Snowflake | Python
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-database"></i>
+                        Data Warehouse
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-chart-line"></i>
+                        Enterprise Analytics
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="insight-section">
+                    <h2><i class="fas fa-snowflake"></i> Project Overview</h2>
+                    <p>
+                        Enterprise-scale data warehouse platform leveraging AWS cloud infrastructure with Snowflake's powerful 
+                        analytics engine. This solution processes multi-terabyte datasets, providing real-time business intelligence 
+                        and advanced analytics capabilities for data-driven decision making across the organization.
+                    </p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> Key Objectives</h3>
+                    <ul>
+                        <li><b>Enterprise Data Warehouse:</b> Implement scalable Snowflake data warehouse capable of handling petabyte-scale analytics workloads.</li>
+                        <li><b>AWS Integration:</b> Seamless integration with AWS services including S3, Lambda, and Glue for comprehensive data pipeline automation.</li>
+                        <li><b>Performance Optimization:</b> Advanced query optimization and data modeling techniques ensuring sub-second response times.</li>
+                        <li><b>Cost Efficiency:</b> Auto-scaling architecture with intelligent resource management for optimal cost-performance ratio.</li>
+                    </ul>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-sitemap"></i> Data Warehouse Architecture</h2>
+                    <p>
+                        Modern cloud-native architecture combining AWS managed services with Snowflake's elastic data warehouse platform:
+                    </p>
+                    
+                    <div class="process-flow">
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="step-number">1</div>
+                                <h4>Data Sources</h4>
+                                <p>Multiple data sources including databases, APIs, and files</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">2</div>
+                                <h4>AWS S3 Storage</h4>
+                                <p>Centralized data lake with organized folder structure</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">3</div>
+                                <h4>AWS Glue ETL</h4>
+                                <p>Serverless data transformation and processing</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">4</div>
+                                <h4>Snowflake DW</h4>
+                                <p>High-performance analytical data warehouse</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">5</div>
+                                <h4>BI Analytics</h4>
+                                <p>Business intelligence dashboards and reports</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">6</div>
+                                <h4>Data Science</h4>
+                                <p>Advanced analytics and machine learning workflows</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-layer-group"></i> Technology Stack Integration</h2>
+                    <p>Comprehensive technology ecosystem designed for enterprise-scale data processing and analytics:</p>
+                    
+                    <div class="technology-stack">
+                        <div class="tech-stack-card">
+                            <div class="tech-icon aws-icon">
+                                <i class="fab fa-aws"></i>
+                            </div>
+                            <h4>Amazon Web Services</h4>
+                            <p>S3 for data lake storage, Glue for ETL processing, Lambda for serverless compute, and IAM for security management</p>
+                        </div>
+                        
+                        <div class="tech-stack-card">
+                            <div class="tech-icon snowflake-icon">
+                                <i class="fas fa-snowflake"></i>
+                            </div>
+                            <h4>Snowflake Data Cloud</h4>
+                            <p>Elastic data warehouse with automatic scaling, multi-cluster compute, and time travel capabilities for enterprise analytics</p>
+                        </div>
+                        
+                        <div class="tech-stack-card">
+                            <div class="tech-icon python-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h4>Python Ecosystem</h4>
+                            <p>Pandas for data manipulation, Boto3 for AWS integration, and Snowflake connector for data warehouse operations</p>
+                        </div>
+                        
+                        <div class="tech-stack-card">
+                            <div class="tech-icon sql-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h4>Advanced SQL</h4>
+                            <p>Complex analytical queries, window functions, stored procedures, and performance optimization techniques</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-tachometer-alt"></i> Data Processing Capabilities</h2>
+                    <p>Comprehensive data processing platform supporting diverse analytical workloads and business requirements:</p>
+                    
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-database" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">🗄️ Data Warehouse</h3>
+                            <p>High-performance analytical data warehouse with automatic scaling, multi-cluster compute, and enterprise security features.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Petabyte-scale storage capacity</li>
+                                <li>Auto-scaling compute clusters</li>
+                                <li>Zero-copy cloning capabilities</li>
+                                <li>Time travel and data recovery</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-cogs" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">⚙️ ETL Processing</h3>
+                            <p>Sophisticated ETL pipelines using AWS Glue and Python for data transformation, cleansing, and enrichment processes.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Automated data quality checks</li>
+                                <li>Schema evolution handling</li>
+                                <li>Real-time data processing</li>
+                                <li>Error handling and monitoring</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="dashboard-preview">
+                                <i class="fas fa-chart-bar" style="font-size: 3rem; color: var(--skin-color);"></i>
+                            </div>
+                            <h3 style="color: var(--skin-color);">📊 Analytics Engine</h3>
+                            <p>Advanced analytics platform supporting complex queries, machine learning workloads, and real-time business intelligence.</p>
+                            <ul style="text-align: left; color: var(--text-secondary);">
+                                <li>Sub-second query performance</li>
+                                <li>Concurrent user scaling</li>
+                                <li>Advanced SQL analytics</li>
+                                <li>Machine learning integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-code"></i> Technical Implementation</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-cloud"></i> Cloud-Native Architecture</h4>
+                            <p><strong>AWS Foundation:</strong> Built on AWS cloud infrastructure leveraging S3 for data lake, Glue for ETL, and Lambda for serverless processing.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-snowflake"></i> Snowflake Optimization</h4>
+                            <p><strong>Performance Tuning:</strong> Advanced clustering keys, materialized views, and query optimization techniques for maximum performance.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-shield-alt"></i> Enterprise Security</h4>
+                            <p><strong>Data Protection:</strong> End-to-end encryption, role-based access control, and comprehensive audit logging for compliance requirements.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-expand-arrows-alt"></i> Auto-Scaling</h4>
+                            <p><strong>Elastic Resources:</strong> Automatic scaling of compute resources based on workload demands with intelligent cost optimization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-lightbulb"></i> Business Intelligence Features</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-clock"></i> Real-time Analytics</h4>
+                            <p>Stream processing capabilities enabling real-time business insights with minimal latency from data ingestion to visualization.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-history"></i> Historical Analysis</h4>
+                            <p>Time travel functionality allowing analysis of historical data states and recovery of previous data versions for comprehensive trend analysis.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-users"></i> Multi-tenant Support</h4>
+                            <p>Secure data sharing and multi-tenant architecture supporting multiple business units with isolated data access and governance.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-robot"></i> ML Integration</h4>
+                            <p>Native integration with machine learning frameworks enabling advanced predictive analytics and automated insight generation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-trophy"></i> Performance & Scale Results</h2>
+                    
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-number">10TB+</div>
+                            <div class="result-label">Data Processed</div>
+                            <div class="result-description">Daily processing capacity</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">500ms</div>
+                            <div class="result-label">Avg Query Time</div>
+                            <div class="result-description">Complex analytical queries</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">99.9%</div>
+                            <div class="result-label">Uptime</div>
+                            <div class="result-description">System availability</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-number">40%</div>
+                            <div class="result-label">Cost Reduction</div>
+                            <div class="result-description">vs Traditional DW</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-rocket"></i> Enterprise Impact & Strategic Value</h2>
+                    
+                    <h3><i class="fas fa-chart-line"></i> Business Outcomes</h3>
+                    <ul>
+                        <li><b>Accelerated Analytics:</b> Reduced time-to-insight from days to minutes through optimized data architecture</li>
+                        <li><b>Cost Optimization:</b> 40% reduction in data warehouse costs through intelligent auto-scaling and resource management</li>
+                        <li><b>Data Democratization:</b> Self-service analytics capabilities empowering business users with direct data access</li>
+                        <li><b>Operational Excellence:</b> Automated monitoring and alerting ensuring 99.9% system availability</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-lightbulb"></i> Strategic Advantages</h3>
+                    <ul>
+                        <li><b>Scalability Assurance:</b> Platform supports 10x data growth without architectural changes or performance degradation</li>
+                        <li><b>Multi-Cloud Flexibility:</b> Snowflake's cloud-agnostic architecture provides vendor independence and flexibility</li>
+                        <li><b>Advanced Analytics:</b> Native support for ML workloads and advanced statistical functions for predictive insights</li>
+                        <li><b>Data Governance:</b> Comprehensive data lineage, quality monitoring, and compliance capabilities</li>
+                    </ul>
+                    
+                    <h3><i class="fas fa-arrow-right"></i> Future Roadmap</h3>
+                    <ul>
+                        <li><b>Real-time Streaming:</b> Integration with Kafka and Kinesis for continuous data ingestion and processing</li>
+                        <li><b>Advanced ML:</b> Deployment of ML models directly within Snowflake for real-time scoring and predictions</li>
+                        <li><b>Data Mesh Architecture:</b> Implementation of decentralized data architecture with domain-specific data products</li>
+                        <li><b>Global Expansion:</b> Multi-region deployment for improved performance and disaster recovery capabilities</li>
+                    </ul>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="https://github.com/your-username/aws-snowflake-pipeline" target="_blank" class="btn-action btn-primary">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                    <a href="#" target="_blank" class="btn-action btn-demo">
+                        <i class="fa fa-external-link-alt"></i> Architecture Demo
+                    </a>
+                    <a href="../index.html#portfolio" class="btn-action btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                <div><i class="fas fa-snowflake"></i> Enterprise Data Warehouse</div>
+                <div><i class="fab fa-aws"></i> AWS Cloud Native</div>
+                <div><i class="fas fa-database"></i> 10TB+ Daily Processing</div>
+                <div><i class="fas fa-chart-line"></i> Real-time Analytics</div>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                © 2025 AWS Snowflake Data Pipeline • Enterprise Analytics & Data Warehouse Platform
+            </div>
+        </div>
+    </div>
+    
+    <!-- Include Scripts -->
+    <script src="../includes/style-switcher.html"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
+</body>
+</html>

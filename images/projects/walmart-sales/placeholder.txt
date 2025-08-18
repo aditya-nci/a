@@ -1,0 +1,12 @@
+Placeholder images for Walmart Sales Analysis Project:
+
+Required images:
+1. process-flow.png - Process flow diagram
+2. dashboard1.png - Sales dashboard screenshot
+3. dashboard2.png - Customer Reviews dashboard
+4. dashboard3.png - Logistics dashboard
+5. er-diagram.png - Entity Relationship diagram
+6. data-dictionary.png - Data dictionary screenshot
+7. hero-image.jpg - Main project hero image
+
+These placeholder files should be replaced with actual project images.
