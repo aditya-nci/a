@@ -126,41 +126,82 @@
     transform: scale(1.02);
 }
 
+/* Project Details: action buttons — clean, single-line on desktop, stacked on small screens */
 .action-buttons {
     display: flex;
-    gap: 15px;
-    margin-top: 30px;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap; /* try to keep buttons in one line */
+    align-items: stretch;
+    gap: 0; /* touching — separators handled with border */
+    margin-top: 32px;
 }
 
 .btn-action {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 12px 24px;
-    border-radius: 25px;
-    text-decoration: none;
+    padding: 12px 22px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    font-size: 1rem;
+    min-width: 120px;
+    box-sizing: border-box;
+    background: var(--bg-card, #fff);
+    color: var(--text-primary, #333);
+    text-decoration: none;
     border: none;
     cursor: pointer;
+    border-radius: 0; /* corners controlled on first/last */
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.btn-action + .btn-action {
+    /* visual separator between touching buttons */
+    border-left: 1px solid rgba(0,0,0,0.06);
+}
+
+.btn-action:first-child {
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+}
+.btn-action:last-child {
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--skin-color) 0%, rgba(var(--skin-color-rgb), 0.8) 100%);
-    color: white;
-    box-shadow: 0 4px 15px rgba(var(--skin-color-rgb), 0.3);
+    background: linear-gradient(135deg, var(--skin-color, #007acc) 0%, rgba(var(--skin-color-rgb,0,122,204), 0.85) 100%);
+    color: #fff;
 }
-
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    color: var(--skin-color, #007acc);
+}
+.btn-demo {
+    background: #f0f6ff;
+    color: var(--skin-color, #1a73e8);
 }
 
 .btn-action:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+}
+
+/* Responsive: stack buttons vertically on small screens and restore rounded pills */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 12px;
+        flex-wrap: nowrap;
+    }
+    .btn-action {
+        width: 100%;
+        min-width: 0;
+        border-radius: 22px;
+    }
+    .btn-action + .btn-action {
+        border-left: none;
+    }
 }
 
 .detail-section {
