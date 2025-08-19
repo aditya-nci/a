@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <link rel="stylesheet" href="../CSS/navigation.css">
     <link rel="stylesheet" href="../CSS/style-switcher.css">
+    <link rel="stylesheet" href="../CSS/project-detail.css">
     
     <!-- Skin Files (same as main website) -->
     <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
@@ -294,6 +295,78 @@
         .dark .graph-card iframe {
             background: #1a1a1a !important;
             color-scheme: dark;
+        }
+        
+        /* Dark mode overrides for hardcoded colors */
+        .dark .insight-section .step-card {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        .dark .source-card {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        .dark [style*="background: #27ae60"] {
+            background: var(--skin-color) !important;
+        }
+        
+        .dark [style*="background: #3498db"] {
+            background: var(--skin-color) !important;
+        }
+        
+        .dark [style*="background: #f39c12"] {
+            background: var(--skin-color) !important;
+        }
+        
+        .dark [style*="background: #9b59b6"] {
+            background: var(--skin-color) !important;
+        }
+        
+        .dark [style*="color: #666"] {
+            color: var(--text-secondary) !important;
+        }
+        
+        .dark [style*="color: #e74c3c"] {
+            color: #ff6b6b !important;
+        }
+        
+        .dark [style*="color: #27ae60"] {
+            color: #51cf66 !important;
+        }
+        
+        /* Additional dark mode support for specific elements */
+        .dark .data-pipeline-container {
+            background: var(--bg-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+        
+        .dark .pipeline-section {
+            background: var(--bg-secondary) !important;
+        }
+        
+        .dark .modal-content {
+            background: var(--bg-primary) !important;
+        }
+        
+        .dark .footer {
+            background: var(--bg-primary) !important;
+            color: var(--text-secondary) !important;
+        }
+        
+        /* Ensure all inline styled elements adapt to dark mode */
+        .dark * {
+            border-color: var(--border-color) !important;
+        }
+        
+        .dark .insight-section,
+        .dark .graph-card,
+        .dark .step-card,
+        .dark .source-card {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
         }
         
         /* Dashboard specific styles */
@@ -625,6 +698,29 @@
         if (window.parent !== window) {
             document.body.classList.add('iframe-mode');
         }
+        
+        // Theme detection and synchronization with main website
+        function syncThemeWithMainSite() {
+            const savedTheme = localStorage.getItem('theme') || localStorage.getItem('dark-mode');
+            const isDark = savedTheme === 'dark' || savedTheme === 'true' || 
+                          document.documentElement.classList.contains('dark') ||
+                          document.body.classList.contains('dark');
+            
+            if (isDark) {
+                document.body.classList.add('dark');
+                document.documentElement.classList.add('dark');
+            } else {
+                document.body.classList.remove('dark');
+                document.documentElement.classList.remove('dark');
+            }
+        }
+        
+        // Initialize theme sync immediately
+        syncThemeWithMainSite();
+        
+        // Listen for theme changes from main website
+        window.addEventListener('storage', syncThemeWithMainSite);
+        document.addEventListener('DOMContentLoaded', syncThemeWithMainSite);
     </script>
     
     <div class="project-detail-container">
@@ -1171,7 +1267,7 @@
             </div>
 
             <!-- Amazon Prime Analysis Section -->
-            <div class="graph-card"></div>
+            <div class="graph-card">
                 <h4>Amazon: Movie Releases Growth by Year</h4>
                 <object data="../images/projects/Film-analytics/AMAZON_number_of_movies_released_per_year_light.html?v=2025" 
                         type="text/html" 
@@ -1300,6 +1396,9 @@
                         </a>
                     </div>
                 </object>
+                        </a>
+                    </div>
+                </object>
                 <p class="graph-description">
                     Genre preferences specific to Netflix's TV show catalog and audience targeting.
                 </p>
@@ -1337,6 +1436,7 @@
                             📊 Open Interactive Chart
                         </a>
                     </div>
+                </object>
                 </object>
                 <p class="graph-description">
                     Interactive world map showing Netflix's global content creation footprint.
@@ -1464,9 +1564,9 @@
             </div>
         </div>
     </div>
-    <script src="JS/script.js"></script>
-    <script src="JS/style-switcher.js"></script>
-    <script src="JS/project-detail-shared.js"></script>
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
     <script src="../JS/skeleton-loader.js"></script>
     
     <script>
