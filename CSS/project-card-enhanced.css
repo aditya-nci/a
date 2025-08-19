@@ -1,0 +1,43 @@
+.project-card {
+    cursor: pointer !important;
+    transition: all 0.3s ease-in-out !important;
+    outline: none;
+    position: relative;
+    z-index: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: var(--shadow-large) !important;
+    border-color: var(--skin-color) !important;
+}
+
+.project-card:focus-visible {
+    border-color: var(--skin-color) !important;
+    box-shadow: 0 0 0 3px rgba(var(--skin-color-rgb), 0.3) !important;
+    outline: none;
+}
+
+.project-card:active {
+    transform: translateY(-4px) !important;
+    transition: transform 0.1s !important;
+}
+
+/* Ensure buttons and links remain clickable */
+.project-card .btn-view-project,
+.project-card .btn-github {
+    position: relative;
+    z-index: 2;
+}
+
+/* Add clickable indicator */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1;
+}
