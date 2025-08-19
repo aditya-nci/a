@@ -34,6 +34,15 @@
         }
 
         /* Project Detail Page Styles */
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
         .project-detail-container {
             min-height: 100vh;
             background: var(--bg-primary);
@@ -50,6 +59,14 @@
             margin-bottom: 2rem;
             border: 1px solid var(--border-color);
             backdrop-filter: blur(10px);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+            margin: 1.5rem 0;
         }
 
         .tech-item {
@@ -405,13 +422,24 @@
         <div class="container">
             <!-- Project Header -->
             <div class="project-detail-header">
-                <h1 class="project-detail-title">🏦 Banking Complaint Analysis</h1>
+                <h1 class="project-detail-title"><i class="fa-solid fa-building-columns"></i> Banking Complaint Analysis</h1>
                 <p class="project-detail-subtitle">NLP-powered compliance platform using DistilBERT for automated complaint categorization</p>
-                <div class="project-meta-info">
-                    <div class="meta-item"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Duration: 2 Months</div>
-                    <div class="meta-item"><i class="fas fa-code" aria-hidden="true"></i> Python | DistilBERT | Streamlit</div>
-                    <div class="meta-item"><i class="fas fa-robot" aria-hidden="true"></i> NLP & Deep Learning</div>
-                    <div class="meta-item"><i class="fas fa-shield-alt" aria-hidden="true"></i> Compliance & Regulation</div>
+                <div class="tech-stack">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Pandas</span>
+                    <span class="tech-item">NumPy</span>
+                    <span class="tech-item">Plotly</span>
+                    <span class="tech-item">Streamlit</span>
+                    <span class="tech-item">Seaborn</span>
+                    <span class="tech-item">Matplotlib</span>
+                    <span class="tech-item">DistilBERT</span>
+                    <span class="tech-item">NLP</span>
+
+                </div>
+                <div class="project-stats">
+                    <div><i class="fas fa-calendar-alt" aria-hidden="true"></i> Duration: 3 Months</div>
+                    <div><i class="fas fa-robot" aria-hidden="true"></i> NLP & Deep Learning</div>
+                    <div><i class="fas fa-shield-alt" aria-hidden="true"></i> Compliance & Regulation</div>
                 </div>
             </div>
 
@@ -513,61 +541,12 @@
                 </div>
 
                 <div class="insight-section">
-                    <h2><i class="fas fa-code" aria-hidden="true"></i> Technical Implementation</h2>
-                    <div class="features-grid">
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-robot" aria-hidden="true"></i> DistilBERT Integration</h4>
-                            <p><strong>Hugging Face Transformers:</strong> Fine-tuned DistilBERT model optimized for financial complaint classification with custom vocabulary and domain-specific training.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-chart-line" aria-hidden="true"></i> Performance Metrics</h4>
-                            <p><strong>Model Evaluation:</strong> Comprehensive evaluation framework with precision, recall, F1-score tracking, and confusion matrix analysis across all categories.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-database" aria-hidden="true"></i> Data Processing</h4>
-                            <p><strong>ETL Pipeline:</strong> Robust data preprocessing pipeline handling text normalization, feature extraction, and real-time batch processing.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-shield-alt" aria-hidden="true"></i> Compliance Engine</h4>
-                            <p><strong>Regulatory Framework:</strong> Automated CFPB compliance checking with rule-based validation and regulatory requirement mapping.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
-                    <h2><i class="fas fa-lightbulb" aria-hidden="true"></i> Key Features & Capabilities</h2>
-                    <div class="features-grid">
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-tags" aria-hidden="true"></i> 12-Category Classification</h4>
-                            <p>Accurate classification across mortgage, credit card, debt collection, credit reporting, student loans, and other financial product categories.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-heart" aria-hidden="true"></i> Sentiment Analysis</h4>
-                            <p>Multi-dimensional sentiment scoring including emotion detection, urgency assessment, and satisfaction level prediction.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-clock" aria-hidden="true"></i> Real-time Processing</h4>
-                            <p>Sub-second complaint processing with instant classification, sentiment analysis, and compliance validation.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-bell" aria-hidden="true"></i> Alert System</h4>
-                            <p>Intelligent alerting for high-priority complaints, regulatory violations, and escalation patterns requiring immediate attention.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
                     <h2><i class="fas fa-trophy" aria-hidden="true"></i> Performance Results</h2>
                     <div class="results-grid">
                         <div class="result-card" tabindex="0">
                             <div class="result-number">94%</div>
                             <div class="result-label">Accuracy</div>
                             <div class="result-description">Classification accuracy across all categories</div>
-                        </div>
-                        <div class="result-card" tabindex="0">
-                            <div class="result-number">99.9%</div>
-                            <div class="result-label">Uptime</div>
-                            <div class="result-description">Production system reliability</div>
                         </div>
                         <div class="result-card" tabindex="0">
                             <div class="result-number">&lt;2s</div>
@@ -586,13 +565,9 @@
                     <h2><i class="fas fa-chart-bar" aria-hidden="true"></i> Business Impact & Results</h2>
                     <div class="features-grid">
                         <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-percentage" aria-hidden="true"></i> 94% Classification Accuracy</h4>
+                            <h4><i class="fas fa-tachometer-alt" aria-hidden="true"></i> 94% Classification Accuracy</h4>
                             <p>Industry-leading accuracy in complaint categorization, significantly reducing manual review time and improving response efficiency.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-tachometer-alt" aria-hidden="true"></i> 75% Faster Processing</h4>
-                            <p>Automated classification reduces average complaint processing time from 45 minutes to under 10 minutes per case.</p>
-                        </div>
+                        </div>  
                         <div class="feature-card" tabindex="0">
                             <h4><i class="fas fa-shield-check" aria-hidden="true"></i> 100% Compliance Coverage</h4>
                             <p>Comprehensive regulatory compliance monitoring ensures all complaints meet CFPB requirements and regulatory standards.</p>
@@ -610,19 +585,16 @@
                     <div class="graph-grid">
                         <div class="graph-card">
                             <h4>Live Classification Interface</h4>
-                            <img src="../images/portfolio/classify.png" alt="Banking Complaint Classification Interface">
+                                <iframe
+                                    src="https://knight-aditya-classifymyticket.hf.space"
+                                    frameborder="0"
+                                    width="850"
+                                    height="450"
+                                ></iframe>
+
                             <p class="graph-description">Interactive web interface showcasing real-time complaint classification with DistilBERT model, displaying confidence scores and category predictions.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="action-buttons">
-                    <a href="https://github.com/aditya-pa/Complaint-Classification" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github" aria-hidden="true"></i> View Source Code
-                    </a>
-                    <a href="https://huggingface.co/spaces/KNIGHT-ADITYA/classifymyticket" target="_blank" class="btn-action btn-demo">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
-                    </a>
                 </div>
             </div>
 
