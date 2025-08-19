@@ -70,6 +70,15 @@
         .tech-item:hover {
             transform: translateY(-2px);
         }
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
 
         .project-detail-header {
             background: var(--bg-secondary);
@@ -383,13 +392,14 @@
 
         .footer {
             text-align: center;
-            padding: 2rem;
-            background: var(--bg-primary);
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 2rem 0 0 0;
+            padding: 2rem 0;
             border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
         }
-
-        .footer-content {
+        
+        .footer-stats {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -397,17 +407,13 @@
             flex-wrap: wrap;
             margin-bottom: 1rem;
         }
-
-        .footer-content div {
+        
+        .footer-stats div {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .footer-content p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
 
         .dark .flow-step, .dark .dashboard-card, .dark .feature-card, .dark .graph-card {
             background: var(--bg-secondary);
@@ -539,13 +545,9 @@
             <div class="project-detail-header">
                 <h1 class="project-detail-title">🛒 Walmart Brazil Sales Analysis</h1>
                 <p class="project-detail-subtitle">Comprehensive ML-driven sales analysis achieving 10% sales increase through predictive insights and strategic dashboards</p>
-                <div class="project-meta-info">
-                    <div class="meta-item"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Duration: 3 Months</div>
-                    <div class="meta-item"><i class="fas fa-code" aria-hidden="true"></i> Python | SQL Server | Power BI</div>
-                    <div class="meta-item"><i class="fas fa-chart-line" aria-hidden="true"></i> Business Intelligence</div>
-                    <div class="meta-item"><i class="fas fa-robot" aria-hidden="true"></i> Machine Learning</div>
-                </div>
                 <div class="tech-stack">
+                    <span class="tech-item">Wireframe-design</span>
+                    <span class="tech-item">Salesforce</span>
                     <span class="tech-item">Python</span>
                     <span class="tech-item">Pandas</span>
                     <span class="tech-item">NumPy</span>
@@ -553,10 +555,15 @@
                     <span class="tech-item">Dash</span>
                     <span class="tech-item">Seaborn</span>
                     <span class="tech-item">Matplotlib</span>
-                    <span class="tech-item">MongoDB</span>
+                    <span class="tech-item">SSIS</span>
                     <span class="tech-item">Jupyter</span>
-                    <span class="tech-item">WordCloud</span>
-                    <span class="tech-item">Statistical Analysis</span>
+                    <span class="tech-item">Power-BI</span>
+
+                </div>
+                
+                <div class="project-stats">
+                    <div><i class="fas fa-calendar-alt" aria-hidden="true"></i> Duration: 3 Months</div>
+                    <div><i class="fas fa-chart-bar" aria-hidden="true"></i>Three Dashboards</div>
                 </div>
             </div>
 
@@ -573,6 +580,7 @@
                         <li><b>Business Impact:</b> Strategic insights designed to achieve 10% sales increase through data-driven decision making.</li>
                     </ul>
                 </div>
+                <!-- Process Flow Image -->
 
                 <div class="insight-section">
                     <h2><i class="fas fa-sitemap" aria-hidden="true"></i> System Architecture & Process Flow</h2>
@@ -614,15 +622,15 @@
                 </div>
 
                 <div class="insight-section">
-                    <h2><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Interactive Dashboards</h2>
+                    <h2><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboards</h2>
                     <p>Three comprehensive Power BI dashboards provide 360-degree visibility into business operations:</p>
                     <div class="dashboard-grid">
                         <div class="dashboard-card">
                             <div class="dashboard-preview">
                                 <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--skin-color);" aria-hidden="true"></i>
                             </div>
-                            <h3 style="color: var(--skin-color);">📈 Sales Dashboard</h3>
-                            <p>Comprehensive sales analytics including revenue trends, product performance, regional analysis, and customer segmentation insights.</p>
+                            <h3 style="color: var(--skin-color);">Sales Dashboard</h3>
+                            <p>Comprehensive sales analytics including revenue trends, product performance,and regional analysis.</p>
                             <ul style="text-align: left; color: var(--text-secondary);">
                                 <li>Revenue trends by time period</li>
                                 <li>Product category performance</li>
@@ -634,7 +642,7 @@
                             <div class="dashboard-preview">
                                 <i class="fas fa-comments" style="font-size: 3rem; color: var(--skin-color);" aria-hidden="true"></i>
                             </div>
-                            <h3 style="color: var(--skin-color);">💬 Customer Reviews</h3>
+                            <h3 style="color: var(--skin-color);">Customer Reviews</h3>
                             <p>Deep dive into customer feedback patterns, sentiment analysis, review ratings distribution, and satisfaction trends.</p>
                             <ul style="text-align: left; color: var(--text-secondary);">
                                 <li>Sentiment analysis by product</li>
@@ -647,7 +655,7 @@
                             <div class="dashboard-preview">
                                 <i class="fas fa-truck" style="font-size: 3rem; color: var(--skin-color);" aria-hidden="true"></i>
                             </div>
-                            <h3 style="color: var(--skin-color);">🚚 Logistics Operations</h3>
+                            <h3 style="color: var(--skin-color);">Logistics Operations</h3>
                             <p>Complete logistics overview including delivery performance, shipping times, delay predictions, and operational efficiency metrics.</p>
                             <ul style="text-align: left; color: var(--text-secondary);">
                                 <li>Delivery time analysis</li>
@@ -674,10 +682,6 @@
                             <h4><i class="fas fa-robot" aria-hidden="true"></i> pred.ipynb</h4>
                             <p><strong>ML Model Training:</strong> Machine learning pipeline using scikit-learn for delivery delay prediction with feature selection and model validation.</p>
                         </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-project-diagram" aria-hidden="true"></i> ER Diagram</h4>
-                            <p><strong>Database Design:</strong> Seven-entity relationship model including Sellers, Payments, Orders, Order Items, Products, Reviews, and Customers.</p>
-                        </div>
                     </div>
                 </div>
 
@@ -696,73 +700,41 @@
                             <h4><i class="fas fa-trending-up" aria-hidden="true"></i> Revenue Growth Strategy</h4>
                             <p>Data-driven recommendations target 10% sales increase through optimized product placement and inventory management.</p>
                         </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-chart-pie" aria-hidden="true"></i> Operational Efficiency</h4>
-                            <p>Process automation and predictive analytics reduce operational costs by 15% while improving customer satisfaction scores.</p>
-                        </div>
                     </div>
                 </div>
 
                 <div class="insight-section">
                     <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Interactive Visualizations & Analytics</h2>
                     <p>Explore comprehensive data visualizations revealing sales trends, performance metrics, and predictive insights across Walmart Brazil's operations. Each chart provides detailed analysis of different business dimensions.</p>
-                    <div class="graph-grid">
-                        <div class="graph-card" tabindex="0" onclick="openImageModal('Sales Performance by Store', '../images/portfolio/sale.png')">
-                            <h4>Sales Performance by Store</h4>
-                            <img src="../images/portfolio/sale.png" alt="Sales Performance Chart" loading="lazy">
+                    <div class="graph-grid" style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+                        <div class="graph-card" tabindex="0" onclick="openImageModal('Sales Performance by Store', '../images/projects/walmart-sales/sales.png')">
+                            <h4>Sales Performance Dashboard</h4>
+                            <img src="../images/projects/walmart-sales/sales.png" alt="Sales Performance Chart" loading="lazy">
                             <p class="graph-description">Comparative analysis showing revenue distribution across all 45 Walmart stores in Brazil, highlighting top performers and growth opportunities.</p>
                         </div>
-                        <div class="graph-card" tabindex="0" onclick="openImageModal('Dashboard Overview', '../images/portfolio/dashboard.png')">
-                            <h4>Interactive Business Dashboard</h4>
-                            <img src="../images/portfolio/dashboard.png" alt="Dashboard Interface" loading="lazy">
-                            <p class="graph-description">Real-time business intelligence dashboard providing comprehensive KPIs, trend analysis, and performance monitoring capabilities.</p>
+                        <div class="graph-card" tabindex="0" onclick="openImageModal('Dashboard Overview', '../images/projects/walmart-sales/logi.png')">
+                            <h4>Logistics Operations Dashboard</h4>
+                            <img src="../images/projects/walmart-sales/logi.png" alt="Dashboard Interface" loading="lazy">
+                            <p class="graph-description">Logistics overview with delivery, shipping, delays, and efficiency insights.</p>
+                        </div>
+                        <div class="graph-card" tabindex="0" onclick="openImageModal('Dashboard Overview', '../images/projects/walmart-sales/review.png')">
+                            <h4>Customer Reviews Dashboard</h4>
+                            <img src="../images/projects/walmart-sales/review.png" alt="Dashboard Interface" loading="lazy">
+                            <p class="graph-description">Customer insights on feedback, sentiment, ratings, and satisfaction trends.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="insight-section">
-                    <h2><i class="fas fa-rocket" aria-hidden="true"></i> Business Impact & Recommendations</h2>
-                    <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Quantified Business Value</h3>
-                    <ul>
-                        <li><b>Revenue Optimization:</b> Identified potential 12-15% revenue increase through optimized inventory management</li>
-                        <li><b>Cost Reduction:</b> Predictive models enable 20% reduction in inventory holding costs</li>
-                        <li><b>Decision Speed:</b> Interactive dashboards reduce reporting time from days to real-time</li>
-                        <li><b>Forecast Accuracy:</b> 87% prediction accuracy enables proactive business planning</li>
-                    </ul>
-                    <h3><i class="fas fa-lightbulb" aria-hidden="true"></i> Strategic Recommendations</h3>
-                    <ul>
-                        <li><b>Inventory Management:</b> Implement predictive restocking based on seasonal patterns and store performance</li>
-                        <li><b>Marketing Strategy:</b> Target promotional campaigns during identified high-impact periods</li>
-                        <li><b>Store Operations:</b> Focus on underperforming stores with tailored improvement strategies</li>
-                        <li><b>Expansion Planning:</b> Use performance clustering to identify optimal locations for new stores</li>
-                    </ul>
-                    <h3><i class="fas fa-arrow-right" aria-hidden="true"></i> Future Enhancements</h3>
-                    <ul>
-                        <li><b>Real-time Integration:</b> Connect with live POS systems for continuous model updates</li>
-                        <li><b>Customer Segmentation:</b> Incorporate customer demographics for personalized analytics</li>
-                        <li><b>Competitor Analysis:</b> Integrate market competition data for comprehensive positioning</li>
-                        <li><b>Mobile Dashboard:</b> Develop mobile-responsive interface for executive decision making</li>
-                    </ul>
-                </div>
-
-                <div class="action-buttons">
-                    <a href="https://github.com/your-username/walmart-brazil-sales" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github" aria-hidden="true"></i> View Source Code
-                    </a>
-                    <a href="https://example.com/walmart-sales-demo" target="_blank" class="btn-action btn-demo">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
-                    </a>
                 </div>
             </div>
 
             <div class="footer">
-                <div class="footer-content">
+                <div class="footer-stats">
                     <div><i class="fas fa-store" aria-hidden="true"></i> 45 Stores Analyzed</div>
                     <div><i class="fas fa-database" aria-hidden="true"></i> 421K+ Transactions</div>
                     <div><i class="fas fa-brain" aria-hidden="true"></i> 87% ML Accuracy</div>
-                    <div><i class="fas fa-chart-line" aria-hidden="true"></i> 15% Revenue Optimization</div>
                 </div>
-                <p>© 2025 Walmart Brazil Sales Analysis • Business Intelligence & Predictive Analytics</p>
+                <div>
+                    © 2025 Walmart Brazil Sales Analysis • Business Intelligence & Predictive Analytics
+                </div>
             </div>
         </div>
 
