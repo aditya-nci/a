@@ -414,6 +414,30 @@
             gap: 0.5rem;
         }
 
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-content div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .footer-content p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            opacity: 0.85;
+        }
+
 
         .dark .flow-step, .dark .dashboard-card, .dark .feature-card, .dark .graph-card {
             background: var(--bg-secondary);
@@ -727,7 +751,7 @@
             </div>
 
             <div class="footer">
-                <div class="footer-stats">
+                <div class="footer-content">
                     <div><i class="fas fa-store" aria-hidden="true"></i> 45 Stores Analyzed</div>
                     <div><i class="fas fa-database" aria-hidden="true"></i> 421K+ Transactions</div>
                     <div><i class="fas fa-brain" aria-hidden="true"></i> 87% ML Accuracy</div>

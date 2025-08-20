@@ -300,17 +300,20 @@
             gap: 2rem;
             flex-wrap: wrap;
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
         .footer-content div {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--text-primary);
         }
 
         .footer-content p {
             color: var(--text-secondary);
             font-size: 0.9rem;
+            color: var(--text-primary);
         }
 
         .dark .flow-step, .dark .dashboard-card, .dark .feature-card, .dark .result-card, .dark .graph-card {
@@ -406,12 +409,13 @@
             <!-- Project Header -->
             <div class="project-detail-header">
                 <h1 class="project-detail-title">☁️ AWS Order Analytics Pipeline</h1>
-                <p class="project-detail-subtitle">Scalable cloud-native analytics pipeline on AWS delivering real-time order insights through serverless architecture</p>
-                <div class="project-meta-info">
-                    <div class="meta-item"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Duration: 8 Weeks</div>
-                    <div class="meta-item"><i class="fas fa-cloud" aria-hidden="true"></i> AWS | Serverless | Analytics</div>
-                    <div class="meta-item"><i class="fas fa-chart-line" aria-hidden="true"></i> Real-time Processing</div>
-                    <div class="meta-item"><i class="fas fa-database" aria-hidden="true"></i> Big Data Platform</div>
+                <p class="project-detail-subtitle">Built an AWS-based pipeline using S3, Glue, Athena, and QuickSight to store, query, and visualize order data.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">SQL</span>
+                    <span class="tech-item">IAM USER</span>
+                    <span class="tech-item">AWS GLUE</span>
+                    <span class="tech-item">Athena</span>
+                    <span class="tech-item">QuickSight</span>
                 </div>
             </div>
 
@@ -419,11 +423,16 @@
             <div class="">
                 <div class="insight-section">
                     <h2><i class="fab fa-aws" aria-hidden="true"></i> Project Overview</h2>
-                    <p>Enterprise-grade cloud-native analytics pipeline built on AWS, designed to process millions of order transactions in real-time. This serverless architecture leverages AWS managed services to deliver scalable, cost-effective, and highly available analytics platform for business intelligence and operational insights.</p>
+                    <p>This project demonstrates how I leveraged various Amazon Web Services (AWS) to build a pipeline for storing, querying, and visualizing order data. The solution involves S3 for storage, Glue for data cataloging, Athena for querying, and QuickSight for visualization. All resources were created and managed directly within the AWS Management Console.</p>
+                    <div style="display: flex; justify-content: center; margin: 2rem 0;"></div>
+                        <img src="../images/projects/aws-order/architecture_diagram.png" alt="AWS Snowflake Data Pipeline Architecture" style="max-width: 100%; border-radius: 16px; box-shadow: var(--shadow-medium); border: 1px solid var(--border-color); background: var(--bg-tertiary);">
+                    </div>
+                    </div>
+
+                <div class="insight-section">
                     <h3><i class="fas fa-bullseye" aria-hidden="true"></i> Key Objectives</h3>
                     <ul>
                         <li><b>Serverless Architecture:</b> Implement fully serverless solution using AWS Lambda, API Gateway, and managed services for maximum scalability.</li>
-                        <li><b>Real-time Processing:</b> Process order data streams in real-time using Kinesis Data Streams and AWS Lambda for immediate insights.</li>
                         <li><b>Cost Optimization:</b> Design cost-effective architecture with pay-per-use model and automated scaling based on demand.</li>
                         <li><b>Business Intelligence:</b> Deliver comprehensive analytics dashboards with QuickSight for executive decision making.</li>
                     </ul>
@@ -438,20 +447,11 @@
                             <h4>Data Ingestion</h4>
                             <p>API Gateway captures order data with Lambda authorization</p>
                         </div>
-                        <div class="flow-step">
-                            <div class="step-number">2</div>
-                            <h4>Stream Processing</h4>
-                            <p>Kinesis Data Streams handle real-time order flow</p>
-                        </div>
-                        <div class="flow-step">
-                            <div class="step-number">3</div>
-                            <h4>Data Processing</h4>
-                            <p>Lambda functions process and enrich order data</p>
-                        </div>
+
                         <div class="flow-step">
                             <div class="step-number">4</div>
                             <h4>Data Storage</h4>
-                            <p>S3 and DynamoDB store processed analytics data</p>
+                            <p>S3 to store data</p>
                         </div>
                         <div class="flow-step">
                             <div class="step-number">5</div>
@@ -467,126 +467,36 @@
                 </div>
 
                 <div class="insight-section">
-                    <h2><i class="fab fa-aws" aria-hidden="true"></i> AWS Services Implementation</h2>
-                    <p>Comprehensive utilization of AWS managed services for enterprise-grade analytics platform:</p>
-                    <div class="features-grid">
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-cloud" aria-hidden="true"></i> API Gateway</h4>
-                            <p>Secure, scalable API endpoints for ingesting order data</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-stream" aria-hidden="true"></i> Kinesis Data Streams</h4>
-                            <p>Real-time data streaming and processing</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-code" aria-hidden="true"></i> Lambda</h4>
-                            <p>Serverless compute for data transformation and enrichment</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-database" aria-hidden="true"></i> S3 & DynamoDB</h4>
-                            <p>Durable, scalable storage for raw and processed data</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-search" aria-hidden="true"></i> Athena</h4>
-                            <p>Serverless query service for ad-hoc analytics</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-chart-bar" aria-hidden="true"></i> QuickSight</h4>
-                            <p>Business intelligence dashboards and reporting</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
-                    <h2><i class="fas fa-code" aria-hidden="true"></i> Technical Implementation</h2>
-                    <div class="features-grid">
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-cloud" aria-hidden="true"></i> Serverless Compute</h4>
-                            <p><strong>Lambda Functions:</strong> Event-driven processing for real-time data transformation and enrichment.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-shield-alt" aria-hidden="true"></i> Security</h4>
-                            <p><strong>IAM Integration:</strong> Fine-grained access control and encryption for secure data handling.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-tachometer-alt" aria-hidden="true"></i> Performance</h4>
-                            <p><strong>Optimized Queries:</strong> Athena query optimization for fast analytics on large datasets.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-expand-arrows-alt" aria-hidden="true"></i> Scalability</h4>
-                            <p><strong>Auto-scaling:</strong> Automatic resource scaling based on data volume and processing demands.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
-                    <h2><i class="fas fa-lightbulb" aria-hidden="true"></i> Key Features & Capabilities</h2>
-                    <div class="features-grid">
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-clock" aria-hidden="true"></i> Real-time Analytics</h4>
-                            <p>Sub-second processing of order data for immediate business insights.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-dollar-sign" aria-hidden="true"></i> Cost Efficiency</h4>
-                            <p>Pay-per-use model with automated scaling to minimize operational costs.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-chart-line" aria-hidden="true"></i> Interactive Dashboards</h4>
-                            <p>QuickSight dashboards for real-time visualization and decision-making.</p>
-                        </div>
-                        <div class="feature-card" tabindex="0">
-                            <h4><i class="fas fa-shield-alt" aria-hidden="true"></i> Enterprise Security</h4>
-                            <p>End-to-end encryption and compliance with industry standards.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
-                    <h2><i class="fas fa-trophy" aria-hidden="true"></i> Performance Results</h2>
-                    <div class="results-grid">
-                        <div class="result-card" tabindex="0">
-                            <div class="result-number">10M+</div>
-                            <div class="result-label">Orders Processed</div>
-                            <div class="result-description">Daily processing capacity</div>
-                        </div>
-                        <div class="result-card" tabindex="0">
-                            <div class="result-number">&lt;1s</div>
-                            <div class="result-label">Latency</div>
-                            <div class="result-description">Real-time processing</div>
-                        </div>
-                        <div class="result-card" tabindex="0">
-                            <div class="result-number">99.99%</div>
-                            <div class="result-label">Uptime</div>
-                            <div class="result-description">System availability</div>
-                        </div>
-                        <div class="result-card" tabindex="0">
-                            <div class="result-number">50%</div>
-                            <div class="result-label">Cost Savings</div>
-                            <div class="result-description">Vs traditional systems</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="insight-section">
                     <h2><i class="fas fa-images" aria-hidden="true"></i> Project Demonstration</h2>
                     <p>Explore the live analytics pipeline in action, showcasing real-time order processing and visualization capabilities.</p>
                     <div class="graph-grid">
                         <div class="graph-card">
                             <h4>Order Analytics Dashboard</h4>
-                            <img src="../images/portfolio/order-analytics.png" alt="AWS Order Analytics Dashboard" loading="lazy">
+                            <img src="../images/projects/aws-order/Picture1.png" alt="AWS Order Analytics Dashboard" loading="lazy">
                             <p class="graph-description">Interactive QuickSight dashboard displaying real-time order trends, performance metrics, and business insights.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="action-buttons">
-                    <a href="https://github.com/placeholder/aws-order-analytics" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github" aria-hidden="true"></i> View Source Code
-                    </a>
-                    <a href="https://aws.amazon.com/quicksight/demo" target="_blank" class="btn-action btn-demo">
-                        <i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo
-                    </a>
+                <div class=""></div>
+                    <h2><i class="fas fa-file-pdf" aria-hidden="true"></i> Project PDF</h2>
+                    <p>View the detailed project documentation as a PDF:</p>
+                    <div style="display: flex; justify-content: center;">
+                        <iframe 
+                            src="../images/projects/aws-order/AWS_Order_Data_Project.pdf" 
+                            width="100%" 
+                            height="600px" 
+                            style="border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-tertiary); box-shadow: var(--shadow-medium);"
+                            title="AWS Order Data Project PDF"
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <a href="../images/projects/aws-order/AWS_Order_Data_Project.pdf" class="btn-action btn-primary" target="_blank" rel="noopener">
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                    </div>
                 </div>
+
             </div>
 
             <div class="footer">
