@@ -2,7 +2,11 @@
 //                               INITIALIZATION
 // ========================================================================= //
 
+console.log('Script loaded successfully!');
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded fired!');
+    
     // TEMPORARY: Disable all transitions during initialization to prevent flicker
     document.body.classList.add('no-transition');
     
@@ -51,6 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         document.body.classList.remove('no-transition');
     }, 100);
+});
+
+// Listen for postMessage from iframes to close the modal
+window.addEventListener('message', function(event) {
+    if (event.data === 'closeProjectModal') {
+        closeProjectModal();
+    }
 });
 
 // ========================================================================= //
@@ -131,7 +142,6 @@ function asideSectionTogglerBtn() {
         mainContent.classList.toggle("open");
     }
 }
-
 
 // ========================================================================= //
 //                         MODERN WEBSITE ENHANCEMENTS
@@ -267,6 +277,19 @@ function initThemeToggle() {
         themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         
+        // Send theme update to iframe if modal is open
+        const modalIframe = document.querySelector('#modalBody iframe');
+        if (modalIframe && modalIframe.contentWindow) {
+            const activeStyleLink = document.querySelector('link[class="alternate-style"]:not([disabled])');
+            const activeStyle = activeStyleLink ? activeStyleLink.getAttribute('title') : 'color-3';
+            
+            modalIframe.contentWindow.postMessage({
+                action: 'setTheme',
+                isDark: isDark,
+                activeStyle: activeStyle
+            }, '*');
+        }
+        
         // Add transition effect
         document.body.style.transition = 'all 0.3s ease';
         setTimeout(() => {
@@ -392,10 +415,14 @@ function initializeContactForm() {
 
 function initializeProjectCards() {
     const projectCards = document.querySelectorAll('.project-card');
+    
     projectCards.forEach(card => {
+        // Add hover effects
         card.addEventListener('mouseenter', () => {
             card.style.transform = 'translateY(-10px) scale(1.02)';
+            card.style.cursor = 'pointer';
         });
+        
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'translateY(0) scale(1)';
         });
@@ -455,131 +482,95 @@ function showAllProjects() {
     }, 3000);
 }
 
-// ===== Project Detail Modal System =====
+// ========================================================================= //
+//                               PROJECT MODAL SYSTEM
+// ========================================================================= //
 
-// Simplified project data for modal content
-const projectData = {
-    'film-analytics': {
-        title: 'Cross-Platform Film Analytics',
-        subtitle: 'Data Analysis | Business Intelligence | Statistical Modeling',
-        duration: '3 Months',
-        teamSize: 'Individual Project',
-        status: 'Completed',
-        category: 'Data Analytics',
-        image: 'images/portfolio/movies.png?raw=true',
-        techStack: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Statistical Analysis', 'Data Visualization'],
-        github: 'https://github.com/aditya-pa/Cross-Platform-Film-Analysis'
-    },
-    'walmart-sales': {
-        title: 'Walmart Brazil Sales Analysis',
-        subtitle: 'E-commerce Analytics | Machine Learning | Business Intelligence',
-        duration: '2.5 Months',
-        teamSize: 'Individual Project',
-        status: 'Completed',
-        category: 'Data Science',
-        image: 'images/portfolio/walmart.png?raw=true',
-        techStack: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas', 'Plotly', 'SQL', 'Business Intelligence'],
-        github: 'https://github.com/aditya-pa/Walmart-Brazil-Sales-Analysis'
-    },
-    'banking-classifier': {
-        title: 'Banking Complaint Classification',
-        subtitle: 'NLP | Transformer Models | Production Deployment',
-        duration: '2 Months',
-        teamSize: 'Individual Project',
-        status: 'Production Ready',
-        category: 'NLP & AI',
-        image: 'images/portfolio/classify.png?raw=true',
-        techStack: ['Python', 'DistilBERT', 'Hugging Face', 'Transformers', 'NLP', 'Machine Learning'],
-        github: 'https://github.com/aditya-pa/Complaint-Classification',
-        demo: 'https://huggingface.co/spaces/KNIGHT-ADITYA/classifymyticket'
-    },
-    'sql-insights': {
-        title: 'SQL Business Insights Dashboard',
-        subtitle: 'Data Analytics | Business Intelligence | SQL',
-        duration: '1.5 Months',
-        teamSize: 'Individual Project',
-        status: 'Completed',
-        category: 'Data Analytics',
-        image: 'images/portfolio/sql-analytics.jpg?raw=true',
-        techStack: ['SQL', 'Business Intelligence', 'Data Analysis', 'Database Design', 'Performance Optimization'],
-        github: 'https://github.com/aditya-pa/SQL-for-business-insights'
-    },
-    'aws-snowflake': {
-        title: 'AWS Snowflake Data Pipeline',
-        subtitle: 'Cloud Architecture | Data Engineering | ETL',
-        duration: '3 Months',
-        teamSize: 'Individual Project',
-        status: 'Production Ready',
-        category: 'Cloud & Data Engineering',
-        image: 'images/portfolio/snow.png?raw=true',
-        techStack: ['AWS', 'Snowflake', 'Python', 'Lambda', 'S3', 'CloudWatch', 'Data Engineering'],
-        github: 'https://github.com/aditya-pa/AWS-Snowflake-Data-Pipeline'
-    },
-    'aws-order-pipeline': {
-        title: 'AWS Order Analytics Pipeline',
-        subtitle: 'Real-time Analytics | Microservices | Cloud Architecture',
-        duration: '4 Months',
-        teamSize: 'Individual Project',
-        status: 'Production Ready',
-        category: 'Cloud & Analytics',
-        image: 'images/portfolio/order.png?raw=true',
-        techStack: ['AWS Lambda', 'DynamoDB', 'API Gateway', 'Kinesis', 'CloudWatch', 'Python'],
-        github: 'https://github.com/aditya-pa/AWS-Order-Analytics-Pipeline'
-    }
-};
-
-// Open project detail modal
 function openProjectModal(projectId) {
-    // Only show modal for projects other than 'film-analytics'
-    if (projectId === 'film-analytics') {
-        // Create or show a floating modal with iframe
-        let modal = document.getElementById('filmAnalyticsModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'filmAnalyticsModal';
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100vw';
-            modal.style.height = '100vh';
-            modal.style.background = 'rgba(0,0,0,0.85)';
-            modal.style.zIndex = '9999';
-            modal.style.display = 'flex';
-            modal.style.alignItems = 'center';
-            modal.style.justifyContent = 'center';
-            modal.innerHTML = `
-                <div style="position:relative;width:90vw;height:90vh;max-width:1200px;max-height:800px;background:#222;border-radius:18px;box-shadow:0 8px 32px rgba(0,0,0,0.4);overflow:hidden;">
-                    <button id="closeFilmAnalyticsModal" style="position:absolute;top:18px;right:18px;z-index:10;background:#fff;color:#222;border:none;border-radius:50%;width:40px;height:40px;font-size:1.5rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);">&times;</button>
-                    <iframe src="film-analytics-detail.html" style="width:100%;height:100%;border:none;border-radius:18px;background:#fff;"></iframe>
-                </div>
-            `;
-            document.body.appendChild(modal);
-            document.body.style.overflow = 'hidden';
-            document.getElementById('closeFilmAnalyticsModal').onclick = function() {
-                modal.remove();
-                document.body.style.overflow = '';
-            };
-        } else {
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+    console.log('Opening modal for project:', projectId);
+    
+    const modal = document.getElementById('projectModal');
+    const modalBody = document.getElementById('modalBody');
+    
+    if (!modal) {
+        console.error('Modal element not found!');
+        alert('Modal element not found! Please check the HTML.');
         return;
     }
-    // ...existing code for other projects...
+    
+    if (!modalBody) {
+        console.error('Modal body element not found!');
+        alert('Modal body element not found! Please check the HTML.');
+        return;
+    }
+    
+    // Map project IDs to their detail page URLs
+    const projectUrls = {
+        'film-analytics': 'projects/film-analytics-detail.html',
+        'walmart-sales': 'projects/walmart-sales-detail.html',
+        'banking-classifier': 'projects/banking-complaint-detail.html',
+        'sql-insights': 'projects/sql-insights-detail.html',
+        'aws-snowflake': 'projects/aws-snowflake-detail.html',
+        'aws-order-pipeline': 'projects/aws-order-detail.html'
+    };
+    
+    const projectUrl = projectUrls[projectId];
+    if (!projectUrl) {
+        console.error('Project URL not found for:', projectId);
+        alert('Project not found: ' + projectId + '. Available projects: ' + Object.keys(projectUrls).join(', '));
+        return;
+    }
+    
+    console.log('Loading project URL:', projectUrl);
+    
+    // Show modal immediately
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Create simple iframe immediately
+    modalBody.innerHTML = '<iframe src="' + projectUrl + '" style="width: 100%; height: 100%; border: none; border-radius: 0;" onload="console.log(\'Iframe loaded for ' + projectId + '\')" onerror="console.error(\'Iframe error for ' + projectId + '\')"></iframe>';
+    
+    console.log('Modal should now be visible for:', projectId);
 }
 
-// Close project detail modal
 function closeProjectModal() {
     const modal = document.getElementById('projectModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Clear modal content after closing
+        setTimeout(() => {
+            const modalBody = document.getElementById('modalBody');
+            if (modalBody) {
+                modalBody.innerHTML = '';
+            }
+        }, 300);
+    }
 }
 
-// Close modal when clicking escape key
+// Close modal when clicking outside or pressing Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeProjectModal();
     }
 });
 
-// ===== End Project Detail Modal System =====
+// Prevent modal content from closing when clicked
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('projectModal');
+    if (modal) {
+        const modalContent = modal.querySelector('.modal-content');
+        const modalBackdrop = modal.querySelector('.modal-backdrop');
+        
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', closeProjectModal);
+        }
+        
+        if (modalContent) {
+            modalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+    }
+});

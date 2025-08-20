@@ -2,577 +2,598 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Business Insights Dashboard - Aditya Pandey</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/Skins/color-1.css" class="alternate-style" title="color-1">
-    <link rel="stylesheet" href="CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-3.css" class="alternate-style" title="color-3" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-6.css" class="alternate-style" title="color-6" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-7.css" class="alternate-style" title="color-7" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-8.css" class="alternate-style" title="color-8" disabled>
+    <meta name="description" content="Advanced SQL-driven business intelligence platform delivering comprehensive insights through sophisticated data analysis and visualization">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>📊 SQL Business Insights Dashboard | Advanced Analytics Platform</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navigation.css">
+    <link rel="stylesheet" href="../CSS/style-switcher.css">
+    <link rel="stylesheet" href="../CSS/project-detail.css">
+    <!-- Skin Files -->
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1">
+    <link rel="stylesheet" href="../CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-3.css" class="alternate-style" title="color-3" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-6.css" class="alternate-style" title="color-6" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-7.css" class="alternate-style" title="color-7" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-8.css" class="alternate-style" title="color-8" disabled>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="CSS/navigation.css">
-    <link rel="stylesheet" href="CSS/style-switcher.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Project Detail Page Styles -->
-    <link rel="stylesheet" href="CSS/project-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        .project-detail-page {
+        /* Immediate iframe mode hiding */
+        body.iframe-mode {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+
+        /* Project Detail Page Styles */
+        .project-detail-container {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow-x: hidden;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', 'Poppins', sans-serif;
+            transition: all 0.3s ease;
         }
-        
-        .project-detail-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-        }
-        
-        .project-header-section {
-            padding: 100px 0 50px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .project-hero {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
+
+        .project-detail-header {
+            background: var(--bg-secondary);
             border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .project-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #fff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .project-hero .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow-medium);
+            padding: 2.5rem;
             margin-bottom: 2rem;
-            font-weight: 500;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
         }
-        
-        .project-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .meta-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .meta-item i {
-            font-size: 2rem;
-            color: var(--skin-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .meta-item h4 {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .meta-item p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .project-image {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            margin: 2rem 0;
-        }
-        
-        .detail-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .detail-section h2 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .detail-section h3 {
-            color: var(--skin-color);
-            font-size: 1.8rem;
-            margin: 2rem 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .detail-section p, .detail-section li {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .detail-section li {
-            position: relative;
-            padding-left: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .detail-section li::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: var(--skin-color);
-            font-weight: bold;
-        }
-        
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2rem 0;
+            gap: 0.7rem;
+            justify-content: center;
+            margin: 1.5rem 0;
         }
-        
         .tech-item {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
+            background: var(--primary-gradient);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 18px;
             font-weight: 600;
             font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s ease;
         }
-        
+
         .tech-item:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
-        
-        .action-buttons {
+
+        .project-stats {
             display: flex;
-            gap: 1.5rem;
-            margin: 3rem 0;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
             flex-wrap: wrap;
         }
-        
-        .btn-action {
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+        .project-detail-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .project-detail-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            border: none;
-            cursor: pointer;
+            gap: 0.5rem;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--skin-color), #ff6b6b);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .btn-demo {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-        }
-        
-        .btn-action:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .back-to-home {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 1rem 1.5rem;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .back-to-home:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
-        }
-        
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .result-card {
-            background: rgba(255, 255, 255, 0.1);
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .result-number {
-            font-size: 3rem;
+
+        .insight-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .insight-section h2, .insight-section h3 {
+            font-size: 2rem;
+            color: var(--skin-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .insight-section h3 {
+            font-size: 1.3rem;
+        }
+
+        .insight-section ul {
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+        }
+
+        .insight-section li {
+            color: var(--text-primary);
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+            line-height: 1.6;
+        }
+
+        .insight-section p {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .process-flow, .flow-steps, .dashboard-grid, .features-grid, .results-grid, .graph-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: stretch;
+            justify-items: stretch;
+        }
+
+        .flow-step, .dashboard-card, .feature-card, .result-card, .graph-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .flow-step:hover, .dashboard-card:hover, .feature-card:hover, .result-card:hover, .graph-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .flow-step .step-number {
+            background: var(--skin-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: 600;
+        }
+
+        .dashboard-card .dashboard-preview, .graph-card .chart-preview {
+            width: 100%;
+            min-height: 100px;
+            border-radius: 12px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-card .dashboard-preview:hover, .graph-card .chart-preview:hover {
+            border-color: var(--skin-color);
+            background: var(--bg-primary);
+        }
+
+        .result-card .result-number {
+            font-size: 2rem;
             font-weight: 700;
             color: var(--skin-color);
             margin-bottom: 0.5rem;
         }
-        
-        .result-label {
-            color: white;
+
+        .result-card .result-label {
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
-        
-        .result-description {
-            color: rgba(255, 255, 255, 0.8);
+
+        .result-card .result-description {
             font-size: 0.9rem;
+            color: var(--text-secondary);
         }
-        
-        .code-block {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
+
+        .graph-card img {
+            width: 100%;
+            min-height: 200px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            background: var(--bg-tertiary);
+        }
+
+        .sql-code-block {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
             padding: 1.5rem;
             margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            color: #00ff88;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .sql-code-block code {
+            white-space: pre-wrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 4rem 0 2rem 0;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            border: 2px solid;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 180px;
+            text-align: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--skin-color), #29b5e8);
+            color: white;
+            border-color: transparent;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #29b5e8, var(--skin-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(41, 181, 232, 0.3);
+        }
+
+        .btn-demo {
+            background: linear-gradient(135deg, var(--skin-color), #f7931e);
+            color: white;
+            border-color: transparent;
+        }
+
+        .btn-demo:hover {
+            background: linear-gradient(135deg, #f7931e, var(--skin-color));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(247, 147, 30, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
         
+        .footer-stats div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-content div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .footer-content p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            opacity: 0.85;
+        }
+
+        .dark .flow-step, .dark .dashboard-card, .dark .feature-card, .dark .result-card, .dark .graph-card {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .project-hero {
-                padding: 2rem;
+            .project-detail-header {
+                padding: 1.5rem;
             }
-            
-            .project-hero h1 {
-                font-size: 2.5rem;
+
+            .project-detail-title {
+                font-size: 2rem;
             }
-            
-            .detail-section {
-                padding: 2rem;
+
+            .project-detail-subtitle {
+                font-size: 1.1rem;
             }
-            
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            .insight-section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .process-flow, .flow-steps, .dashboard-grid, .features-grid, .results-grid, .graph-grid {
+                grid-template-columns: 1fr;
+            }
+
             .action-buttons {
                 flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                margin: 3rem 0 2rem 0;
             }
-            
-            .back-to-home {
-                position: relative;
-                top: auto;
-                left: auto;
-                margin: 2rem 0;
+
+            .btn-action {
+                width: 100%;
+                max-width: 300px;
+                padding: 14px 28px;
+            }
+
+            .insight-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .insight-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .insight-section p, .insight-section li {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .sql-code-block {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
-<body class="project-detail-page">
-    <a href="index.html" class="back-to-home">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
-    </a>
-    
-    <div class="project-header-section">
+<body>
+    <script>
+        // Immediate iframe detection
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+            setTimeout(() => {
+                document.body.style.setProperty('visibility', 'visible', 'important');
+                document.body.style.setProperty('opacity', '1', 'important');
+            }, 100);
+        }
+
+        // Theme synchronization
+        function syncThemeWithMainSite() {
+            const savedTheme = localStorage.getItem('theme') || localStorage.getItem('dark-mode');
+            const isDark = savedTheme === 'dark' || savedTheme === 'true' ||
+                          document.documentElement.classList.contains('dark') ||
+                          document.body.classList.contains('dark');
+
+            document.body.classList.toggle('dark', isDark);
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+
+        syncThemeWithMainSite();
+        window.addEventListener('storage', syncThemeWithMainSite);
+        document.addEventListener('DOMContentLoaded', syncThemeWithMainSite);
+    </script>
+
+    <div class="project-detail-container">
         <div class="container">
-            <div class="project-hero">
-                <h1>SQL Business Insights Dashboard</h1>
-                <p class="subtitle">Data Analytics | Business Intelligence | SQL</p>
-                
-                <div class="project-meta-grid">
-                    <div class="meta-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <h4>Duration</h4>
-                        <p>1.5 Months</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-users"></i>
-                        <h4>Team Size</h4>
-                        <p>Individual Project</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Status</h4>
-                        <p>Completed</p>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-code"></i>
-                        <h4>Category</h4>
-                        <p>Data Analytics</p>
-                    </div>
-                </div>
-                
+            <!-- Project Header -->
+            <div class="project-detail-header">
+                <h1 class="project-detail-title">SQL Business Insights Dashboard</h1>
+                <p class="project-detail-subtitle">SQL-based platform for data analysis and visualization</p>
                 <div class="tech-stack">
+                    <span class="tech-item">SSIS</span>
                     <span class="tech-item">SQL</span>
+                    <span class="tech-item">Excel</span>
+                    <span class="tech-item">Powerpoint</span>
+                    <span class="tech-item">Analytics</span>
                     <span class="tech-item">Business Intelligence</span>
-                    <span class="tech-item">Data Analysis</span>
-                    <span class="tech-item">Database Design</span>
-                    <span class="tech-item">Performance Optimization</span>
-                    <span class="tech-item">KPIs</span>
+                    <span class="tech-item">Power BI</span>
                 </div>
-                
-                <img src="images/portfolio/sql-analytics.jpg?raw=true" alt="SQL Business Insights Dashboard" class="project-image">
-                
-                <div class="action-buttons">
-                    <a href="https://github.com/aditya-pa/SQL-for-business-insights" target="_blank" class="btn-action btn-primary">
-                        <i class="fab fa-github"></i> View Source Code
-                    </a>
-                    <a href="index.html#portfolio" class="btn-action btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back to Portfolio
-                    </a>
+
+            </div>
+
+            <!-- Main Content -->
+            <div class="">
+                <div class="insight-section">
+                    <h2><i class="fas fa-database" aria-hidden="true"></i> Project Overview</h2>
+                    <p>This project uses SQL to analyze restaurant customer data, answering key business questions and uncovering insights on ordering behavior and promo code usage. The findings are shared through SQL queries, a Word document, and a PowerPoint presentation for actionable business insights.</p>
+                    <h3><i class="fas fa-bullseye" aria-hidden="true"></i> Key Objectives</h3>
+                    <ul>
+                        <li><b>Advanced SQL Analytics:</b> Implement sophisticated SQL queries utilizing window functions, CTEs, and complex joins for deep data analysis.</li>
+                        <li><b>Business Intelligence:</b> Transform raw data into actionable business insights.</li>
+                        <li><b>Performance Optimization:</b> Design efficient query structures with proper indexing and optimization techniques.</li>
+                    </ul>
                 </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-sitemap" aria-hidden="true"></i> Data Analysis Architecture</h2>
+                    <p>The analytical framework leverages advanced SQL techniques to process and analyze multi-dimensional business data:</p>
+                    <div class="process-flow">
+                        <div class="flow-steps">
+                            <div class="flow-step">
+                                <div class="step-number">2</div>
+                                <h4>Data Validation</h4>
+                                <p>Implement data quality checks and constraint validation</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">3</div>
+                                <h4></h4>Queries</h4>
+                                <p>Execute advanced SQL analytics with window functions and CTEs</p>
+                            </div>
+                            <div class="flow-step">
+                                <div class="step-number">6</div>
+                                <h4>Dashboard Creation</h4>
+                                <p>Visualize insights through comprehensive analytical dashboards</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-code" aria-hidden="true"></i> Advanced SQL Techniques</h2>
+                    <div class="features-grid">
+                        <div class="feature-card" tabindex="0">
+                            <h4><i class="fas fa-window-maximize" aria-hidden="true"></i> Window Functions</h4>
+                            <p><strong>Advanced Analytics:</strong> Implemented sophisticated window functions for running totals, moving averages, and ranking operations across partitioned datasets.</p>
+                        </div>
+                        <div class="feature-card" tabindex="0">
+                            <h4><i class="fas fa-layer-group" aria-hidden="true"></i> Common Table Expressions</h4>
+                            <p><strong>Recursive CTEs:</strong> Utilized CTEs for complex hierarchical queries, recursive operations, and modular query construction for enhanced readability.</p>
+                        </div>
+                        <div class="feature-card" tabindex="0">
+                            <h4><i class="fas fa-link" aria-hidden="true"></i> Complex Joins</h4>
+                            <p><strong>Multi-table Analysis:</strong> Designed sophisticated join operations including self-joins, cross-joins, and multiple table correlations for comprehensive data integration.</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="insight-section">
+                    <h2><i class="fas fa-terminal" aria-hidden="true"></i> Sample SQL Implementation</h2>
+
+                    <h3><i class="fas fa-chart-bar" aria-hidden="true"></i> List all the customer with no orders in last seven days but where aquired one month ago with their order on promo</h3>
+                    <div class="sql-code-block">
+                        <code>DECLARE @date DATE = getdate() ;
+
+                                    with cte as(
+                                    select 
+                                        Customer_code, 
+                                        min(Placed_at) first_order_date, 
+                                        max(Placed_at) last_order_date 
+                                    from orders 
+                                    group by Customer_code
+                                    having 
+                                        min(Placed_at) < dateadd(month,-1,@date) AND
+                                        max(Placed_at) < dateadd(day,-7,@date))
+                                    select * from cte c join orders o on o.Customer_code = c.Customer_code and c.first_order_date=o.Placed_at
+                                    where o.Promo_code_Name is not null
+                        </code>
+                    </div>
+                    <h3><i class="fas fa-trending-up" aria-hidden="true"></i>What percentage of cumtomer where organically required in jan 2025.(Placed their first order without any promo code)?</h3>
+                    <div class="sql-code-block">
+                        <code>with janmonthuser as (
+                                select customer_code, min(Placed_at) first_order_date 
+                                from orders 
+                                group by Customer_code having month(min(Placed_at)) = 1 and year(min(Placed_at)) = 2025
+                                )
+                                , cte as(
+                                select case when Promo_code_Name is null then 1 else 0 end as promo_orders from orders o join janmonthuser j on o.customer_code = j.customer_code
+                                and first_order_date = Placed_at
+                                )
+                                select sum(promo_orders)*100.0/count(*) from cte
+                        </code>
+                    </div>
+                </div>
+                <div class="insight-section">
+                    <h2><i class="fas fa-images" aria-hidden="true"></i> Project Demonstration</h2>
+                   
+                    <div class="graph-grid">
+                        <div class="graph-card">
+                            <h4>Business Insights Dashboard</h4>
+                             <p class="graph-description">Dashboard Screenshot.</p>
+                             <img src="../images/projects/sql-insights/dashboard.png" alt="SQL Business Insights Dashboard" loading="lazy">
+                    </div>
+                        </div>
+                            
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer-content">
+                    <div><i class="fas fa-database" aria-hidden="true"></i> 50+ Advanced Queries</div>
+                    <div><i class="fas fa-chart-bar" aria-hidden="true"></i> 15 KPI Metrics</div>
+                    <div><i class="fas fa-tachometer-alt" aria-hidden="true"></i> 95% Query Efficiency</div>
+                    <div><i class="fas fa-lightbulb" aria-hidden="true"></i> Strategic Insights</div>
+                </div>
+                <p>© 2025 SQL Business Insights Dashboard • Advanced Analytics & Business Intelligence</p>
             </div>
         </div>
     </div>
-    
-    <div class="container">
-        <div class="detail-section">
-            <h2><i class="fas fa-building"></i> Business Context</h2>
-            <p>In today's data-driven business environment, organizations need actionable insights from their operational data to make informed strategic decisions. This project demonstrates how advanced SQL analytics can transform raw business data into meaningful insights that drive decision-making processes.</p>
-            <p>The project showcases comprehensive data analysis techniques used in enterprise environments to analyze customer behavior, sales performance, operational efficiency, and market trends through sophisticated SQL queries and business intelligence methodologies.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-bullseye"></i> Project Objectives</h2>
-            <ul>
-                <li>Develop comprehensive SQL analytics framework for business intelligence</li>
-                <li>Create actionable insights from complex business datasets</li>
-                <li>Implement performance optimization techniques for large-scale data processing</li>
-                <li>Design reusable analytical queries for ongoing business monitoring</li>
-                <li>Establish data-driven KPIs and metrics tracking systems</li>
-                <li>Demonstrate advanced SQL techniques for enterprise-level analytics</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-database"></i> Technical Implementation</h2>
-            
-            <h3><i class="fas fa-chart-pie"></i> Analytics Categories</h3>
-            <ul>
-                <li><strong>Customer Analytics:</strong> Customer segmentation, lifetime value, churn analysis</li>
-                <li><strong>Sales Performance:</strong> Revenue trends, product performance, seasonal analysis</li>
-                <li><strong>Operational Metrics:</strong> Efficiency tracking, resource utilization, cost analysis</li>
-                <li><strong>Market Intelligence:</strong> Competitive analysis, market share, growth opportunities</li>
-            </ul>
-            
-            <h3><i class="fas fa-code"></i> Advanced SQL Techniques</h3>
-            <ul>
-                <li>Complex window functions for trend analysis and ranking</li>
-                <li>Common Table Expressions (CTEs) for modular query design</li>
-                <li>Advanced JOINs and subqueries for multi-table analytics</li>
-                <li>Date and time functions for temporal analysis</li>
-                <li>Aggregate functions with CASE statements for conditional metrics</li>
-                <li>Performance optimization with indexing strategies</li>
-            </ul>
-            
-            <h3><i class="fas fa-tools"></i> Key Query Examples</h3>
-            <div class="code-block">
--- Customer Lifetime Value Analysis
-WITH customer_metrics AS (
-    SELECT 
-        customer_id,
-        COUNT(order_id) as total_orders,
-        SUM(order_value) as total_revenue,
-        AVG(order_value) as avg_order_value,
-        DATEDIFF(MAX(order_date), MIN(order_date)) as customer_lifespan
-    FROM orders 
-    GROUP BY customer_id
-)
-SELECT 
-    customer_id,
-    total_revenue / NULLIF(customer_lifespan, 0) * 365 as annual_clv
-FROM customer_metrics
-WHERE customer_lifespan > 0;
-            </div>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-chart-bar"></i> Business Insights Generated</h2>
-            
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-number">25%</div>
-                    <div class="result-label">Revenue Growth</div>
-                    <div class="result-description">Identified through trend analysis</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">78%</div>
-                    <div class="result-label">Customer Retention</div>
-                    <div class="result-description">Improved through segmentation</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">40+</div>
-                    <div class="result-label">KPIs Tracked</div>
-                    <div class="result-description">Comprehensive metrics dashboard</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number">90%</div>
-                    <div class="result-label">Query Efficiency</div>
-                    <div class="result-description">Performance optimization achieved</div>
-                </div>
-            </div>
-            
-            <h3><i class="fas fa-lightbulb"></i> Key Business Findings</h3>
-            <ul>
-                <li>Identified top 20% of customers contributing to 80% of revenue</li>
-                <li>Discovered seasonal patterns affecting sales performance by 35%</li>
-                <li>Optimized inventory management reducing costs by 22%</li>
-                <li>Improved customer segmentation increasing marketing ROI by 45%</li>
-                <li>Enhanced operational efficiency through data-driven decision making</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-trophy"></i> Analytical Achievements</h2>
-            
-            <h3><i class="fas fa-users"></i> Customer Analytics</h3>
-            <ul>
-                <li>Developed RFM (Recency, Frequency, Monetary) analysis model</li>
-                <li>Created customer lifetime value prediction algorithms</li>
-                <li>Implemented churn prediction and prevention strategies</li>
-                <li>Established customer satisfaction correlation metrics</li>
-            </ul>
-            
-            <h3><i class="fas fa-chart-line"></i> Sales Performance</h3>
-            <ul>
-                <li>Built comprehensive sales forecasting models</li>
-                <li>Analyzed product performance across multiple dimensions</li>
-                <li>Created territory and salesperson performance metrics</li>
-                <li>Developed pricing optimization recommendations</li>
-            </ul>
-            
-            <h3><i class="fas fa-cogs"></i> Operational Excellence</h3>
-            <ul>
-                <li>Optimized supply chain efficiency through data analysis</li>
-                <li>Implemented cost center analysis and budget tracking</li>
-                <li>Created resource utilization and capacity planning models</li>
-                <li>Established performance benchmarking frameworks</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-rocket"></i> Business Impact</h2>
-            <ul>
-                <li>Enabled data-driven decision making across all business units</li>
-                <li>Reduced reporting time from days to hours through automation</li>
-                <li>Improved forecasting accuracy by 60% using historical trend analysis</li>
-                <li>Enhanced customer targeting resulting in 35% increase in conversion rates</li>
-                <li>Optimized operational processes reducing costs by 18%</li>
-                <li>Created scalable analytics framework for future business growth</li>
-            </ul>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-tools"></i> Technical Challenges & Solutions</h2>
-            
-            <h3><i class="fas fa-tachometer-alt"></i> Performance Optimization</h3>
-            <p>Addressed large dataset query performance through strategic indexing, query optimization, and efficient data modeling techniques.</p>
-            
-            <h3><i class="fas fa-puzzle-piece"></i> Complex Business Logic</h3>
-            <p>Implemented modular query design using CTEs and stored procedures to handle intricate business rules and calculations.</p>
-            
-            <h3><i class="fas fa-sync-alt"></i> Data Consistency</h3>
-            <p>Ensured data integrity and consistency across multiple data sources through comprehensive validation and cleansing procedures.</p>
-        </div>
-        
-        <div class="detail-section">
-            <h2><i class="fas fa-graduation-cap"></i> Skills Demonstrated</h2>
-            <div class="tech-stack">
-                <span class="tech-item">Advanced SQL</span>
-                <span class="tech-item">Business Intelligence</span>
-                <span class="tech-item">Data Analytics</span>
-                <span class="tech-item">Performance Tuning</span>
-                <span class="tech-item">Database Design</span>
-                <span class="tech-item">Statistical Analysis</span>
-                <span class="tech-item">KPI Development</span>
-                <span class="tech-item">Business Strategy</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Style Switcher -->
-    <div class="style-switcher">
-        <div class="style-switcher-toggler s-icon">
-            <i class="fas fa-cog fa-spin"></i>
-        </div>
-        <div class="style-switcher-wrap">
-            <div class="switcher-head">
-                <h4>Style Switcher</h4>
-            </div>
-            <div class="colors">
-                <h5>Colors</h5>
-                <span class="color-1" onclick="setActiveStyle('color-1')"></span>
-                <span class="color-2" onclick="setActiveStyle('color-2')"></span>
-                <span class="color-3" onclick="setActiveStyle('color-3')"></span>
-                <span class="color-4" onclick="setActiveStyle('color-4')"></span>
-                <span class="color-5" onclick="setActiveStyle('color-5')"></span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.16/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="JS/script.js"></script>
-    <script src="JS/style-switcher.js"></script>
-    <script src="JS/project-detail-shared.js"></script>
+
+    <!-- Scripts -->
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
 </body>
 </html>

@@ -3,267 +3,1296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cross-Platform Film Analytics – Insights & Visualizations</title>
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/Skins/color-1.css" class="alternate-style" title="color-1">
-    <link rel="stylesheet" href="CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-3.css" class="alternate-style" title="color-3" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-6.css" class="alternate-style" title="color-6" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-7.css" class="alternate-style" title="color-7" disabled>
-    <link rel="stylesheet" href="CSS/Skins/color-8.css" class="alternate-style" title="color-8" disabled>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Cross-Platform Film Analytics – Comprehensive Analysis & Insights</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/navigation.css">
+    <link rel="stylesheet" href="../CSS/style-switcher.css">
+    <link rel="stylesheet" href="../CSS/project-detail.css">
+    
+    <!-- Skin Files -->
+    <link rel="stylesheet" href="../CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-3.css" class="alternate-style" title="color-3">
+    <link rel="stylesheet" href="../CSS/Skins/color-6.css" class="alternate-style" title="color-6" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-7.css" class="alternate-style" title="color-7" disabled>
+    <link rel="stylesheet" href="../CSS/Skins/color-8.css" class="alternate-style" title="color-8" disabled>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Project Detail Specific Styles -->
     <style>
+        /* Custom properties for colors */
         :root {
-            --bg-main: #181a20;
-            --bg-card: #23262f;
-            --bg-card-light: #fff;
-            --text-main: #fff;
-            --text-secondary: #b5b5b5;
-            --accent: var(--skin-color, #ffb86b);
-            --accent-alt: var(--skin-color-alt, #ffb86b);
-            --shadow: 0 8px 32px rgba(0,0,0,0.18);
+            --color-mongodb: #27ae60;
+            --color-postgres: #3498db;
+            --color-process: #f39c12;
+            --color-final: #9b59b6;
         }
-        body {
+
+        /* Immediate iframe mode hiding */
+        body.iframe-mode {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }
+        
+        /* Project Detail Page Styles */
+        .project-detail-container {
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             font-family: 'Inter', 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-alt) 100%);
-            color: var(--text-main);
-            transition: background 0.4s, color 0.4s;
+            transition: all 0.3s ease;
         }
-        body.light {
-            --bg-main: #f7f7fa;
-            --bg-card: #fff;
-            --text-main: #23262f;
-            --text-secondary: #555;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        .header-card {
-            background: var(--bg-card);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
+        
+        .project-detail-header {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
             padding: 2.5rem 2rem;
-            margin-bottom: 2.5rem;
-            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
         }
-        .header-card h1 {
+        
+        .project-detail-title {
             font-size: 2.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #fff, var(--accent));
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
         }
-        .header-card .subtitle {
+        
+        .project-detail-subtitle {
             font-size: 1.3rem;
             color: var(--text-secondary);
+            text-align: center;
             margin-bottom: 1.5rem;
         }
+        
+        .project-meta-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+            flex-wrap: wrap;
+        }
+        
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 0.7rem;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin: 1.5rem 0;
         }
+        
         .tech-item {
-            background: linear-gradient(135deg, var(--accent), var(--accent-alt));
-            color: #fff;
+            background: var(--primary-gradient);
+            color: white;
             padding: 0.5rem 1.2rem;
             border-radius: 18px;
             font-weight: 600;
             font-size: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s ease;
         }
+        
+        .tech-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .project-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+        
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.7rem;
-            background: var(--bg-card);
-            color: var(--accent);
+            background: var(--bg-secondary);
+            color: var(--skin-color);
             border-radius: 50px;
             padding: 0.7rem 1.5rem;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-light);
             margin-bottom: 2rem;
-            transition: background 0.3s, color 0.3s;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
+        
         .back-btn:hover {
-            background: var(--accent);
-            color: #fff;
+            background: var(--skin-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
         }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
         .insight-section {
-            background: var(--bg-card);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
             padding: 2rem 1.5rem;
             margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
         }
+        
         .insight-section h2 {
             font-size: 2rem;
-            color: var(--accent);
+            color: var(--skin-color);
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        
         .insight-section h3 {
             font-size: 1.3rem;
-            color: var(--accent-alt);
+            color: var(--skin-color);
             margin-top: 1.5rem;
             margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        
         .insight-section ul {
             margin: 0 0 1rem 1.5rem;
             padding: 0;
         }
+        
         .insight-section li {
-            color: var(--text-main);
+            color: var(--text-primary);
             margin-bottom: 0.7rem;
             font-size: 1.08rem;
+            line-height: 1.6;
         }
+        
+        .insight-section p {
+            color: var(--text-primary);
+            font-size: 1.08rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
         .graph-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
+        
         .graph-card {
-            background: var(--bg-card);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            tabindex: 0;
         }
-        .graph-card h4 {
-            color: var(--accent);
-            font-size: 1.1rem;
-            margin-bottom: 0.7rem;
-            font-weight: 600;
+        
+        .graph-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-large);
         }
-        .graph-card iframe, .graph-card img {
+        
+        .graph-card:focus {
+            outline: 2px solid var(--skin-color);
+        }
+        
+        .graph-card iframe {
+            position: relative;
+            z-index: 1;
             width: 100%;
             min-height: 340px;
             border: none;
             border-radius: 12px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-            background: #fff;
+            box-shadow: var(--shadow-light);
+            background: var(--bg-tertiary);
+            pointer-events: auto;
         }
-        .graph-card img {
-            object-fit: cover;
+        
+        .graph-card h4 {
+            color: var(--skin-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
         }
+        
+        .chart-preview {
+            width: 100%;
+            min-height: 340px;
+            border-radius: 12px;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .chart-preview:hover {
+            border-color: var(--accent-color);
+            background: var(--bg-primary);
+        }
+        
+        .preview-placeholder {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .preview-placeholder p {
+            margin: 0.5rem 0;
+            line-height: 1.4;
+        }
+        
+        .click-instruction {
+            font-size: 0.9rem;
+            color: var(--accent-color) !important;
+            font-weight: 600;
+            margin-top: 1rem !important;
+        }
+        
+        .graph-card:hover .click-instruction {
+            color: var(--skin-color) !important;
+        }
+        
+        .dark .graph-card iframe {
+            background: #1a1a1a !important;
+            color-scheme: dark;
+        }
+        
+        .dark .insight-section,
+        .dark .graph-card,
+        .dark .data-pipeline-container,
+        .dark .pipeline-section,
+        .dark .modal-content,
+        .dark .footer {
+            background: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+        
+        .dashboard-card {
+            grid-column: 1/-1;
+            max-width: 100%;
+        }
+        
+        .dashboard-card iframe {
+            min-height: 650px !important;
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .desktop-only {
+                display: none !important;
+            }
+            
+            .project-detail-title { 
+                font-size: 1.8rem !important; 
+                line-height: 1.2;
+            }
+            
+            .project-detail-subtitle {
+                font-size: 1.1rem !important;
+            }
+            
+            .container { 
+                padding: 1rem 0.5rem !important; 
+            }
+            
+            .insight-section { 
+                padding: 1.2rem 1rem !important; 
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .graph-grid { 
+                gap: 1rem !important; 
+                grid-template-columns: 1fr !important; 
+            }
+            
+            .graph-card {
+                padding: 1rem !important;
+            }
+            
+            .graph-card iframe {
+                min-height: 280px !important;
+            }
+            
+            .dashboard-card iframe {
+                min-height: 500px !important;
+            }
+            
+            .project-meta-info { 
+                flex-direction: column !important; 
+                gap: 0.5rem !important; 
+                text-align: center;
+            }
+            
+            .project-stats { 
+                flex-direction: column !important; 
+                gap: 0.5rem !important; 
+                text-align: center !important; 
+            }
+            
+            .footer-stats { 
+                flex-direction: column !important; 
+                gap: 0.5rem !important; 
+            }
+            
+            .tech-stack {
+                justify-content: center !important;
+            }
+            
+            .tech-item {
+                font-size: 0.9rem !important;
+                padding: 0.4rem 1rem !important;
+            }
+            
+            .insight-section h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            .insight-section h3 {
+                font-size: 1.2rem !important;
+            }
+            
+            .insight-section p, .insight-section li {
+                font-size: 1rem !important;
+                line-height: 1.5 !important;
+            }
+        }
+        
+        .graph-description {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .key-takeaway {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .key-takeaway h4 {
+            margin-bottom: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .key-takeaway p {
+            margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: white;
+        }
+        
         .footer {
             text-align: center;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-size: 1rem;
             margin: 2rem 0 0 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
         }
-        @media (max-width: 700px) {
-            .header-card h1 { font-size: 2rem; }
-            .container { padding: 1rem 0.3rem; }
-            .insight-section { padding: 1.2rem 0.7rem; }
-            .graph-grid { gap: 1rem; }
+        
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-stats div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Modal Styles */
+        .chart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 15px;
+            max-width: 95vw;
+            max-height: 95vh;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+        
+        .modal-header h3 {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: var(--skin-color);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 0;
+            height: calc(95vh - 100px);
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .chart-modal.active {
+            display: flex;
+        }
+        
+        /* Data Pipeline Styles */
+        .data-pipeline-container {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-large);
+            margin: 1rem 0;
+            border: 2px solid var(--border-color);
+        }
+        
+        .source-card, .db-card, .process-card, .final-process {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .source-card:hover, .db-card:hover, .process-card:hover, .final-process:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-large);
+        }
+        
+        .source-card .entity, .db-card .database, .process-card .rectangle, .final-process .rectangle {
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .source-card .entity {
+            background: var(--color-mongodb);
+        }
+        
+        .db-card .database.mongodb {
+            background: var(--color-mongodb);
+        }
+        
+        .db-card .database.postgres {
+            background: var(--color-postgres);
+        }
+        
+        .process-card .rectangle {
+            background: var(--color-process);
+        }
+        
+        .final-process .rectangle {
+            background: var(--color-final);
+        }
+        
+        .source-card code, .db-card code, .process-card code, .final-process code {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            display: block;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
-        <div class="header-card">
-            <h1>Cross-Platform Film Analytics</h1>
-            <div class="subtitle">Key Insights & Interactive Visualizations</div>
-            <div class="tech-stack">
-                <span class="tech-item">Python</span>
-                <span class="tech-item">Pandas</span>
-                <span class="tech-item">Plotly</span>
-                <span class="tech-item">Dash</span>
-                <span class="tech-item">Seaborn</span>
-                <span class="tech-item">MongoDB</span>
-                <span class="tech-item">Jupyter</span>
+    <script>
+        // Immediate iframe detection
+        if (window.parent !== window) {
+            document.body.classList.add('iframe-mode');
+        }
+        
+        // Theme synchronization
+        function syncThemeWithMainSite() {
+            const savedTheme = localStorage.getItem('theme') || localStorage.getItem('dark-mode');
+            const isDark = savedTheme === 'dark' || savedTheme === 'true' || 
+                          document.documentElement.classList.contains('dark') ||
+                          document.body.classList.contains('dark');
+            
+            document.body.classList.toggle('dark', isDark);
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+        
+        syncThemeWithMainSite();
+        window.addEventListener('storage', syncThemeWithMainSite);
+        document.addEventListener('DOMContentLoaded', syncThemeWithMainSite);
+    </script>
+    
+    <div class="project-detail-container">
+        <div class="container">
+            <div class="project-detail-header">
+                <h1 class="project-detail-title">Cross-Platform Film Analytics</h1>
+                <div class="project-detail-subtitle">Comprehensive Analysis of IMDB, Amazon Prime & Netflix</div>
+                <div class="project-meta-info">
+                    <div><i class="fas fa-graduation-cap" aria-hidden="true"></i> <strong>MSc Data Analytics</strong> • National College of Ireland</div>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Pandas</span>
+                    <span class="tech-item">NumPy</span>
+                    <span class="tech-item">Plotly</span>
+                    <span class="tech-item">Dash</span>
+                    <span class="tech-item">Seaborn</span>
+                    <span class="tech-item">Matplotlib</span>
+                    <span class="tech-item">MongoDB</span>
+                    <span class="tech-item">Jupyter</span>
+                    <span class="tech-item">WordCloud</span>
+                    <span class="tech-item">Statistical Analysis</span>
+                </div>
+                <div class="project-stats">
+                    <div><i class="fas fa-database" aria-hidden="true"></i> <strong>Datasets:</strong> IMDB Movies, Amazon Prime Titles, Netflix Catalog</div>
+                    <div><i class="fas fa-chart-bar" aria-hidden="true"></i> <strong>15+ Interactive Visualizations</strong></div>
+                    <div><i class="fas fa-code" aria-hidden="true"></i> <strong>1900+ Lines of Analysis Code</strong></div>
+                </div>
             </div>
-        </div>
-        <div class="insight-section">
-            <h2><i class="fas fa-lightbulb"></i> Key Insights</h2>
-            <ul>
-                <li><b>IMDB:</b> Action/Adventure films dominate revenue, but Drama/Biography score higher ratings. Ratings cluster between 6-8, showing audience consensus.</li>
-                <li><b>Amazon Prime:</b> Explosive growth post-2015, diverse directors, strong international presence (India, UK, Canada).</li>
-                <li><b>Netflix:</b> Genre diversity, top actors and directors more evenly distributed, strong global reach.</li>
-                <li><b>Combined:</b> Streaming platforms favor niche and international content, while IMDB remains traditional. Ratings and genre trends reflect platform strategies.</li>
-            </ul>
-            <h3><i class="fas fa-cogs"></i> Data Cleaning & Preparation</h3>
-            <ul>
-                <li>Missing values handled by filling or dropping.</li>
-                <li>Standardized columns for merging.</li>
-                <li>Extracted primary genres, calculated metrics (average ratings, counts).</li>
-            </ul>
-        </div>
-        <div class="graph-grid">
-            <div class="graph-card">
-                <h4>IMDB: Revenue vs. Rating by Genre</h4>
-                <iframe src="images/projects/Film-analytics/IMDB_revenue_vs_rating_by_genre.html"></iframe>
+            
+            <div class="insight-section">
+                <h2><i class="fas fa-lightbulb" aria-hidden="true"></i> Project Overview</h2>
+                <p>This comprehensive project analyzes film data from three major platforms: <strong>IMDB</strong>, <strong>Amazon Prime</strong>, and <strong>Netflix</strong>. Our goal is to uncover trends, correlations, and platform-specific characteristics that influence movie success across different distribution channels.</p>
+                
+                <h3><i class="fas fa-target" aria-hidden="true"></i> Research Objectives</h3>
+                <ul>
+                    <li>Identify which genres consistently perform well across platforms</li>
+                    <li>Analyze the impact of actors and directors on movie performance</li>
+                    <li>Examine how release trends correlate with revenue and audience ratings</li>
+                    <li>Compare platform strategies and content differentiation</li>
+                </ul>
             </div>
-            <div class="graph-card">
-                <h4>IMDB: Rating Distribution (KDE)</h4>
-                <iframe src="images/projects/Film-analytics/IMDB_rating_distribution_kde.html"></iframe>
+
+            <div class="insight-section">
+                <h2><i class="fas fa-cogs" aria-hidden="true"></i> Data Pipeline & Processing Architecture</h2>
+                <p>This project implements a comprehensive data pipeline that ingests, processes, and transforms film data from three major platforms. Our architecture ensures data consistency, quality, and standardization across heterogeneous data sources.</p>
+                
+                <h3><i class="fas fa-sitemap" aria-hidden="true"></i> Data Flow Architecture</h3>
+                <div class="pipeline-section desktop-only">
+                    <h4>Data Flow Architecture</h4>
+                    <div class="data-pipeline-container">
+                        <h5><i class="fas fa-database" aria-hidden="true"></i> Raw Data Sources</h5>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem;">
+                            <div class="source-card">
+                                <div class="entity">
+                                    <i class="fas fa-file-csv" aria-hidden="true"></i> ENTITY
+                                </div>
+                                <strong>IMDB Dataset</strong>
+                                <code>Imdb_dataset.csv</code>
+                            </div>
+                            <div class="source-card">
+                                <div class="entity">
+                                    <i class="fas fa-file-csv" aria-hidden="true"></i> ENTITY
+                                </div>
+                                <strong>Amazon Prime Dataset</strong>
+                                <code>amazon_prime_titles.csv</code>
+                            </div>
+                            <div class="source-card">
+                                <div class="entity">
+                                    <i class="fas fa-file-code" aria-hidden="true"></i> ENTITY
+                                </div>
+                                <strong>Netflix Dataset</strong>
+                                <code>netflix_output.json</code>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-around; margin: 2rem 0; flex-wrap: wrap; gap: 1rem;">
+                            <div style="text-align: center; min-width: 200px;">
+                                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem;">
+                                    <strong>Insert via</strong><br>
+                                    <code>load_data() + mongodb_insert()</code>
+                                </div>
+                                <i class="fas fa-arrow-down" style="font-size: 1.5rem; color: var(--skin-color); animation: pulse 2s infinite;" aria-hidden="true"></i>
+                            </div>
+                            <div style="text-align: center; min-width: 200px;">
+                                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem;">
+                                    <strong>Insert via</strong><br>
+                                    <code>load_data() + mongodb_insert()</code>
+                                </div>
+                                <i class="fas fa-arrow-down" style="font-size: 1.5rem; color: var(--skin-color); animation: pulse 2s infinite;" aria-hidden="true"></i>
+                            </div>
+                            <div style="text-align: center; min-width: 200px;">
+                                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem;">
+                                    <strong>Insert via</strong><br>
+                                    <code>psycopg2/sqlalchemy</code>
+                                </div>
+                                <i class="fas fa-arrow-down" style="font-size: 1.5rem; color: var(--skin-color); animation: pulse 2s infinite;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                        <h5><i class="fas fa-server" aria-hidden="true"></i> Database Storage Layer</h5>
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+                            <div class="db-card">
+                                <div class="database mongodb">
+                                    <i class="fas fa-leaf" aria-hidden="true"></i> DATABASE
+                                </div>
+                                <strong>MongoDB</strong>
+                                <code>IMDB_DataBase</code>
+                                <code>IMDB_Collection</code>
+                            </div>
+                            <div class="db-card">
+                                <div class="database mongodb">
+                                    <i class="fas fa-leaf" aria-hidden="true"></i> DATABASE
+                                </div>
+                                <strong>MongoDB</strong>
+                                <code>Amazon_DataBase</code>
+                                <code>Amazon_Collection</code>
+                            </div>
+                            <div class="db-card">
+                                <div class="database postgres">
+                                    <i class="fas fa-database" aria-hidden="true"></i> DATABASE
+                                </div>
+                                <strong>PostgreSQL</strong>
+                                <code>mydb</code>
+                                <code>Netflix_table</code>
+                                <div style="margin-top: 1rem; padding: 0.8rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px dashed var(--border-color);">
+                                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                        <i class="fas fa-arrow-right" style="font-size: 1rem; color: var(--skin-color);" aria-hidden="true"></i>
+                                        <small>Export Path</small>
+                                    </div>
+                                    <div style="background: var(--color-mongodb); color: white; padding: 0.5rem; border-radius: 5px; text-align: center;">
+                                        <small>MongoDB</small><br>
+                                        <code>netflix_shows</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="db-card">
+                                <div class="database mongodb">
+                                    <i class="fas fa-leaf" aria-hidden="true"></i> DATABASE
+                                </div>
+                                <strong>MongoDB</strong>
+                                <code>netflix_db</code>
+                                <code>netflix_shows</code>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 2rem 0;">
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                                <i class="fas fa-arrow-up" style="font-size: 1.5rem; color: #e74c3c;" aria-hidden="true"></i>
+                                <span style="background: var(--bg-secondary); padding: 0.5rem 1rem; border-radius: 10px; color: var(--text-primary); font-weight: bold;">Bidirectional Data Flow</span>
+                                <i class="fas fa-arrow-down" style="font-size: 1.5rem; color: var(--color-mongodb);" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        
+                        <h5><i class="fas fa-cogs" aria-hidden="true"></i> Data Processing Rectangles</h5>
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; align-items: center;">
+                            <div class="process-card">
+                                <div class="rectangle">
+                                    <i class="fas fa-square" aria-hidden="true"></i> RECTANGLE
+                                </div>
+                                <strong>Data Cleaning & Transformation</strong>
+                                <code>(IMDB)</code>
+                            </div>
+                            <div class="process-card">
+                                <div class="rectangle">
+                                    <i class="fas fa-square" aria-hidden="true"></i> RECTANGLE
+                                </div>
+                                <strong>Data Cleaning & Transformation</strong>
+                                <code>(Amazon)</code>
+                            </div>
+                            <div class="process-card">
+                                <div class="rectangle">
+                                    <i class="fas fa-square" aria-hidden="true"></i> RECTANGLE
+                                </div>
+                                <strong>Data Cleaning & Transformation</strong>
+                                <code>(Netflix)</code>
+                            </div>
+                        </div>
+                        
+                        <h5><i class="fas fa-compress-arrows-alt" aria-hidden="true"></i> Final Combined Processing</h5>
+                        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                            <div class="final-process">
+                                <div class="rectangle">
+                                    <i class="fas fa-search-plus" aria-hidden="true"></i> RECTANGLE
+                                </div>
+                                <strong>Data Retrieval from MongoDB</strong>
+                                <code>(All Platforms)</code>
+                            </div>
+                            <div class="final-process">
+                                <div class="rectangle">
+                                    <i class="fas fa-compress-arrows-alt" aria-hidden="true"></i> RECTANGLE
+                                </div>
+                                <strong>Standardization & Merge</strong>
+                                <code>Add Platform Labels, pd.concat</code>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="background: var(--bg-secondary); border: 3px solid var(--skin-color); padding: 2.5rem; border-radius: 25px; box-shadow: var(--shadow-large); max-width: 400px; margin: 0 auto;">
+                                <div style="background: var(--skin-color); color: white; padding: 1rem; border-radius: 15px; margin-bottom: 1.5rem; font-weight: bold;">
+                                    <i class="fas fa-chart-line" style="font-size: 3rem; display: block; margin-bottom: 0.5rem;" aria-hidden="true"></i>
+                                    FINAL RECTANGLE
+                                </div>
+                                <h4>Combined Analysis & Visualization</h4>
+                                <code>(Dash/Plotly)</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border: 1px solid var(--border-color);">
+                        <h5><i class="fas fa-info-circle" aria-hidden="true"></i> UML Component Legend</h5>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="background: var(--color-mongodb); color: white; padding: 0.5rem; border-radius: 5px; min-width: 80px; text-align: center; font-size: 0.8rem;">ENTITY</div>
+                                <span>Data Source Files</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="background: var(--color-mongodb); color: white; padding: 0.5rem; border-radius: 5px; min-width: 80px; text-align: center; font-size: 0.8rem;">DATABASE</div>
+                                <span>Storage Systems</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="background: var(--color-process); color: white; padding: 0.5rem; border-radius: 5px; min-width: 80px; text-align: center; font-size: 0.8rem;">RECTANGLE</div>
+                                <span>Processing Steps</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="background: var(--color-postgres); color: white; padding: 0.5rem; border-radius: 5px; min-width: 80px; text-align: center; font-size: 0.8rem;">POSTGRES</div>
+                                <span>Relational Database</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3><i class="fas fa-database" aria-hidden="true"></i> Data Sources & Storage</h3>
+                <ul>
+                    <li><b>IMDB Dataset:</b> CSV format with movie metadata (titles, ratings, revenue, genres, cast) processed through MongoDB collections for efficient querying and analysis</li>
+                    <li><b>Amazon Prime Titles:</b> CSV dataset containing platform-specific content with release dates, country information, and content categorization stored in dedicated MongoDB database</li>
+                    <li><b>Netflix Catalog:</b> JSON format data initially loaded into PostgreSQL for relational operations, then exported to MongoDB for consistent cross-platform analysis</li>
+                    <li><b>Database Architecture:</b> Hybrid approach using PostgreSQL for initial Netflix processing and MongoDB for unified analytics across all platforms</li>
+                </ul>
+                
+                <h3><i class="fas fa-exchange-alt" aria-hidden="true"></i> Data Processing Pipeline</h3>
+                <ul>
+                    <li><b>Stage 1 - Data Ingestion:</b> Platform-specific loaders handle different data formats (CSV, JSON) with automatic schema detection and validation</li>
+                    <li><b>Stage 2 - Cleaning & Transformation:</b> Standardized data cleaning processes including null value handling, date formatting, and categorical data normalization</li>
+                    <li><b>Stage 3 - Cross-Platform Standardization:</b> Addition of platform labels, schema harmonization, and feature engineering for comparative analysis</li>
+                    <li><b>Stage 4 - Unified Analytics:</b> Combined dataset creation using pandas concatenation with preserved platform identity for segmented analysis</li>
+                </ul>
+                
+                <h3><i class="fas fa-tools" aria-hidden="true"></i> Technical Implementation</h3>
+                <ul>
+                    <li><b>MongoDB Integration:</b> Custom functions for data insertion, retrieval, and aggregation operations with proper indexing for performance optimization</li>
+                    <li><b>PostgreSQL Connectivity:</b> psycopg2 and SQLAlchemy for robust database operations and ORM capabilities</li>
+                    <li><b>Data Quality Assurance:</b> Comprehensive validation checks, duplicate detection, and consistency verification across all data sources</li>
+                    <li><b>Scalable Architecture:</b> Modular design allowing easy addition of new streaming platforms and data sources</li>
+                </ul>
             </div>
-            <div class="graph-card">
-                <h4>IMDB: Top 10 Genres by Movie Count</h4>
-                <iframe src="images/projects/Film-analytics/IMDB_top_10_genres_by_movie_count.html"></iframe>
+
+            <div class="insight-section">
+                <h2><i class="fas fa-chart-line" aria-hidden="true"></i> Key Findings & Insights</h2>
+                
+                <h3><i class="fas fa-film" aria-hidden="true"></i> IMDB Analysis</h3>
+                <ul>
+                    <li><b>Revenue vs. Rating Trade-off:</b> Action and Adventure films dominate high-revenue segments but show moderate ratings (6-7), while Drama and Biography achieve higher critical acclaim (7-8) with lower commercial returns.</li>
+                    <li><b>Rating Distribution:</b> Tight clustering between 6-8 ratings indicates stable, cinephile-driven consensus with few outliers below 5 or above 9.</li>
+                    <li><b>Genre Hierarchy:</b> Drama, Comedy, and Action are most prolific, but Biography, Mystery, and History achieve highest average ratings.</li>
+                    <li><b>Temporal Stability:</b> Average ratings remain remarkably stable over decades, even through the streaming revolution.</li>
+                </ul>
+
+                <h3><i class="fas fa-globe" aria-hidden="true"></i> Amazon Prime Insights</h3>
+                <ul>
+                    <li><b>Explosive Growth:</b> Dramatic content increase post-2015 with 20%+ year-on-year growth rates, outpacing traditional studios.</li>
+                    <li><b>Director Democratization:</b> More evenly distributed director representation with lower concentration compared to traditional platforms.</li>
+                    <li><b>Global Strategy:</b> Strong international presence with significant content from India, UK, Canada beyond US dominance.</li>
+                    <li><b>Content Diversity:</b> Higher proportion of documentaries and international films compared to IMDB's traditional catalog.</li>
+                </ul>
+
+                <h3><i class="fas fa-tv" aria-hidden="true"></i> Netflix Patterns</h3>
+                <ul>
+                    <li><b>Genre Innovation:</b> More experimental and niche content with focus on contemporary social themes.</li>
+                    <li><b>Geographic Focus:</b> Strong presence in Latin America and Europe with localized content strategies.</li>
+                    <li><b>Rating Polarization:</b> More diverse rating distributions due to algorithmic recommendations and targeted audiences.</li>
+                    <li><b>Creative Talent:</b> Even distribution of top actors and directors across catalog.</li>
+                </ul>
+
+                <h3><i class="fas fa-balance-scale" aria-hidden="true"></i> Cross-Platform Comparison</h3>
+                <ul>
+                    <li><b>Content Strategy Divergence:</b> IMDB maintains traditional Western-centric catalog while streaming platforms prioritize global and niche audiences.</li>
+                    <li><b>Success Metrics Evolution:</b> Streaming platforms blur commercial vs. critical success distinction, prioritizing awards and critical recognition over box office revenue.</li>
+                    <li><b>Long-tail Hypothesis:</b> Digital platforms successfully serve niche audiences alongside mainstream content, validating the long-tail theory.</li>
+                    <li><b>Semantic Analysis:</b> While universal themes persist (Love, Life, War), platform-specific content reflects different audience targeting strategies.</li>
+                </ul>
+                
+                <h3><i class="fas fa-cogs" aria-hidden="true"></i> Methodology & Data Processing</h3>
+                <ul>
+                    <li>Extensive data cleaning including missing value imputation, standardization, and schema reconciliation</li>
+                    <li>Feature engineering for primary genre extraction and metric calculation</li>
+                    <li>Statistical validation using ANOVA and chi-square tests for robust findings</li>
+                    <li>MongoDB integration for efficient data storage and retrieval</li>
+                    <li>Interactive visualization using Plotly, Dash, and Seaborn for comprehensive analysis</li>
+                </ul>
             </div>
-            <div class="graph-card">
-                <h4>IMDB: Top 10 Genres by Average Rating</h4>
-                <iframe src="images/projects/Film-analytics/IMDB_top_10_genres_by_avg_rating.html"></iframe>
+
+            <div class="insight-section">
+                <h2><i class="fas fa-rocket" aria-hidden="true"></i> Interactive Comprehensive Dashboard</h2>
+                <p>Explore our interactive dashboard with real-time filtering capabilities, custom analysis tools, and comprehensive visualizations across all three platforms.</p>
+                <div class="graph-grid">
+                    <div class="graph-card dashboard-card">
+                        <h4>Interactive Analytics Dashboard</h4>
+                        <iframe src="../images/projects/Film-analytics/index_light.html?v=2025" 
+                                title="Interactive Analytics Dashboard"></iframe>
+                        <p class="graph-description">
+                            Interactive dashboard with tabs for IMDB, Amazon Prime, and Netflix analytics. Use dropdown menus to explore different visualizations.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="graph-card">
-                <h4>IMDB: Average Rating by Year</h4>
-                <iframe src="images/projects/Film-analytics/IMDB_avg_rating_by_year.html"></iframe>
+
+            <div class="graph-grid">
+                <div class="graph-card" data-chart-title="IMDB: Revenue vs. Rating by Genre (Top 5)" data-chart-src="../images/projects/Film-analytics/IMDB_revenue_vs_rating_by_genre_light.html?v=2025">
+                    <h4>IMDB: Revenue vs. Rating by Genre (Top 5)</h4>
+                    <iframe src="../images/projects/Film-analytics/IMDB_revenue_vs_rating_by_genre_light.html?v=2025" 
+                            title="IMDB Revenue vs Rating by Genre"></iframe>
+                    <p class="graph-description">
+                        Action and Adventure cluster at high revenue but moderate ratings, while Drama and Biography achieve higher ratings with lower revenue.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="IMDB: Rating Distribution (KDE)" data-chart-src="../images/projects/Film-analytics/IMDB_rating_distribution_kde_light.html?v=2025">
+                    <h4>IMDB: Rating Distribution (KDE)</h4>
+                    <iframe src="../images/projects/Film-analytics/IMDB_rating_distribution_kde_light.html?v=2025" 
+                            title="IMDB Rating Distribution"></iframe>
+                    <p class="graph-description">
+                        Sharp peak between 6-8 shows stable audience consensus, with few outliers below 5 or above 9.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="IMDB: Top 10 Genres by Movie Count" data-chart-src="../images/projects/Film-analytics/IMDB_top_10_genres_by_movie_count_light.html?v=2025">
+                    <h4>IMDB: Top 10 Genres by Movie Count</h4>
+                    <iframe src="../images/projects/Film-analytics/IMDB_top_10_genres_by_movie_count_light.html?v=2025" 
+                            title="IMDB Top Genres by Count"></iframe>
+                    <p class="graph-description">
+                        Drama, Comedy, and Action dominate production volume, reflecting global industry priorities.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="IMDB: Top 10 Genres by Average Rating" data-chart-src="../images/projects/Film-analytics/IMDB_top_10_genres_by_avg_rating_light.html?v=2025">
+                    <h4>IMDB: Top 10 Genres by Average Rating</h4>
+                    <iframe src="../images/projects/Film-analytics/IMDB_top_10_genres_by_avg_rating_light.html?v=2025" 
+                            title="IMDB Top Genres by Rating"></iframe>
+                    <p class="graph-description">
+                        Biography, Mystery, and History achieve highest ratings despite lower production volume.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="IMDB: Average Rating Trends by Year" data-chart-src="../images/projects/Film-analytics/IMDB_avg_rating_by_year_light.html?v=2025">
+                    <h4>IMDB: Average Rating Trends by Year</h4>
+                    <iframe src="../images/projects/Film-analytics/IMDB_avg_rating_by_year_light.html?v=2025" 
+                            title="IMDB Rating Trends by Year"></iframe>
+                    <p class="graph-description">
+                        Remarkable rating stability over decades, unaffected by industry shifts to streaming.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Movie Releases Growth by Year" data-chart-src="../images/projects/Film-analytics/AMAZON_number_of_movies_released_per_year_light.html?v=2025">
+                    <h4>Amazon: Movie Releases Growth by Year</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_number_of_movies_released_per_year_light.html?v=2025" 
+                            title="Amazon Release Trends"></iframe>
+                    <p class="graph-description">
+                        Exponential growth post-2015 with 20%+ annual increases, demonstrating platform expansion strategy.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Top 10 Directors by Movie Count" data-chart-src="../images/projects/Film-analytics/AMAZON_top_10_directors_by_movie_count_light.html?v=2025">
+                    <h4>Amazon: Top 10 Directors by Movie Count</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_top_10_directors_by_movie_count_light.html?v=2025" 
+                            title="Amazon Top Directors"></iframe>
+                    <p class="graph-description">
+                        Even distribution indicates democratization of content creation and diverse talent pool.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Top 10 Countries by Content" data-chart-src="../images/projects/Film-analytics/AMAZON_top_10_countries_by_movie_count_light.html?v=2025">
+                    <h4>Amazon: Top 10 Countries by Content</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_top_10_countries_by_movie_count_light.html?v=2025" 
+                            title="Amazon Top Countries"></iframe>
+                    <p class="graph-description">
+                        Strong international presence with significant content from India, UK, and Canada.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Movies vs TV Shows Distribution" data-chart-src="../images/projects/Film-analytics/AMAZON_movies_vs_tvshows_pie_light.html?v=2025">
+                    <h4>Amazon: Movies vs TV Shows Distribution</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_movies_vs_tvshows_pie_light.html?v=2025" 
+                            title="Amazon Movies vs TV Shows"></iframe>
+                    <p class="graph-description">
+                        Content type distribution showing platform's strategic focus areas.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Country-wise Content Distribution" data-chart-src="../images/projects/Film-analytics/AMAZON_countrywise_count_light.html?v=2025">
+                    <h4>Amazon: Country-wise Content Distribution</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_countrywise_count_light.html?v=2025" 
+                            title="Amazon Country-wise Content"></iframe>
+                    <p class="graph-description">
+                        Geographic content analysis revealing global market penetration strategy.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Amazon: Top 15 Release Years" data-chart-src="../images/projects/Film-analytics/AMAZON_top_15_release_years_light.html?v=2025">
+                    <h4>Amazon: Top 15 Release Years</h4>
+                    <iframe src="../images/projects/Film-analytics/AMAZON_top_15_release_years_light.html?v=2025" 
+                            title="Amazon Top Release Years"></iframe>
+                    <p class="graph-description">
+                        Temporal distribution highlighting recent content focus and catalog growth.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Netflix: Top 10 TV Show Genres" data-chart-src="../images/projects/Film-analytics/NETFLIX_top10_tvshow_genres_netflix_light.html?v=2025">
+                    <h4>Netflix: Top 10 TV Show Genres</h4>
+                    <iframe src="../images/projects/Film-analytics/NETFLIX_top10_tvshow_genres_netflix_light.html?v=2025" 
+                            title="Netflix Top TV Show Genres"></iframe>
+                    <p class="graph-description">
+                        Genre preferences specific to Netflix's TV show catalog and audience targeting.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Netflix: Top 10 Actors by Title Count" data-chart-src="../images/projects/Film-analytics/NETFLIX_top_10_actors_by_titles_light.html?v=2025">
+                    <h4>Netflix: Top 10 Actors by Title Count</h4>
+                    <iframe src="../images/projects/Film-analytics/NETFLIX_top_10_actors_by_titles_light.html?v=2025" 
+                            title="Netflix Top Actors"></iframe>
+                    <p class="graph-description">
+                        Even distribution of talent across platform, showing diverse casting strategies.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Netflix: Global Content Distribution (Map)" data-chart-src="../images/projects/Film-analytics/NETFLIX_topcountriesmapnetflix_light.html?v=2025">
+                    <h4>Netflix: Global Content Distribution (Map)</h4>
+                    <iframe src="../images/projects/Film-analytics/NETFLIX_topcountriesmapnetflix_light.html?v=2025" 
+                            title="Netflix Global Content Map"></iframe>
+                    <p class="graph-description">
+                        Interactive world map showing Netflix's global content creation footprint.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Netflix: Top Countries (Bar Chart)" data-chart-src="../images/projects/Film-analytics/NETFLIX_top_10_countries by country Netflix bar_light.html?v=2025">
+                    <h4>Netflix: Top Countries (Bar Chart)</h4>
+                    <iframe src="../images/projects/Film-analytics/NETFLIX_top_10_countries by country Netflix bar_light.html?v=2025" 
+                            title="Netflix Top Countries Bar"></iframe>
+                    <p class="graph-description">
+                        Quantitative analysis of content volume by country, highlighting regional strategies.
+                    </p>
+                </div>
+                
+                <div class="graph-card" data-chart-title="Netflix: Country Distribution (Pie Chart)" data-chart-src="../images/projects/Film-analytics/NETFLIX_top_10_countries by country Netflix pie_light.html?v=2025">
+                    <h4>Netflix: Country Distribution (Pie Chart)</h4>
+                    <iframe src="../images/projects/Film-analytics/NETFLIX_top_10_countries by country Netflix pie_light.html?v=2025" 
+                            title="Netflix Country Distribution Pie"></iframe>
+                    <p class="graph-description">
+                        Proportional view of content distribution emphasizing market concentration.
+                    </p>
+                </div>
             </div>
-            <div class="graph-card">
-                <h4>Amazon: Movies Released per Year</h4>
-                <iframe src="images/projects/Film-analytics/AMAZON_number_of_movies_released_per_year.html"></iframe>
+
+            <div class="insight-section">
+                <h2><i class="fas fa-rocket" aria-hidden="true"></i> Comprehensive Analysis & Conclusions</h2>
+                
+                <h3><i class="fas fa-chart-pie" aria-hidden="true"></i> Platform Strategy & Content Differentiation</h3>
+                <ul>
+                    <li><b>IMDB Legacy Model:</b> Maintains traditional Western-centric catalog with emphasis on established genres and cinephile preferences.</li>
+                    <li><b>Amazon's Global Expansion:</b> Aggressive international strategy with democratized content creation and rapid catalog growth exceeding 20% annually.</li>
+                    <li><b>Netflix's Innovation Focus:</b> Emphasis on experimental formats, contemporary social themes, and algorithmic personalization for niche audiences.</li>
+                </ul>
+
+                <h3><i class="fas fa-globe-americas" aria-hidden="true"></i> Geographic & Cultural Impact</h3>
+                <ul>
+                    <li><b>Content Localization:</b> Streaming platforms successfully penetrate international markets with region-specific content strategies.</li>
+                    <li><b>Cultural Democratization:</b> Increased representation of non-Western narratives and diverse storytelling approaches across platforms.</li>
+                    <li><b>Global vs. Local Balance:</b> Platforms balance universal themes with culturally specific content to maximize both global and local appeal.</li>
+                </ul>
+
+                <h3><i class="fas fa-brain" aria-hidden="true"></i> Theoretical Implications</h3>
+                <ul>
+                    <li><b>Long-tail Validation:</b> Digital platforms successfully serve niche audiences alongside mainstream content, confirming long-tail media theory.</li>
+                    <li><b>Disruption Pattern:</b> Streaming platforms fundamentally altered traditional success metrics, prioritizing critical acclaim and awards over pure box office revenue.</li>
+                    <li><b>Algorithmic Influence:</b> Recommendation systems create more polarized rating distributions, enabling successful niche content discovery.</li>
+                    <li><b>Content Creation Evolution:</b> Transition from gatekeeping models to democratized, data-driven content commissioning strategies.</li>
+                </ul>
+
+                <h3><i class="fas fa-microscope" aria-hidden="true"></i> Methodological Contributions</h3>
+                <ul>
+                    <li><b>Data Integration Framework:</b> Successfully reconciled disparate schemas across multiple platforms using advanced cleaning and normalization techniques.</li>
+                    <li><b>Statistical Validation:</b> Applied robust statistical tests (ANOVA, chi-square) to ensure findings are statistically significant and not due to chance.</li>
+                    <li><b>Multi-dimensional Analysis:</b> Combined quantitative metrics with qualitative semantic analysis for comprehensive platform comparison.</li>
+                    <li><b>Interactive Visualization:</b> Developed dynamic dashboards enabling user-driven exploration and hypothesis testing.</li>
+                </ul>
+
+                <h3><i class="fas fa-arrow-right" aria-hidden="true"></i> Future Research Directions</h3>
+                <ul>
+                    <li><b>Sentiment Analysis:</b> Integrate user review sentiment to understand audience emotional responses beyond ratings.</li>
+                    <li><b>Network Analysis:</b> Examine cast/crew collaboration patterns and their impact on content success across platforms.</li>
+                    <li><b>Predictive Modeling:</b> Develop machine learning models to forecast content success based on genre, talent, and platform characteristics.</li>
+                    <li><b>Real-time Analytics:</b> Implement streaming analytics to track content performance and audience engagement in real-time.</li>
+                    <li><b>Cross-cultural Studies:</b> Analyze how content travels across geographic and cultural boundaries in the streaming era.</li>
+                </ul>
+
+                <h3><i class="fas fa-lightbulb" aria-hidden="true"></i> Industry Implications</h3>
+                <ul>
+                    <li><b>Content Strategy:</b> Platforms should balance universal appeal with niche targeting, leveraging data-driven insights for content commissioning.</li>
+                    <li><b>Talent Management:</b> Democratization of content creation offers opportunities for diverse voices and emerging talent.</li>
+                    <li><b>Global Expansion:</b> International market penetration requires deep understanding of local preferences while maintaining global brand coherence.</li>
+                    <li><b>Technology Integration:</b> Advanced analytics and machine learning are essential for competitive advantage in content discovery and recommendation.</li>
+                </ul>
+
+                <div class="key-takeaway">
+                    <h4><i class="fas fa-star" aria-hidden="true"></i> Key Takeaway</h4>
+                    <p>
+                        This comprehensive analysis reveals that the film industry is undergoing a fundamental transformation. While traditional metrics and genres remain relevant, streaming platforms have successfully created new paradigms for content success, audience engagement, and global cultural exchange. The future of film lies in the intelligent balance of data-driven insights, creative innovation, and cultural sensitivity.
+                    </p>
+                </div>
             </div>
-            <div class="graph-card">
-                <h4>Amazon: Top 10 Directors</h4>
-                <iframe src="images/projects/Film-analytics/AMAZON_top_10_directors_by_movie_count.html"></iframe>
+            
+            <div id="chartModal" class="chart-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 id="modalTitle">Chart Title</h3>
+                        <button class="close-modal" aria-label="Close modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe id="modalChart" src="" title="Modal Chart"></iframe>
+                    </div>
+                </div>
             </div>
-            <div class="graph-card">
-                <h4>Amazon: Top 10 Countries</h4>
-                <iframe src="images/projects/Film-analytics/AMAZON_top_10_countries_by_movie_count.html"></iframe>
+            
+            <div class="footer">
+                <div class="footer-stats">
+                    <div><i class="fas fa-chart-line" aria-hidden="true"></i> 15+ Interactive Visualizations</div>
+                    <div><i class="fas fa-database" aria-hidden="true"></i> 3 Major Platforms Analyzed</div>
+                    <div><i class="fas fa-globe" aria-hidden="true"></i> Global Content Insights</div>
+                    <div><i class="fas fa-brain" aria-hidden="true"></i> Advanced Statistical Analysis</div>
+                </div>
+                <div>
+                    © 2025 Cross-Platform Film Analytics Project • National College of Ireland • MSc Data Analytics
+                </div>
             </div>
-            <div class="graph-card">
-                <h4>Combined: Top 10 Genres</h4>
-                <iframe src="images/projects/Film-analytics/ALLDATA_top_10_genres.html"></iframe>
-            </div>
-            <div class="graph-card">
-                <h4>Combined: Word Cloud of Titles</h4>
-                <img src="images/projects/Film-analytics/ALLDATA_wordcloud_titles.png" alt="Word Cloud">
-            </div>
-            <div class="graph-card" style="grid-column: 1/-1;">
-                <h4>Interactive Dashboard</h4>
-                <iframe src="images/projects/Film-analytics/index.html" style="min-height:600px;"></iframe>
-            </div>
-        </div>
-        <div class="insight-section">
-            <h2><i class="fas fa-rocket"></i> Conclusion</h2>
-            <ul>
-                <li>Genre popularity and ratings are platform-dependent, shaped by audience and recommendation algorithms.</li>
-                <li>Streaming platforms drive diversity and internationalization, while IMDB remains a traditional reference.</li>
-                <li>Methodological rigor in cleaning and merging data is essential for robust insights.</li>
-                <li>Future work: sentiment analysis, network analysis, predictive modeling of content success.</li>
-            </ul>
-        </div>
-        <div class="footer">
-            © 2025 Cross-Platform Film Analytics Project
         </div>
     </div>
-    <script src="JS/script.js"></script>
-    <script src="JS/style-switcher.js"></script>
-    <script src="JS/project-detail-shared.js"></script>
+    
+    <script src="../JS/script.js"></script>
+    <script src="../JS/style-switcher.js"></script>
+    <script src="../JS/project-detail-shared.js"></script>
+    <script src="../JS/skeleton-loader.js"></script>
+    
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('chartModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalChart = document.getElementById('modalChart');
+        const closeModalBtn = document.querySelector('.close-modal');
+
+        function openChartModal(title, src) {
+            modalTitle.textContent = title;
+            modalChart.src = src;
+            modal.classList.add('active');
+        }
+
+        function closeModal(e) {
+            if (e.target === modal || e.target === closeModalBtn || e.key === 'Escape') {
+                modal.classList.remove('active');
+                modalChart.src = '';
+            }
+        }
+
+        modal.addEventListener('click', closeModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        document.addEventListener('keydown', closeModal);
+
+        // Chart loading with error handling
+        function loadChart(container, chartUrl, fallbackText) {
+            const iframe = document.createElement('iframe');
+            iframe.src = chartUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = '340px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '12px';
+            iframe.title = fallbackText;
+
+            iframe.onload = () => container.appendChild(iframe);
+            iframe.onerror = () => {
+                console.error(`Failed to load chart: ${chartUrl}`);
+                container.innerHTML = `
+                    <div class="chart-preview">
+                        <div class="preview-placeholder">
+                            <i class="fas fa-chart-line" style="font-size: 2rem; margin-bottom: 1rem; color: var(--accent-color);"></i>
+                            <p><strong>${fallbackText}</strong></p>
+                            <p>Unable to load chart</p>
+                            <a href="${chartUrl}" target="_blank" style="color: var(--accent-color); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--accent-color); border-radius: 5px; display: inline-block; margin-top: 0.5rem;">
+                                📊 Open Chart in New Tab
+                            </a>
+                        </div>
+                    </div>
+                `;
+            };
+
+            setTimeout(() => {
+                if (!iframe.parentNode) iframe.onerror();
+            }, 5000);
+
+            container.innerHTML = '';
+            container.appendChild(iframe);
+        }
+
+        // Theme switching for charts
+        function applyDarkModeToCharts() {
+            const isDark = document.body.classList.contains('dark');
+            const themeSuffix = isDark ? '_dark' : '_light';
+            
+            document.querySelectorAll('.graph-card iframe, .dashboard-card iframe').forEach(iframe => {
+                let src = iframe.src;
+                if (src.includes('_light.html') && isDark) {
+                    src = src.replace('_light.html', '_dark.html');
+                } else if (src.includes('_dark.html') && !isDark) {
+                    src = src.replace('_dark.html', '_light.html');
+                }
+                if (iframe.src !== src) {
+                    iframe.src = src;
+                }
+            });
+        }
+
+        // Graph card click handling
+        document.querySelectorAll('.graph-card').forEach(card => {
+            card.addEventListener('click', e => {
+                if (e.target.closest('iframe')) return;
+                const title = card.dataset.chartTitle;
+                const src = card.dataset.chartSrc;
+                openChartModal(title, src);
+            });
+
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const title = card.dataset.chartTitle;
+                    const src = card.dataset.chartSrc;
+                    openChartModal(title, src);
+                }
+            });
+        });
+
+        // Theme observer
+        const themeObserver = new MutationObserver(() => {
+            setTimeout(applyDarkModeToCharts, 100);
+        });
+
+        themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        window.addEventListener('storage', e => {
+            if (e.key === 'theme' || e.key === 'dark-mode') {
+                setTimeout(applyDarkModeToCharts, 100);
+            }
+        });
+
+        // Initial theme application
+        setTimeout(applyDarkModeToCharts, 500);
+
+        // Modal handling for portfolio
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('modal') === 'true') {
+                const backBtn = document.querySelector('.back-btn');
+                if (backBtn) {
+                    backBtn.addEventListener('click', e => {
+                        e.preventDefault();
+                        window.parent.postMessage({ action: 'closeModal' }, '*');
+                    });
+                }
+            }
+        });
+    </script>
 </body>
 </html>

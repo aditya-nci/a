@@ -1,0 +1,12 @@
+Placeholder images for AWS Order Data Project:
+
+Required images:
+1. hero-image.jpg - Main project hero image
+2. architecture-diagram.png - AWS architecture diagram
+3. s3-bucket.png - S3 bucket structure
+4. glue-crawler.png - AWS Glue Crawler setup
+5. athena-queries.png - Athena query interface
+6. quicksight-dashboard.png - QuickSight dashboard
+7. spice-import.png - SPICE import process
+
+These placeholder files should be replaced with actual project images.

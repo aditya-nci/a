@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Platform Visualizations - Light Theme</title>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333333;
+            transition: all 0.3s ease;
+        }
+        h1 {
+            color: #1f77b4;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        .tab {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tabs {
+            margin: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            display: inline-block;
+        }
+        .tabs button {
+            padding: 12px 24px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #495057;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .tabs button:hover {
+            background-color: #e9ecef;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .tabs button.active {
+            background-color: #1f77b4;
+            color: white;
+            border-color: #1f77b4;
+        }
+        .dropdown {
+            width: 70%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #495057;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .dropdown:focus {
+            border-color: #1f77b4;
+            box-shadow: 0 0 0 3px rgba(31, 119, 180, 0.1);
+        }
+        #imdb-graph, #amazon-graph, #netflix-graph {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 500px;
+        }
+        h3 {
+            color: #1f77b4;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Platform Analytics Dashboard</h1>
+    <div class="tabs">
+        <button onclick="openTab('imdb')" id="imdb-btn" class="active">📊 IMDb</button>
+        <button onclick="openTab('amazon')" id="amazon-btn">📺 Amazon Prime</button>
+        <button onclick="openTab('netflix')" id="netflix-btn">🎭 Netflix</button>
+    </div>
+
+    <!-- IMDb Tab -->
+    <div id="imdb" class="tab active">
+        <h3>Select IMDb Visualization</h3>
+        <select id="imdb-dropdown" class="dropdown" onchange="updateIMDbGraph()">
+            <option value="imdb-bar-revenue">🏆 Top IMDb Movies by Revenue (Bar Chart)</option>
+            <option value="imdb-bar-rating">⭐ Top IMDb Movies by Rating (Bar Chart)</option>
+        </select>
+        <div id="imdb-graph"></div>
+        <div id="imdb-error" class="error-message"></div>
+    </div>
+
+    <!-- Amazon Tab -->
+    <div id="amazon" class="tab">
+        <h3>Select Amazon Prime Visualization</h3>
+        <select id="amazon-dropdown" class="dropdown" onchange="updateAmazonGraph()">
+            <option value="amazon-trendline">📈 Movies Release Trendline by Year</option>
+            <option value="amazon-runtime">⏱️ Average Runtime by Year</option>
+        </select>
+        <div id="amazon-graph"></div>
+        <div id="amazon-error" class="error-message"></div>
+    </div>
+
+    <!-- Netflix Tab -->
+    <div id="netflix" class="tab">
+        <h3>Select Netflix Visualization</h3>
+        <select id="netflix-dropdown" class="dropdown" onchange="updateNetflixGraph()">
+            <option value="netflix-top-directors">🎬 Top Directors in Netflix Movies (Bar Chart)</option>
+            <option value="netflix-top-stars">🌟 Top Stars in Netflix Movies (Bar Chart)</option>
+            <option value="netflix-pie-genre">🎭 Genre Distribution (Pie Chart)</option>
+        </select>
+        <div id="netflix-graph"></div>
+        <div id="netflix-error" class="error-message"></div>
+    </div>
+
+    <script>
+        // Light theme Plotly configuration
+        const lightTheme = {
+            paper_bgcolor: '#ffffff',
+            plot_bgcolor: '#ffffff',
+            font: { color: '#333333' },
+            colorway: ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f'],
+            xaxis: {
+                gridcolor: '#e0e0e0',
+                linecolor: '#cccccc',
+                tickcolor: '#cccccc'
+            },
+            yaxis: {
+                gridcolor: '#e0e0e0',
+                linecolor: '#cccccc',
+                tickcolor: '#cccccc'
+            }
+        };
+
+        // Tab switching function
+        function openTab(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const buttons = document.querySelectorAll('.tabs button');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            document.getElementById(tabName + '-btn').classList.add('active');
+            
+            // Initialize the graph for the opened tab
+            if (tabName === 'imdb') updateIMDbGraph();
+            else if (tabName === 'amazon') updateAmazonGraph();
+            else if (tabName === 'netflix') updateNetflixGraph();
+        }
+
+        // IMDb Graph Function
+        function updateIMDbGraph() {
+            const dropdown = document.getElementById('imdb-dropdown').value;
+            const errorDiv = document.getElementById('imdb-error');
+            errorDiv.textContent = '';
+            
+            try {
+                let trace, layout;
+                const sampleData = [
+                    { title: 'Avengers: Endgame', revenue: 2797800564, rating: 8.4 },
+                    { title: 'Avatar', revenue: 2787965087, rating: 7.8 },
+                    { title: 'Titanic', revenue: 2187463944, rating: 7.8 },
+                    { title: 'Star Wars: The Force Awakens', revenue: 2068223624, rating: 7.9 },
+                    { title: 'Avengers: Infinity War', revenue: 2048359754, rating: 8.4 }
+                ];
+                
+                if (dropdown === 'imdb-bar-revenue') {
+                    trace = [{
+                        x: sampleData.map(d => d.title),
+                        y: sampleData.map(d => d.revenue),
+                        type: 'bar',
+                        marker: { color: '#1f77b4' }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '🏆 Top IMDb Movies by Revenue',
+                        xaxis: { ...lightTheme.xaxis, title: 'Movies', tickangle: -45 },
+                        yaxis: { ...lightTheme.yaxis, title: 'Revenue ($)' },
+                        margin: { t: 60, l: 80, r: 40, b: 120 }
+                    };
+                } else {
+                    trace = [{
+                        x: sampleData.map(d => d.title),
+                        y: sampleData.map(d => d.rating),
+                        type: 'bar',
+                        marker: { color: '#ff7f0e' }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '⭐ Top IMDb Movies by Rating',
+                        xaxis: { ...lightTheme.xaxis, title: 'Movies', tickangle: -45 },
+                        yaxis: { ...lightTheme.yaxis, title: 'Rating', range: [7, 9] },
+                        margin: { t: 60, l: 80, r: 40, b: 120 }
+                    };
+                }
+                
+                Plotly.newPlot('imdb-graph', trace, layout, {responsive: true});
+            } catch (e) {
+                errorDiv.textContent = 'Error rendering IMDb graph: ' + e.message;
+            }
+        }
+
+        // Amazon Graph Function
+        function updateAmazonGraph() {
+            const dropdown = document.getElementById('amazon-dropdown').value;
+            const errorDiv = document.getElementById('amazon-error');
+            errorDiv.textContent = '';
+            
+            try {
+                let trace, layout;
+                const years = [2015, 2016, 2017, 2018, 2019, 2020, 2021];
+                
+                if (dropdown === 'amazon-trendline') {
+                    const movieCounts = [120, 145, 180, 220, 280, 350, 320];
+                    trace = [{
+                        x: years,
+                        y: movieCounts,
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        line: { color: '#2ca02c', width: 3 },
+                        marker: { color: '#2ca02c', size: 8 }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '📈 Amazon Prime Movies Release Trend',
+                        xaxis: { ...lightTheme.xaxis, title: 'Year' },
+                        yaxis: { ...lightTheme.yaxis, title: 'Number of Movies' }
+                    };
+                } else {
+                    const avgRuntime = [95, 98, 102, 105, 108, 110, 107];
+                    trace = [{
+                        x: years,
+                        y: avgRuntime,
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        line: { color: '#d62728', width: 3 },
+                        marker: { color: '#d62728', size: 8 }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '⏱️ Amazon Prime Average Runtime by Year',
+                        xaxis: { ...lightTheme.xaxis, title: 'Year' },
+                        yaxis: { ...lightTheme.yaxis, title: 'Average Runtime (minutes)' }
+                    };
+                }
+                
+                Plotly.newPlot('amazon-graph', trace, layout, {responsive: true});
+            } catch (e) {
+                errorDiv.textContent = 'Error rendering Amazon graph: ' + e.message;
+            }
+        }
+
+        // Netflix Graph Function
+        function updateNetflixGraph() {
+            const dropdown = document.getElementById('netflix-dropdown').value;
+            const errorDiv = document.getElementById('netflix-error');
+            errorDiv.textContent = '';
+            
+            try {
+                let trace, layout;
+                
+                if (dropdown === 'netflix-top-directors') {
+                    const directors = ['Rajiv Chilaka', 'Raúl Campos', 'Jan Suter', 'Suhas Kadav', 'Marcus Raboy'];
+                    const counts = [19, 18, 16, 14, 12];
+                    trace = [{
+                        x: directors,
+                        y: counts,
+                        type: 'bar',
+                        marker: { color: '#9467bd' }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '🎬 Top Directors in Netflix Movies',
+                        xaxis: { ...lightTheme.xaxis, title: 'Directors', tickangle: -45 },
+                        yaxis: { ...lightTheme.yaxis, title: 'Number of Movies' },
+                        margin: { t: 60, l: 80, r: 40, b: 120 }
+                    };
+                } else if (dropdown === 'netflix-top-stars') {
+                    const stars = ['Shah Rukh Khan', 'Anupam Kher', 'Rupa Bhimani', 'Takahiro Sakurai', 'Yuki Kaji'];
+                    const counts = [15, 12, 11, 10, 9];
+                    trace = [{
+                        x: stars,
+                        y: counts,
+                        type: 'bar',
+                        marker: { color: '#8c564b' }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '🌟 Top Stars in Netflix Movies',
+                        xaxis: { ...lightTheme.xaxis, title: 'Stars', tickangle: -45 },
+                        yaxis: { ...lightTheme.yaxis, title: 'Number of Movies' },
+                        margin: { t: 60, l: 80, r: 40, b: 120 }
+                    };
+                } else {
+                    const genres = ['Drama', 'Comedy', 'Action', 'Documentary', 'Horror', 'Romance', 'Thriller', 'Others'];
+                    const counts = [1200, 800, 600, 500, 400, 350, 300, 850];
+                    trace = [{
+                        labels: genres,
+                        values: counts,
+                        type: 'pie',
+                        marker: { colors: ['#e377c2', '#7f7f7f', '#bcbd22', '#17becf', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd'] }
+                    }];
+                    layout = {
+                        ...lightTheme,
+                        title: '🎭 Netflix Genre Distribution'
+                    };
+                }
+                
+                Plotly.newPlot('netflix-graph', trace, layout, {responsive: true});
+            } catch (e) {
+                errorDiv.textContent = 'Error rendering Netflix graph: ' + e.message;
+            }
+        }
+
+        // Initialize with IMDb tab
+        document.addEventListener('DOMContentLoaded', function() {
+            openTab('imdb');
+        });
+    </script>
+</body>
+</html>

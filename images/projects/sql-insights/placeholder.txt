@@ -1,0 +1,11 @@
+Placeholder images for SQL Business Insights Project:
+
+Required images:
+1. hero-image.jpg - Main project hero image
+2. dashboard.png - Power BI dashboard
+3. query-results.png - SQL query results
+4. data-flow.png - Data flow diagram
+5. insights-chart.png - Key insights visualization
+6. customer-analysis.png - Customer behavior analysis
+
+These placeholder files should be replaced with actual project images.
