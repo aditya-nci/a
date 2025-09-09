@@ -32,6 +32,38 @@
     <link rel="stylesheet" href="CSS/contact.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Animations for TAM Project -->
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+        }
+        
+        .project-preview {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-preview:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+    
     <!-- Style Switcher -->
     <link rel="stylesheet" href="CSS/Skins/color-1.css" class="alternate-style" title="color-1" disabled>
     <link rel="stylesheet" href="CSS/Skins/color-2.css" class="alternate-style" title="color-2" disabled>
@@ -423,8 +455,39 @@
 
                         </div>
                     </div>
-                
+                <!-- STEM Technology Acceptance Model -->
                     <div class="projects-container">
+                        <div class="project-card modern-card" data-project="tam-analysis">
+                            <div class="project-header">
+                                <div class="project-icon">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </div>
+                                <div class="project-meta">
+                                    <h3>Technology Acceptance Model</h3>
+                                    <p class="project-subtitle">Cross-Cultural Research | Educational Technology | Statistical Analysis</p>
+                                    <div class="project-tags">
+                                        <span class="tag">Research</span>
+                                        <span class="tag">TAM Framework</span>
+                                        <span class="tag">Statistical Analysis</span>
+                                        <span class="tag">STEM Education</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-preview">
+                                <img src="images/projects/tam-analysis/stem.png" alt="STEM Education Analysis - Technology Acceptance Model">
+                            </div>
+                            <div class="project-summary">
+                                <p>Cross-cultural analysis of technology acceptance in STEM education between India and Ireland using the Technology Acceptance Model framework, examining gender stereotypes.</p>
+                            </div>
+                            <div class="project-actions">
+                                <button onclick="openProjectModal('tam-analysis')" class="btn-view-project">
+                                    <i class="fa fa-external-link-alt"></i> View Details
+                                </button>
+                                <a href="https://github.com/aditya-pa/technology-education-analysis" target="_blank" class="btn-github">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
                         <!-- Cross-Platform Film Analytics -->
                         <div class="project-card modern-card" data-project="film-analytics">
                             <div class="project-header">
@@ -628,6 +691,9 @@
                                 </a>
                             </div>
                         </div>
+
+                        
+                        
                     </div>
                 </div>
             </section>

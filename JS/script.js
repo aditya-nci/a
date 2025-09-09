@@ -511,7 +511,8 @@ function openProjectModal(projectId) {
         'banking-classifier': 'projects/banking-complaint-detail.html',
         'sql-insights': 'projects/sql-insights-detail.html',
         'aws-snowflake': 'projects/aws-snowflake-detail.html',
-        'aws-order-pipeline': 'projects/aws-order-detail.html'
+        'aws-order-pipeline': 'projects/aws-order-detail.html',
+        'tam-analysis': 'projects/TAM.html'
     };
     
     const projectUrl = projectUrls[projectId];
