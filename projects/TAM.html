@@ -45,15 +45,51 @@
 
         .hero-gradient {
             border-bottom: 1px solid var(--border-color);
+            /* Force white background as default */
+            background: #ffffff !important;
+        }
+        
+        /* Nuclear option: Override any browser extension interference */
+        header.hero-gradient,
+        header.hero-gradient *,
+        .hero-gradient,
+        .hero-gradient * {
+            background-color: inherit !important;
+        }
+        
+        header.hero-gradient {
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            filter: none !important;
+            -webkit-filter: none !important;
+        }
+        
+        /* Prevent extension CSS injection */
+        header.hero-gradient[style*="background"] {
+            background: #ffffff !important;
         }
 
         /* Theme-specific hero styling */
-        body:not(.dark) .hero-gradient {
+        body:not(.dark) .hero-gradient,
+        .hero-gradient:not(.dark),
+        header.hero-gradient {
             background: #ffffff !important;
-            border-bottom: 1px solid #e2e8f0;
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border-bottom: 1px solid #e2e8f0 !important;
         }
 
         body.dark .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%) !important;
+        }
+        
+        /* Force white background with highest specificity */
+        header.hero-gradient.relative.overflow-hidden {
+            background: #ffffff !important;
+        }
+        
+        body.dark header.hero-gradient.relative.overflow-hidden {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%) !important;
         }
 
@@ -359,8 +395,10 @@
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
             
+            /* Mobile hero - modify only padding, preserve background */
             .hero-gradient {
-                padding: 32px 0;
+                padding-top: 32px;
+                padding-bottom: 32px;
             }
             
             .floating-card {
@@ -420,8 +458,10 @@
                 padding: 8px 6px;
             }
             
+            /* Mobile hero - modify only padding, preserve background */
             .hero-gradient {
-                padding: 24px 0;
+                padding-top: 24px;
+                padding-bottom: 24px;
             }
             
             .grid {
@@ -446,8 +486,10 @@
                 margin-bottom: 12px;
             }
             
+            /* Mobile hero - modify only padding, preserve background */
             .hero-gradient {
-                padding: 20px 0;
+                padding-top: 20px;
+                padding-bottom: 20px;
             }
             
             .section-divider {
@@ -533,7 +575,7 @@
 
     <!-- Hero Section -->
     <header class="hero-gradient relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/5 dark:bg-black/20"></div>
+        <div class="absolute inset-0 bg-transparent dark:bg-black/20"></div>
         <div class="relative z-10 container mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-12 md:py-16 lg:py-24">
             <div class="text-center mb-8 sm:mb-12 md:mb-16">
                 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black mb-4 sm:mb-6 md:mb-8 leading-tight">
@@ -1046,6 +1088,45 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Anti-extension hero background fix
+            function forceHeroBackground() {
+                const heroElement = document.querySelector('.hero-gradient');
+                if (heroElement) {
+                    const isDark = document.body.classList.contains('dark') || 
+                                  document.documentElement.classList.contains('dark');
+                    
+                    if (!isDark) {
+                        // Force white background with multiple methods
+                        heroElement.style.setProperty('background', '#ffffff', 'important');
+                        heroElement.style.setProperty('background-color', '#ffffff', 'important');
+                        heroElement.style.setProperty('background-image', 'none', 'important');
+                        heroElement.style.setProperty('filter', 'none', 'important');
+                        
+                        // Remove any extension-added attributes
+                        heroElement.removeAttribute('data-darkreader-inline-bgcolor');
+                        heroElement.removeAttribute('data-darkreader-inline-bgimage');
+                        
+                        // Force repaint
+                        heroElement.offsetHeight;
+                    }
+                }
+            }
+            
+            // Run immediately and on any potential extension interference
+            forceHeroBackground();
+            setTimeout(forceHeroBackground, 100);
+            setTimeout(forceHeroBackground, 500);
+            setTimeout(forceHeroBackground, 1000);
+            
+            // Watch for DOM changes from extensions
+            if (window.MutationObserver) {
+                const observer = new MutationObserver(forceHeroBackground);
+                observer.observe(document.body, { 
+                    attributes: true, 
+                    attributeFilter: ['style', 'class'],
+                    subtree: true 
+                });
+            }
             // Color scheme
             const colors = {
                 india: '#3b82f6',
