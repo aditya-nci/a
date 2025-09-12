@@ -131,13 +131,14 @@
             background: var(--skin-color);
         }
 
+        /* Simplified CSS for better performance */
         .stat-card {
             background: var(--bg-secondary);
-            backdrop-filter: blur(10px);
+            backdrop-filter: none; /* Remove expensive blur effect */
             border-radius: 20px;
             padding: 28px;
             box-shadow: var(--shadow-medium);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease; /* Simplified transition */
             border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
@@ -155,8 +156,7 @@
         }
 
         .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-large);
+            transform: translateY(-4px); /* Reduced movement for better performance */
         }
 
         .gradient-text {
@@ -541,12 +541,11 @@
             margin: 60px 0;
         }
         .floating-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--bg-secondary); /* Simplified background */
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px;
-            color: white;
+            color: var(--text-primary);
         }
         .progress-bar {
             height: 8px;
@@ -1112,21 +1111,11 @@
                 }
             }
             
-            // Run immediately and on any potential extension interference
+            // Run once at load - avoid aggressive monitoring
             forceHeroBackground();
-            setTimeout(forceHeroBackground, 100);
-            setTimeout(forceHeroBackground, 500);
-            setTimeout(forceHeroBackground, 1000);
             
-            // Watch for DOM changes from extensions
-            if (window.MutationObserver) {
-                const observer = new MutationObserver(forceHeroBackground);
-                observer.observe(document.body, { 
-                    attributes: true, 
-                    attributeFilter: ['style', 'class'],
-                    subtree: true 
-                });
-            }
+            // Single timeout for delayed styling
+            setTimeout(forceHeroBackground, 500);
             // Color scheme
             const colors = {
                 india: '#3b82f6',
@@ -1175,211 +1164,237 @@
                 }
             };
 
-            // Student TAM Chart - Accurate data from v2.ipynb
-            const studentTamCtx = document.getElementById('studentTamChart').getContext('2d');
-            new Chart(studentTamCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['India', 'Ireland'],
-                    datasets: [
-                        {
-                            label: 'Perceived Usefulness (STEM Interest)',
-                            data: [2.933, 2.103],
-                            backgroundColor: colors.india,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        },
-                        {
-                            label: 'Perceived Ease of Use (Tech Confidence)',
-                            data: [2.278, 2.971],
-                            backgroundColor: colors.ireland,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        },
-                        {
-                            label: 'Attitude Score',
-                            data: [2.933, 2.103],
-                            backgroundColor: colors.accent,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        }
-                    ]
-                },
-                options: {
-                    ...chartConfig,
-                    scales: {
-                        ...chartConfig.scales,
-                        y: {
-                            ...chartConfig.scales.y,
-                            max: 4,
-                            title: {
-                                display: true,
-                                text: 'TAM Score (1-4 scale)',
-                                font: { weight: 'bold', size: 12 }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Parent TAM Chart
-            const parentTamCtx = document.getElementById('parentTamChart').getContext('2d');
-            new Chart(parentTamCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['India', 'Ireland'],
-                    datasets: [
-                        {
-                            label: 'Technology Interest (Child)',
-                            data: [4.0, 4.0],
-                            backgroundColor: colors.india,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        },
-                        {
-                            label: 'Coding Ease Perception (Child)',
-                            data: [4.0, 4.0],
-                            backgroundColor: colors.ireland,
-                            borderRadius: 8,
-                            borderSkipped: false
-                        }
-                    ]
-                },
-                options: {
-                    ...chartConfig,
-                    scales: {
-                        ...chartConfig.scales,
-                        y: {
-                            ...chartConfig.scales.y,
-                            max: 6,
-                            title: {
-                                display: true,
-                                text: 'Parent TAM Score (1-6 scale)',
-                                font: { weight: 'bold', size: 12 }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Radar Chart for Interest vs Confidence
-            const radarCtx = document.getElementById('radarChart');
-            if (radarCtx) {
-                new Chart(radarCtx.getContext('2d'), {
-                    type: 'radar',
-                    data: {
-                        labels: ['STEM Interest', 'Coding Confidence', 'Computer Skills', 'Math Interest', 'Overall Attitude'],
-                        datasets: [
-                            {
-                                label: 'India',
-                                data: [2.93, 2.28, 2.5, 2.8, 2.93],
-                                borderColor: colors.india,
-                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                                borderWidth: 3,
-                                pointBackgroundColor: colors.india,
-                                pointBorderColor: '#fff',
-                                pointBorderWidth: 2,
-                                pointRadius: 6
-                            },
-                            {
-                                label: 'Ireland',
-                                data: [2.10, 2.97, 3.2, 2.0, 2.10],
-                                borderColor: colors.ireland,
-                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                                borderWidth: 3,
-                                pointBackgroundColor: colors.ireland,
-                                pointBorderColor: '#fff',
-                                pointBorderWidth: 2,
-                                pointRadius: 6
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                                labels: {
-                                    padding: 20,
-                                    font: { size: 14, weight: 'bold' },
-                                    usePointStyle: true
-                                }
-                            }
-                        },
-                        scales: {
-                            r: {
-                                beginAtZero: true,
-                                max: 4,
-                                grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                                pointLabels: {
-                                    font: { size: 11, weight: 'bold' },
-                                    color: '#374151'
+            // Create charts with error handling and delays
+            function createCharts() {
+                try {
+                    // Student TAM Chart - with delay to prevent blocking
+                    setTimeout(() => {
+                        const studentTamCtx = document.getElementById('studentTamChart');
+                        if (studentTamCtx) {
+                            new Chart(studentTamCtx.getContext('2d'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['India', 'Ireland'],
+                                    datasets: [
+                                        {
+                                            label: 'Perceived Usefulness (STEM Interest)',
+                                            data: [2.933, 2.103],
+                                            backgroundColor: colors.india,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        },
+                                        {
+                                            label: 'Perceived Ease of Use (Tech Confidence)',
+                                            data: [2.278, 2.971],
+                                            backgroundColor: colors.ireland,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        },
+                                        {
+                                            label: 'Attitude Score',
+                                            data: [2.933, 2.103],
+                                            backgroundColor: colors.accent,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        }
+                                    ]
                                 },
-                                ticks: {
-                                    display: false
+                                options: {
+                                    ...chartConfig,
+                                    animation: false, // Disable animations for better performance
+                                    scales: {
+                                        ...chartConfig.scales,
+                                        y: {
+                                            ...chartConfig.scales.y,
+                                            max: 4,
+                                            title: {
+                                                display: true,
+                                                text: 'TAM Score (1-4 scale)',
+                                                font: { weight: 'bold', size: 12 }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
+                            });
                         }
-                    }
-                });
+                    }, 100);
+
+                    // Parent TAM Chart - with delay
+                    setTimeout(() => {
+                        const parentTamCtx = document.getElementById('parentTamChart');
+                        if (parentTamCtx) {
+                            new Chart(parentTamCtx.getContext('2d'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['India', 'Ireland'],
+                                    datasets: [
+                                        {
+                                            label: 'Technology Interest (Child)',
+                                            data: [4.0, 4.0],
+                                            backgroundColor: colors.india,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        },
+                                        {
+                                            label: 'Coding Ease Perception (Child)',
+                                            data: [4.0, 4.0],
+                                            backgroundColor: colors.ireland,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    ...chartConfig,
+                                    animation: false, // Disable animations for better performance
+                                    scales: {
+                                        ...chartConfig.scales,
+                                        y: {
+                                            ...chartConfig.scales.y,
+                                            max: 6,
+                                            title: {
+                                                display: true,
+                                                text: 'Parent TAM Score (1-6 scale)',
+                                                font: { weight: 'bold', size: 12 }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }, 200);
+
+                    // Radar Chart - with delay
+                    setTimeout(() => {
+                        const radarCtx = document.getElementById('radarChart');
+                        if (radarCtx) {
+                            new Chart(radarCtx.getContext('2d'), {
+                                type: 'radar',
+                                data: {
+                                    labels: ['STEM Interest', 'Coding Confidence', 'Computer Skills', 'Math Interest', 'Overall Attitude'],
+                                    datasets: [
+                                        {
+                                            label: 'India',
+                                            data: [2.93, 2.28, 2.5, 2.8, 2.93],
+                                            borderColor: colors.india,
+                                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                            borderWidth: 3,
+                                            pointBackgroundColor: colors.india,
+                                            pointBorderColor: '#fff',
+                                            pointBorderWidth: 2,
+                                            pointRadius: 6
+                                        },
+                                        {
+                                            label: 'Ireland',
+                                            data: [2.10, 2.97, 3.2, 2.0, 2.10],
+                                            borderColor: colors.ireland,
+                                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                                            borderWidth: 3,
+                                            pointBackgroundColor: colors.ireland,
+                                            pointBorderColor: '#fff',
+                                            pointBorderWidth: 2,
+                                            pointRadius: 6
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    animation: false, // Disable animations for better performance
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                            labels: {
+                                                padding: 20,
+                                                font: { size: 14, weight: 'bold' },
+                                                usePointStyle: true
+                                            }
+                                        }
+                                    },
+                                    scales: {
+                                        r: {
+                                            beginAtZero: true,
+                                            max: 4,
+                                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                                            pointLabels: {
+                                                font: { size: 11, weight: 'bold' },
+                                                color: '#374151'
+                                            },
+                                            ticks: {
+                                                display: false
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }, 300);
+
+                    // Gender Bias Chart - with delay
+                    setTimeout(() => {
+                        const genderBiasCtx = document.getElementById('genderBiasChart');
+                        if (genderBiasCtx) {
+                            new Chart(genderBiasCtx.getContext('2d'), {
+                                type: 'bar',
+                                data: {
+                                    labels: ['India', 'Ireland'],
+                                    datasets: [
+                                        {
+                                            label: 'Girls Tech Capability (%)',
+                                            data: [61.4, 74.2],
+                                            backgroundColor: colors.girls,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        },
+                                        {
+                                            label: 'Boys Tech Capability (%)',
+                                            data: [68.6, 75.6],
+                                            backgroundColor: colors.boys,
+                                            borderRadius: 8,
+                                            borderSkipped: false
+                                        }
+                                    ]
+                                },
+                                options: {
+                                    ...chartConfig,
+                                    animation: false, // Disable animations for better performance
+                                    maintainAspectRatio: false,
+                                    responsive: true,
+                                    scales: {
+                                        ...chartConfig.scales,
+                                        y: {
+                                            ...chartConfig.scales.y,
+                                            min: 50,
+                                            max: 80,
+                                            title: {
+                                                display: true,
+                                                text: 'Parental Agreement (%)',
+                                                font: { weight: 'bold', size: 12 }
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        ...chartConfig.plugins,
+                                        title: {
+                                            display: true,
+                                            text: 'Gender Bias Gap: India (7.2 points) vs Ireland (1.4 points)',
+                                            font: { size: 14, weight: 'bold' },
+                                            padding: 20
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }, 400);
+                } catch (error) {
+                    console.warn('Chart creation error:', error);
+                }
             }
 
-            // Gender Bias Chart
-            const genderBiasCtx = document.getElementById('genderBiasChart');
-            if (genderBiasCtx) {
-                new Chart(genderBiasCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['India', 'Ireland'],
-                        datasets: [
-                            {
-                                label: 'Girls Tech Capability (%)',
-                                data: [61.4, 74.2],
-                                backgroundColor: colors.girls,
-                                borderRadius: 8,
-                                borderSkipped: false
-                            },
-                            {
-                                label: 'Boys Tech Capability (%)',
-                                data: [68.6, 75.6],
-                                backgroundColor: colors.boys,
-                                borderRadius: 8,
-                                borderSkipped: false
-                            }
-                        ]
-                    },
-                    options: {
-                        ...chartConfig,
-                        maintainAspectRatio: false,
-                        responsive: true,
-                        scales: {
-                            ...chartConfig.scales,
-                            y: {
-                                ...chartConfig.scales.y,
-                                min: 50,
-                                max: 80,
-                                title: {
-                                    display: true,
-                                    text: 'Parental Agreement (%)',
-                                    font: { weight: 'bold', size: 12 }
-                                }
-                            }
-                        },
-                        plugins: {
-                            ...chartConfig.plugins,
-                            title: {
-                                display: true,
-                                text: 'Gender Bias Gap: India (7.2 points) vs Ireland (1.4 points)',
-                                font: { size: 14, weight: 'bold' },
-                                padding: 20
-                            }
-                        }
-                    }
-                });
-            }
+            // Create charts after a delay to prevent blocking
+            setTimeout(createCharts, 500);
 
-            // Scroll animation
+            // Optimized scroll animation with throttling
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -1389,24 +1404,35 @@
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        // Stop observing once animated to improve performance
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                observer.observe(el);
-            });
-
-            // Progress bar animation
-            setTimeout(() => {
-                document.querySelectorAll('.progress-fill').forEach((bar) => {
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
+            // Only observe a limited number of elements to prevent performance issues
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            if (elementsToAnimate.length < 20) { // Safety check
+                elementsToAnimate.forEach((el) => {
+                    observer.observe(el);
                 });
-            }, 500);
+            }
+
+            // Simplified progress bar animation with less DOM manipulation
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-fill');
+                if (progressBars.length < 50) { // Safety check
+                    progressBars.forEach((bar, index) => {
+                        const width = bar.style.width;
+                        if (width) {
+                            bar.style.width = '0%';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 100 + (index * 50)); // Stagger animations
+                        }
+                    });
+                }
+            }, 1000); // Delayed start
         });
 
         // Modal handling for portfolio
