@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 1. Initialize Typed.js for the typing animation
     if (typeof Typed !== 'undefined') {
         new Typed(".typing", {
-            strings: ["Data Analyst", "Data Engineer", ".NET Developer", "SSIS Developer", "Data Scientist", "Software Developer", "Business Intelligence Developer"],
+            strings: ["Data Analyst", "Data Engineer", "SSIS Developer", "Data Scientist", "Business Intelligence Developer", "Machine Learning Enthusiast"],
             typeSpeed: 100,
             backSpeed: 60,
             loop: true
