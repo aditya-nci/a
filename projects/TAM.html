@@ -44,323 +44,123 @@
         }
 
         .hero-gradient {
-            border-bottom: 1px solid var(--border-color);
-            /* Force white background as default */
             background: #ffffff !important;
         }
         
-        /* Nuclear option: Override any browser extension interference */
-        header.hero-gradient,
-        header.hero-gradient *,
-        .hero-gradient,
-        .hero-gradient * {
-            background-color: inherit !important;
+        .dark .hero-gradient {
+            background: #1a1a2e !important;
         }
         
-        header.hero-gradient {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            background-image: none !important;
-            filter: none !important;
-            -webkit-filter: none !important;
+        .hero-gradient h1 span:nth-child(1) {
+            color: #2563eb !important;
         }
         
-        /* Prevent extension CSS injection */
-        header.hero-gradient[style*="background"] {
-            background: #ffffff !important;
-        }
-
-        /* Theme-specific hero styling */
-        body:not(.dark) .hero-gradient,
-        .hero-gradient:not(.dark),
-        header.hero-gradient {
-            background: #ffffff !important;
-            background-color: #ffffff !important;
-            background-image: none !important;
-            border-bottom: 1px solid #e2e8f0 !important;
-        }
-
-        body.dark .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%) !important;
+        .dark .hero-gradient h1 span:nth-child(1) {
+            color: #60a5fa !important;
         }
         
-        /* Force white background with highest specificity */
-        header.hero-gradient.relative.overflow-hidden {
-            background: #ffffff !important;
+        .hero-gradient h1 span:nth-child(2) {
+            color: #000000 !important;
         }
         
-        body.dark header.hero-gradient.relative.overflow-hidden {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%) !important;
+        .dark .hero-gradient h1 span:nth-child(2) {
+            color: #ffffff !important;
         }
-
-        /* Ensure proper text contrast throughout */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--skin-color), #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        .hero-gradient > div > div p {
+            color: #374151 !important;
         }
-
-        /* Country badges theme styling */
-        .country-badge {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
+        
+        .dark .hero-gradient > div > div p {
+            color: #d1d5db !important;
         }
-
-        /* Floating cards theme styling */
-        .floating-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
+        
+        .hero-gradient > div > div > div > div {
+            background: #ffffff !important;
+            border-color: #e5e7eb !important;
         }
-
-        /* Metric cards theme styling */
-        .metric-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
+        
+        .dark .hero-gradient > div > div > div > div {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border-color: #2d3748 !important;
+        }
+        
+        .hero-gradient span[style*="rgba(191"] {
+            background: rgba(191, 219, 254, 0.5) !important;
+            border-color: #3b82f6 !important;
+            color: #1e40af !important;
+        }
+        
+        .dark .hero-gradient span[style*="rgba(191"] {
+            background: rgba(37, 99, 235, 0.2) !important;
+            border-color: #1d4ed8 !important;
+            color: #93c5fd !important;
+        }
+        
+        .hero-gradient span[style*="rgba(167"] {
+            background: rgba(167, 243, 208, 0.5) !important;
+            border-color: #10b981 !important;
+            color: #047857 !important;
+        }
+        
+        .dark .hero-gradient span[style*="rgba(167"] {
+            background: rgba(16, 185, 129, 0.2) !important;
+            border-color: #047857 !important;
+            color: #6ee7b7 !important;
         }
 
         /* Progress bars theme styling */
         .progress-bar {
-            background: var(--bg-tertiary);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .progress-bar {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .progress-fill {
-            background: var(--skin-color);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.8s ease-in-out;
         }
 
         /* Simplified CSS for better performance */
         .stat-card {
-            background: var(--bg-secondary);
-            backdrop-filter: none; /* Remove expensive blur effect */
-            border-radius: 20px;
-            padding: 28px;
-            box-shadow: var(--shadow-medium);
-            transition: transform 0.3s ease; /* Simplified transition */
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.7) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            border: 1px solid #e5e7eb !important;
+            transition: transform 0.3s ease;
         }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #10b981, #f59e0b, #ef4444);
+        
+        .dark .stat-card {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border-color: #2d3748 !important;
         }
 
         .stat-card:hover {
-            transform: translateY(-4px); /* Reduced movement for better performance */
+            transform: translateY(-4px);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--skin-color), #3b82f6);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
         }
+
         .chart-container {
             position: relative;
             height: 380px;
             width: 100%;
-            padding: 10px;
         }
-        
-        /* Specific chart heights for better balance */
+
         .gender-chart-container {
             height: 340px;
         }
-        
+
         .radar-chart-container {
             height: 380px;
-        }
-        
-        /* Comprehensive theme color overrides */
-        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-            color: var(--text-primary) !important;
-        }
-        
-        .dark p, .dark div, .dark span, .dark li {
-            color: var(--text-primary) !important;
-        }
-        
-        .dark .text-gray-800 {
-            color: var(--text-primary) !important;
-        }
-        
-        .dark .text-gray-900 {
-            color: var(--text-primary) !important;
-        }
-        
-        .dark .text-gray-600 {
-            color: var(--text-secondary) !important;
-        }
-        
-        .dark .bg-white {
-            background: var(--bg-secondary) !important;
-        }
-        
-        .dark .bg-gray-50 {
-            background: var(--bg-secondary) !important;
-        }
-        
-        .dark .bg-gray-100 {
-            background: var(--bg-secondary) !important;
-        }
-        
-        .dark .border-gray-200 {
-            border-color: var(--border-color) !important;
-        }
-        
-        .dark .gradient-text {
-            background: var(--skin-color) !important;
-            -webkit-background-clip: text !important;
-            background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-        }
-        
-        /* Force all text to use theme colors */
-        body.dark * {
-            border-color: var(--border-color);
-        }
-        
-        body.dark .bg-gray-50,
-        body.dark .bg-gray-100,
-        body.dark .bg-gray-200 {
-            background: var(--bg-secondary) !important;
-            color: var(--text-primary) !important;
-        }
-        
-        /* Fix colored background boxes in dark mode */
-        body.dark .bg-red-50 {
-            background: rgba(220, 38, 38, 0.1) !important;
-            border: 1px solid rgba(220, 38, 38, 0.2) !important;
-        }
-        
-        body.dark .bg-emerald-50 {
-            background: rgba(16, 185, 129, 0.1) !important;
-            border: 1px solid rgba(16, 185, 129, 0.2) !important;
-        }
-        
-        body.dark .bg-blue-50 {
-            background: rgba(59, 130, 246, 0.1) !important;
-            border: 1px solid rgba(59, 130, 246, 0.2) !important;
-        }
-        
-        body.dark .bg-green-50 {
-            background: rgba(34, 197, 94, 0.1) !important;
-            border: 1px solid rgba(34, 197, 94, 0.2) !important;
-        }
-        
-        body.dark .bg-yellow-50 {
-            background: rgba(245, 158, 11, 0.1) !important;
-            border: 1px solid rgba(245, 158, 11, 0.2) !important;
-        }
-        
-        body.dark .bg-purple-50 {
-            background: rgba(168, 85, 247, 0.1) !important;
-            border: 1px solid rgba(168, 85, 247, 0.2) !important;
-        }
-        
-        /* Medium shade backgrounds for darker alternatives */
-        body.dark .bg-blue-100 {
-            background: rgba(59, 130, 246, 0.15) !important;
-            border: 1px solid rgba(59, 130, 246, 0.3) !important;
-        }
-        
-        body.dark .bg-emerald-100 {
-            background: rgba(16, 185, 129, 0.15) !important;
-            border: 1px solid rgba(16, 185, 129, 0.3) !important;
-        }
-        
-        body.dark .bg-red-100 {
-            background: rgba(220, 38, 38, 0.15) !important;
-            border: 1px solid rgba(220, 38, 38, 0.3) !important;
-        }
-        
-        body.dark .bg-yellow-100 {
-            background: rgba(245, 158, 11, 0.15) !important;
-            border: 1px solid rgba(245, 158, 11, 0.3) !important;
-        }
-        
-        /* Fix text colors in colored boxes */
-        body.dark .text-red-700,
-        body.dark .text-red-600,
-        body.dark .text-red-800 {
-            color: #fca5a5 !important;
-        }
-        
-        body.dark .text-emerald-700,
-        body.dark .text-emerald-600,
-        body.dark .text-emerald-800 {
-            color: #6ee7b7 !important;
-        }
-        
-        body.dark .text-blue-700,
-        body.dark .text-blue-600,
-        body.dark .text-blue-800 {
-            color: #93c5fd !important;
-        }
-        
-        body.dark .text-green-700,
-        body.dark .text-green-600,
-        body.dark .text-green-800 {
-            color: #86efac !important;
-        }
-        
-        body.dark .text-yellow-700,
-        body.dark .text-yellow-600,
-        body.dark .text-yellow-800 {
-            color: #fde047 !important;
-        }
-        
-        body.dark .text-purple-700,
-        body.dark .text-purple-600,
-        body.dark .text-purple-800 {
-            color: #c4b5fd !important;
-        }
-        
-        /* Fix specific amber/yellow text colors */
-        body.dark .text-amber-700,
-        body.dark .text-amber-600,
-        body.dark .text-amber-800 {
-            color: #fbbf24 !important;
-        }
-        
-        /* Ensure all numeric values and labels are visible */
-        body.dark .text-blue-600,
-        body.dark .text-blue-700 {
-            color: #93c5fd !important;
-        }
-        
-        body.dark .text-emerald-600,
-        body.dark .text-emerald-700 {
-            color: #6ee7b7 !important;
-        }
-        
-        /* Additional background overrides */
-        body.dark .bg-amber-100 {
-            background: rgba(245, 158, 11, 0.15) !important;
-            border: 1px solid rgba(245, 158, 11, 0.3) !important;
-        }
-        
-        /* Override any Tailwind text colors in dark mode */
-        body.dark [class*="text-gray-"],
-        body.dark [class*="text-black"],
-        body.dark [class*="text-slate-"] {
-            color: var(--text-primary) !important;
-        }
-        
-        body.dark [class*="text-gray-6"],
-        body.dark [class*="text-gray-5"] {
-            color: var(--text-secondary) !important;
         }
 
         /* Mobile Optimizations */
@@ -537,22 +337,34 @@
         }
         .section-divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
             margin: 60px 0;
         }
+        
+        .dark .section-divider {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
         .floating-card {
-            background: var(--bg-secondary); /* Simplified background */
+            background: rgba(255, 255, 255, 0.7);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px;
             color: var(--text-primary);
         }
+        
+        .dark .floating-card {
+            background: rgba(0, 0, 0, 0.3);
+        }
         .progress-bar {
             height: 8px;
-            background-color: #e5e7eb;
+            background-color: rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             overflow: hidden;
             margin-top: 8px;
+        }
+        
+        .dark .progress-bar {
+            background-color: rgba(255, 255, 255, 0.1);
         }
         .progress-fill {
             height: 100%;
@@ -573,46 +385,88 @@
 <body>
 
     <!-- Hero Section -->
-    <header class="hero-gradient relative overflow-hidden">
-        <div class="absolute inset-0 bg-transparent dark:bg-black/20"></div>
-        <div class="relative z-10 container mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-12 md:py-16 lg:py-24">
-            <div class="text-center mb-8 sm:mb-12 md:mb-16">
-                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black mb-4 sm:mb-6 md:mb-8 leading-tight">
-                    <span class="block bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent mb-2">
-                        Technology Education
-                    </span>
-                    <span class="block text-gray-800 dark:text-white">Across Cultures</span>
+    <header id="heroHeader" style="background: #ffffff; padding: 3rem 1rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <!-- Title Section -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1.1;">
+                    <span style="display: block; color: #2563eb; margin-bottom: 0.5rem;">Technology Education</span>
+                    <span style="display: block; color: #000000;">Across Cultures</span>
                 </h1>
-                <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-6 sm:mb-8 md:mb-12 leading-relaxed px-2 sm:px-4">
-                    A comprehensive cross-cultural analysis comparing STEM perceptions, technology acceptance, and educational attitudes between <span class="font-bold text-blue-700 dark:text-blue-300">India</span> and <span class="font-bold text-emerald-700 dark:text-emerald-300">Ireland</span> using the Technology Acceptance Model framework.
+                
+                <p style="font-size: 1.25rem; color: #374151; max-width: 56rem; margin: 0 auto 2rem; line-height: 1.5;">
+                    A comprehensive cross-cultural analysis comparing STEM perceptions, technology acceptance, and educational attitudes between <span style="font-weight: 700; color: #1e40af;">India</span> and <span style="font-weight: 700; color: #059669;">Ireland</span> using the Technology Acceptance Model framework.
                 </p>
-                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-12 px-2">
-                    <span class="country-badge india-badge text-xs sm:text-sm">🇮🇳 India</span>
-                    <span class="country-badge ireland-badge text-xs sm:text-sm">🇮🇪 Ireland</span>
+                
+                <!-- Country Badges -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+                    <span style="display: inline-block; padding: 0.5rem 1rem; background: rgba(191, 219, 254, 0.5); border: 1px solid #3b82f6; color: #1e40af; border-radius: 9999px; font-size: 0.875rem; font-weight: 500;">🇮🇳 India</span>
+                    <span style="display: inline-block; padding: 0.5rem 1rem; background: rgba(167, 243, 208, 0.5); border: 1px solid #10b981; color: #047857; border-radius: 9999px; font-size: 0.875rem; font-weight: 500;">🇮🇪 Ireland</span>
                 </div>
             </div>
             
             <!-- Statistics Grid -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 max-w-5xl mx-auto px-2 sm:px-4">
-                <div class="floating-card text-center py-3 sm:py-4">
-                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">156</div>
-                    <div class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-tight">Total<br class="sm:hidden"> Participants</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 80rem; margin: 0 auto;">
+                <!-- Total Participants -->
+                <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 900; color: #2563eb; margin-bottom: 0.5rem;">156</div>
+                    <div style="font-size: 0.875rem; color: #4b5563; font-weight: 500;">Total Participants</div>
                 </div>
-                <div class="floating-card text-center py-3 sm:py-4">
-                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-emerald-600 dark:text-emerald-400 mb-1">79</div>
-                    <div class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-tight">Students<br class="sm:hidden"> Surveyed</div>
+                
+                <!-- Students Surveyed -->
+                <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 900; color: #10b981; margin-bottom: 0.5rem;">79</div>
+                    <div style="font-size: 0.875rem; color: #4b5563; font-weight: 500;">Students Surveyed</div>
                 </div>
-                <div class="floating-card text-center py-3 sm:py-4">
-                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-yellow-600 dark:text-yellow-400 mb-1">77</div>
-                    <div class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-tight">Parents<br class="sm:hidden"> Surveyed</div>
+                
+                <!-- Parents Surveyed -->
+                <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 900; color: #f59e0b; margin-bottom: 0.5rem;">77</div>
+                    <div style="font-size: 0.875rem; color: #4b5563; font-weight: 500;">Parents Surveyed</div>
                 </div>
-                <div class="floating-card text-center py-3 sm:py-4">
-                    <div class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-red-600 dark:text-red-400 mb-1">2</div>
-                    <div class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-tight">Countries<br class="sm:hidden"> Analyzed</div>
+                
+                <!-- Countries Analyzed -->
+                <div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 900; color: #ef4444; margin-bottom: 0.5rem;">2</div>
+                    <div style="font-size: 0.875rem; color: #4b5563; font-weight: 500;">Countries Analyzed</div>
                 </div>
             </div>
         </div>
     </header>
+    
+    <script>
+        const heroHeader = document.getElementById('heroHeader');
+        
+        function applyHeroTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                heroHeader.style.background = '#1a1a2e';
+                // Update title
+                heroHeader.querySelector('h1 span:nth-child(1)').style.color = '#60a5fa';
+                heroHeader.querySelector('h1 span:nth-child(2)').style.color = '#ffffff';
+                // Update paragraph
+                heroHeader.querySelector('p').style.color = '#d1d5db';
+                // Update cards
+                heroHeader.querySelectorAll('div[style*="background: #ffffff; border"]').forEach(card => {
+                    card.style.background = 'rgba(0, 0, 0, 0.4)';
+                    card.style.borderColor = '#2d3748';
+                });
+            } else {
+                heroHeader.style.background = '#ffffff';
+                heroHeader.querySelector('h1 span:nth-child(1)').style.color = '#2563eb';
+                heroHeader.querySelector('h1 span:nth-child(2)').style.color = '#000000';
+                heroHeader.querySelector('p').style.color = '#374151';
+                heroHeader.querySelectorAll('div[style*="rgba(0, 0, 0"]').forEach(card => {
+                    card.style.background = '#ffffff';
+                    card.style.borderColor = '#e5e7eb';
+                });
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', applyHeroTheme);
+        new MutationObserver(applyHeroTheme).observe(document.documentElement, { attributes: true });
+    </script>
 
     <main class="container mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-12 md:py-16 lg:py-20">
 
@@ -703,7 +557,7 @@
                     </div>
                     
                     <!-- Reduced insights -->
-                    <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+                    <div class="mt-4 p-3 rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
                         <h4 class="font-bold text-gray-800 dark:text-white mb-2">📊 5x Gender Bias Difference</h4>
                         <p class="text-sm text-gray-600 dark:text-gray-400">Irish parents show significantly more progressive views on gender equality in STEM education.</p>
                     </div>
@@ -760,14 +614,14 @@
                     <div class="text-7xl mb-6">📱</div>
                     <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Smartphone Access</h3>
                     <div class="space-y-4">
-                        <div class="bg-blue-50 p-4 rounded-lg">
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-blue-600 mb-1">100%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">India</div>
                             <div class="progress-bar mt-2">
                                 <div class="progress-fill bg-blue-500" style="width: 100%"></div>
                             </div>
                         </div>
-                        <div class="bg-emerald-50 p-4 rounded-lg">
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-emerald-600 mb-1">100%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">Ireland</div>
                             <div class="progress-bar mt-2">
@@ -775,7 +629,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+                    <div class="mt-4 p-3 rounded-lg border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-950">
                         <div class="text-sm text-gray-600 dark:text-gray-400">Universal mobile connectivity enables ubiquitous learning opportunities</div>
                     </div>
                 </div>
@@ -784,14 +638,14 @@
                     <div class="text-7xl mb-6">💻</div>
                     <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Computer Access</h3>
                     <div class="space-y-4">
-                        <div class="bg-blue-50 p-4 rounded-lg">
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-blue-600 mb-1">95.5%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">India</div>
                             <div class="progress-bar mt-2">
                                 <div class="progress-fill bg-blue-500" style="width: 95.5%"></div>
                             </div>
                         </div>
-                        <div class="bg-emerald-50 p-4 rounded-lg">
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-emerald-600 mb-1">87.9%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">Ireland</div>
                             <div class="progress-bar mt-2">
@@ -799,7 +653,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+                    <div class="mt-4 p-3 rounded-lg border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950">
                         <div class="text-sm text-gray-600 dark:text-gray-400">High computer penetration supports coding and technical skill development</div>
                     </div>
                 </div>
@@ -808,14 +662,14 @@
                     <div class="text-7xl mb-6">🌐</div>
                     <h3 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Internet Access</h3>
                     <div class="space-y-4">
-                        <div class="bg-blue-50 p-4 rounded-lg">
+                        <div style="background: rgba(59, 130, 246, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-blue-600 mb-1">97.7%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">India</div>
                             <div class="progress-bar mt-2">
                                 <div class="progress-fill bg-blue-500" style="width: 97.7%"></div>
                             </div>
                         </div>
-                        <div class="bg-emerald-50 p-4 rounded-lg">
+                        <div style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 0.5rem;">
                             <div class="text-4xl font-black text-emerald-600 mb-1">90.9%</div>
                             <div class="text-sm text-gray-600 dark:text-gray-400">Ireland</div>
                             <div class="progress-bar mt-2">
@@ -823,7 +677,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 p-3 bg-gray-50 rounded-lg">
+                    <div class="mt-4 p-3 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950">
                         <div class="text-sm text-gray-600 dark:text-gray-400">Widespread connectivity enables online learning and digital collaboration</div>
                     </div>
                 </div>
